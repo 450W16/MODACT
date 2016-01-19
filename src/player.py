@@ -21,10 +21,21 @@ class Player(pygame.sprite.Sprite):
 
 	def update(self):
 		# update movements, gravity, animation, etc.
-		
+		self.gravity()
 		self.rect.x += self.delta_x
 		self.rect.y += self.delta_y
 		
+	def gravity(self):
+		if self.delta_y == 0:
+			self.delta_y = 1
+		else:
+			self.delta_y += 1
+
+		# check if we're on the ground
+		if self.rect.y >= SCREEN_HEIGHT - self.rect.height and self.delta_y >= 0:
+			self.delta_y = 0
+			self.rect.y = SCREEN_HEIGHT - self.rect.height
+	
 	def move_left(self):
 		self.delta_x = -5
 
@@ -32,8 +43,7 @@ class Player(pygame.sprite.Sprite):
 		self.delta_x = 5
 
 	def jump(self):
-		
-		self.dela_y = -10
+		pass
 
 	def stop(self):
 		self.delta_x = 0

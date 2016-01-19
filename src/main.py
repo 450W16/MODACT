@@ -1,7 +1,8 @@
 import pygame
 from utils import *
 import level
-from player import Player
+from tracy import Tracy
+from biggie import Biggie
 
 def main():
 	# initialize pygame
@@ -12,12 +13,17 @@ def main():
 	screen = pygame.display.set_mode(size)
 	pygame.display.set_caption("This is a game... or is it")
 
-	player = Player()
+	player = Tracy()
 	player.rect.x = 300
 	player.rect.y = SCREEN_HEIGHT - player.rect.height
+	AI = Biggie()
+	AI.rect.x = 200
+	AI.rect.y = SCREEN_HEIGHT - AI.rect.height
+
 	# create sprite grouping for active sprites
 	active_sprites = pygame.sprite.Group()
 	active_sprites.add(player)
+	active_sprites.add(AI)
 
 	done = False
 	clock = pygame.time.Clock()
@@ -27,6 +33,12 @@ def main():
 		for event in pygame.event.get()	:
 			if event.type == pygame.QUIT:
 				done = True
+
+			pressed = pygame.key.get_pressed()
+			if pressed[pygame.K_f]:
+				temp = player
+				player = AI
+				AI = temp			
 
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_LEFT:
