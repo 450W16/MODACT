@@ -25,10 +25,27 @@ class Player(pygame.sprite.Sprite):
 	def update(self):
 		# update movements, gravity, animation, etc.
 		self.gravity()
+
 		self.rect.x += self.delta_x
-		#TODO collision detection in x
+		# collision detection in x
+		collide_list = pygame.sprite.spritecollide(self, 
+				self.level.platform_list, False)
+		for platform in collide_list:
+			if self.delta_x > 0:
+				self.rect.right = platform.rect.left
+			elif self.delta_x < 0:
+				self.rect.left = platform.rect.right
+
 		self.rect.y += self.delta_y
-		#TODO collision detection in y
+		# collision detection in y
+		collide_list = pygame.sprite.spritecollide(self, 
+				self.level.platform_list, False)
+		for platform in collide_list:
+			if self.delta_y > 0:
+				self.rect.bottom = platform.rect.top
+			elif self.delta_y < 0:
+				self.rect.top = platform.rect.bottom
+			self.delta_y = 0
 		
 	def gravity(self):
 		if self.delta_y == 0:

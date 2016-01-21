@@ -29,13 +29,16 @@ def main():
 	active_sprites = pygame.sprite.Group()
 	active_sprites.add(player)
 	active_sprites.add(AI)
+	# which is active
+	ACTIVE = player
 
 	# create level and list of levels
 	lvl_list = []
-	lvl_list.append( Tutorial_level(player) ) # not sure if this will work for switching
+	lvl_list.append( Tutorial_level(player, AI) ) # doesn't work for switching
 	lvl_num = 0
 	lvl_current = lvl_list[lvl_num]
 	player.level = lvl_current
+	AI.level = lvl_current
 
 	# some initialization for game loop
 	done = False
@@ -53,6 +56,7 @@ def main():
 				# moving and switching
 				player.delta_x = 0
 				player, AI = AI, player
+				ACTIVE = player
 
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_LEFT:
