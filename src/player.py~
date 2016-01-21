@@ -19,9 +19,6 @@ class Player(pygame.sprite.Sprite):
 		self.image.fill((0, 0, 255))
 		self.rect = self.image.get_rect()
 
-		#players level
-		self.level = None
-
 	def update(self):
 		# update movements, gravity, animation, etc.
 		self.gravity()

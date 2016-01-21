@@ -75,9 +75,9 @@ def main():
 		lvl_current.update()
 
 		# draw
-		lvl_current.draw(screen)
 		active_sprites.draw(screen)
-		
+		lvl_current.draw(screen)
+	
 		#FPS		
 		clock.tick(60)
 		

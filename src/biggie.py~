@@ -8,7 +8,4 @@ class Biggie(Player):
 		
 	def jump(self):
 		print "biggie jump"
-		#check if we're on the ground
-		#if yes, set trajectory upwards
-		
 		
