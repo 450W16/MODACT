@@ -10,7 +10,6 @@ def main():
 
 	# initialize pygame
 	pygame.init()
-	print pygame.version.vernum
 
 	# initialize screen
 	size = [SCREEN_WIDTH, SCREEN_HEIGHT]

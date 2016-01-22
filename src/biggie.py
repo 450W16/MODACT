@@ -8,7 +8,7 @@ class Biggie(Player):
 		Player.__init__(self)
 		
 	def jump(self):
-		print "biggie jump"
+
 		#check if we're on the ground
 		self.rect.y += 2
 		platform_collisions = pygame.sprite.spritecollide(self, 				self.level.platform_list, False)
