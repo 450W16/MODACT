@@ -4,8 +4,8 @@ from utils import *
 
 class Biggie(Player):
 	
-	def __init__(self):
-		Player.__init__(self)
+	def __init__(self, x, y):
+		Player.__init__(self,x ,y)
 		
 	def jump(self):
 

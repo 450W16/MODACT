@@ -7,11 +7,10 @@ class Ability(pygame.sprite.Sprite):
 		self.name = name
 		self.keybind = keybind
 
-
 	def cast(self):
 		pass
 
-	def key(self):
+	def getKey(self):
 		return self.keybind
 
 	def __str__(self):

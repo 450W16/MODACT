@@ -1,11 +1,12 @@
 # player class
 
 import pygame
+from switch import *
 from utils import *
 
 class Player(pygame.sprite.Sprite):
 
-	def __init__(self):
+	def __init__(self, x, y):
 		pygame.sprite.Sprite.__init__(self)
 		# change in x and y
 		self.delta_x = 0
@@ -18,9 +19,14 @@ class Player(pygame.sprite.Sprite):
 		self.image = pygame.Surface([PLAYER_WIDTH, PLAYER_HEIGHT])
 		self.image.fill((0, 0, 255))
 		self.rect = self.image.get_rect()
+		self.rect.x = x
+		self.rect.y = y - self.rect.height
 
 		#players level
 		self.level = None
+		# player's abilities
+		switch = Switch()
+		self.abilities = [switch]
 
 	def update(self):
 		# update movements, gravity, animation, etc.
@@ -70,4 +76,12 @@ class Player(pygame.sprite.Sprite):
 	def stop(self):
 		self.delta_x = 0
 
-		
+	def getAbilities(self):
+		return self.abilities
+
+	def checkAbility(self, key):
+		for ab in self.abilities:
+			if ab.getKey() == key:
+				return ab
+
+		return None 
