@@ -1,7 +1,7 @@
 # player class
 
 import pygame
-from switch import *
+from abilities.switch import *
 from utils import *
 
 class Player(pygame.sprite.Sprite):

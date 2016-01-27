@@ -1,10 +1,10 @@
 #!/bin/python
 import pygame
 from utils import *
-from tutorial_level import Tutorial_level
-from tracy import Tracy
-from biggie import Biggie
-from platforms import Platform
+from levels.tutorial_level import Tutorial_level
+from characters.tracy import Tracy
+from characters.biggie import Biggie
+from levels.platforms import Platform
 
 
 class Control(object):
