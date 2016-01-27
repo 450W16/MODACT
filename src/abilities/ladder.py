@@ -6,4 +6,4 @@ class Ladder(Ability):
 		Ability.__init__(self, "ladder", pygame.K_l)
 
 	def cast(self, c):
-		
+		isInstance(c.player, Biggie)
