@@ -38,7 +38,7 @@ class Control(object):
 		while not self.done:
 			for event in pygame.event.get()	:
 				if event.type == pygame.QUIT:
-					done = True
+					self.done = True
 
 				# switch players (should be function?)
 				pressed = pygame.key.get_pressed()
@@ -69,10 +69,7 @@ class Control(object):
 			self.lvl_current.update()
 
 			# scrolling
-			if self.player.rect.right > LEVEL_WIDTH - 300:
-				diff = self.player.rect.right - LEVEL_WIDTH - 300
-				self.player.rect.right = LEVEL_WIDTH - 300
-				self.lvl_current.shift(-diff)
+		
 
 			# draw
 			self.lvl_current.draw(self.screen)
@@ -95,7 +92,6 @@ def main():
 	pygame.display.set_caption("This is a game... or is it")
 
 	Control(screen).main_loop()
-	print 'NEVER GIVE UP'
 	pygame.quit()
 
 if __name__ == "__main__":
