@@ -4,9 +4,14 @@ from utils import *
 
 class Tracy(Player):
 	
-	def __init__(self, x, y):
-		Player.__init__(self, x, y)
+	def __init__(self):
+		Player.__init__(self)
 
+		# initialize avitar (will replace with sprites later)
+		self.image = pygame.Surface([TRACY_WIDTH, TRACY_HEIGHT])
+		self.image.fill((0, 0, 255))
+		self.rect = self.image.get_rect()
+		
 	def jump(self):
 
 		#check if we're on the ground

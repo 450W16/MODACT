@@ -12,18 +12,9 @@ class Player(pygame.sprite.Sprite):
 		self.delta_x = 0
 		self.delta_y = 0
 
-		# player hitpoints
-		self.HP = PLAYER_HEALTH
-
-		# initialize avatar (will replace with sprites later)
-		self.image = pygame.Surface([PLAYER_WIDTH, PLAYER_HEIGHT])
-		self.image.fill((0, 0, 255))
-		self.rect = self.image.get_rect()
-		self.rect.x = x
-		self.rect.y = y - self.rect.height
-
 		#players level
 		self.level = None
+
 		# player's abilities
 		switch = Switch()
 		self.abilities = {switch.getKey(): switch}
