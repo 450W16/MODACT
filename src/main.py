@@ -68,6 +68,12 @@ class Control(object):
 			# update level
 			self.lvl_current.update()
 
+			# scrolling
+			if self.player.rect.right > LEVEL_WIDTH - 300:
+				diff = self.player.rect.right - LEVEL_WIDTH - 300
+				self.player.rect.right = LEVEL_WIDTH - 300
+				self.lvl_current.shift(-diff)
+
 			# draw
 			self.lvl_current.draw(self.screen)
 			self.active_sprites.draw(self.screen)

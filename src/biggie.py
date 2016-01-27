@@ -5,8 +5,8 @@ from utils import *
 class Biggie(Player):
 	
 
-	def __init__(self):
-		Player.__init__(self)
+	def __init__(self, x, y):
+		Player.__init__(self, x, y)
 
 		# initialize avitar (will replace with sprites later)
 		self.image = pygame.Surface([BIGGIE_WIDTH, BIGGIE_HEIGHT])
