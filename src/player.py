@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
 		self.level = None
 		# player's abilities
 		switch = Switch()
-		self.abilities = [switch]
+		self.abilities = {switch.getKey(): switch}
 
 	def update(self):
 		# update movements, gravity, animation, etc.
@@ -80,8 +80,7 @@ class Player(pygame.sprite.Sprite):
 		return self.abilities
 
 	def checkAbility(self, key):
-		for ab in self.abilities:
-			if ab.getKey() == key:
-				return ab
-
-		return None 
+		if key in self.abilities:
+			return self.abilities[key]
+		else:
+			return None

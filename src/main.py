@@ -53,8 +53,7 @@ class Control(object):
 					else:
 						k = self.player.checkAbility(event.key)
 						if k is not None:
-							action = k.cast()
-							action(self)
+							k.cast(self)
 
 
 				if event.type == pygame.KEYUP:
