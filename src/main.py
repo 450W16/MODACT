@@ -95,6 +95,7 @@ def main():
 	pygame.display.set_caption("This is a game... or is it")
 
 	Control(screen).main_loop()
+	print 'NEVER GIVE UP'
 	pygame.quit()
 
 if __name__ == "__main__":
