@@ -4,8 +4,8 @@ from utils import *
 
 class Tracy(Player):
 	
-	def __init__(self):
-		Player.__init__(self)
+	def __init__(self, x, y):
+		Player.__init__(self, x, y)
 
 		# initialize avitar (will replace with sprites later)
 		self.image = pygame.Surface([TRACY_WIDTH, TRACY_HEIGHT])

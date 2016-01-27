@@ -18,3 +18,6 @@ David Supina<br/>
 ## License
 
 This project is licensed under the Apache 2 license.
+
+## NOTES
+Basic platforming code adapted from programarcadegames.com by Paul Craven
