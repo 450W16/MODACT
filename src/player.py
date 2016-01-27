@@ -11,14 +11,6 @@ class Player(pygame.sprite.Sprite):
 		self.delta_x = 0
 		self.delta_y = 0
 
-		# player hitpoints
-		self.HP = PLAYER_HEALTH
-
-		# initialize avitar (will replace with sprites later)
-		self.image = pygame.Surface([PLAYER_WIDTH, PLAYER_HEIGHT])
-		self.image.fill((0, 0, 255))
-		self.rect = self.image.get_rect()
-
 		#players level
 		self.level = None
 

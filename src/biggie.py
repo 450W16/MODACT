@@ -6,6 +6,11 @@ class Biggie(Player):
 	
 	def __init__(self):
 		Player.__init__(self)
+
+		# initialize avitar (will replace with sprites later)
+		self.image = pygame.Surface([BIGGIE_WIDTH, BIGGIE_HEIGHT])
+		self.image.fill((0, 0, 255))
+		self.rect = self.image.get_rect()
 		
 	def jump(self):
 
