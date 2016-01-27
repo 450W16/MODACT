@@ -8,12 +8,12 @@ In progress
 
 ## Contributors
 
-Aaron Tse
-Cody Ingram
-Ondra Chan
-Terence Leung
-Shuxiao Miao
-David Supina
+Aaron Tse<br/>
+Cody Ingram<br/>
+Ondra Chan<br/>
+Terence Leung<br/>
+Shuxiao Miao<br/>
+David Supina<br/>
 
 ## License
 
