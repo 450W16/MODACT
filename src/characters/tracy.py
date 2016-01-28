@@ -11,6 +11,8 @@ class Tracy(Player):
 		self.image = pygame.Surface([TRACY_WIDTH, TRACY_HEIGHT])
 		self.image.fill((0, 0, 255))
 		self.rect = self.image.get_rect()
+		self.rect.x = x
+		self.rect.y = y
 		
 	def jump(self):
 

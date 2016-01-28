@@ -5,21 +5,24 @@ from levels.tutorial_level import Tutorial_level
 from characters.tracy import Tracy
 from characters.biggie import Biggie
 from levels.platforms import Platform
+from camera import Camera
 
 
 class Control(object):
 
 	def __init__(self, screen):
 		# instanciate players and their size
-		self.player = Tracy(300, SCREEN_HEIGHT)
-		self.AI = Biggie(200, SCREEN_HEIGHT)
+		self.player = Tracy(50, SCREEN_HEIGHT-TRACY_HEIGHT)
+		self.AI = Biggie(0, SCREEN_HEIGHT-BIGGIE_HEIGHT)
 
+		# screen
 		self.screen = screen
 
 		# create sprite grouping for active sprites
 		self.active_sprites = pygame.sprite.Group()
 		self.active_sprites.add(self.player)
 		self.active_sprites.add(self.AI)
+
 		# which is active
 		self.ACTIVE = self.player
 
@@ -33,6 +36,9 @@ class Control(object):
 		# some initialization for game loop
 		self.done = False
 		self.clock=pygame.time.Clock()
+
+		# instantiate camera
+		self.camera = Camera()
 
 	def main_loop(self):
 		while not self.done:
@@ -62,18 +68,20 @@ class Control(object):
 					if event.key == pygame.K_RIGHT and self.player.delta_x > 0:
 						self.player.stop()
 			
+			# update camera
+			self.camera.update(self.player)			
+
 			#update player
 			self.active_sprites.update()
-
+			
 			# update level
 			self.lvl_current.update()
 
-			# scrolling
-		
-
 			# draw
-			self.lvl_current.draw(self.screen)
-			self.active_sprites.draw(self.screen)
+			self.lvl_current.draw(self.screen, self.camera)
+			#self.active_sprites.draw(self.screen)
+			for char in self.active_sprites:
+				self.screen.blit(char.image, self.camera.applyCam(char))
 			
 			#FPS		
 			self.clock.tick(60)
