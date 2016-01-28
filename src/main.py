@@ -40,48 +40,57 @@ class Control(object):
 		# instantiate camera
 		self.camera = Camera()
 
+	def processEvents(self):
+		# loop events
+		for event in pygame.event.get()	:
+			if event.type == pygame.QUIT:
+				self.done = True
+			# key pressed 
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_LEFT:
+					self.player.move_left()
+				if event.key == pygame.K_RIGHT:
+					self.player.move_right()
+				if event.key == pygame.K_SPACE:
+					self.player.jump()
+				else:
+					# check for ability key
+					k = self.player.checkAbility(event.key)
+					if k is not None:
+						k.cast(self)
+			# key released
+			if event.type == pygame.KEYUP:
+				if event.key == pygame.K_LEFT and self.player.delta_x < 0:
+					self.player.stop()
+				if event.key == pygame.K_RIGHT and self.player.delta_x > 0:
+					self.player.stop()
+			
+
+	def update(self):
+		# update camera
+		self.camera.update(self.player)			
+
+		#update player
+		self.active_sprites.update()
+			
+		# update level
+		self.lvl_current.update()
+
+	def draw(self):
+		# draw
+		self.lvl_current.draw(self.screen, self.camera)
+
+		# draw players
+		for char in self.active_sprites:
+			self.screen.blit(char.image, self.camera.applyCam(char))
+
 	def main_loop(self):
 		while not self.done:
-			for event in pygame.event.get()	:
-				if event.type == pygame.QUIT:
-					self.done = True
-
-				# switch players (should be function?)
-				pressed = pygame.key.get_pressed()
-
-				if event.type == pygame.KEYDOWN:
-					if event.key == pygame.K_LEFT:
-						self.player.move_left()
-					if event.key == pygame.K_RIGHT:
-						self.player.move_right()
-					if event.key == pygame.K_SPACE:
-						self.player.jump()
-					else:
-						k = self.player.checkAbility(event.key)
-						if k is not None:
-							k.cast(self)
-
-
-				if event.type == pygame.KEYUP:
-					if event.key == pygame.K_LEFT and self.player.delta_x < 0:
-						self.player.stop()
-					if event.key == pygame.K_RIGHT and self.player.delta_x > 0:
-						self.player.stop()
 			
-			# update camera
-			self.camera.update(self.player)			
-
-			#update player
-			self.active_sprites.update()
-			
-			# update level
-			self.lvl_current.update()
-
-			# draw
-			self.lvl_current.draw(self.screen, self.camera)
-			#self.active_sprites.draw(self.screen)
-			for char in self.active_sprites:
-				self.screen.blit(char.image, self.camera.applyCam(char))
+			# input, update, draw
+			self.processEvents()
+			self.update()
+			self.draw()
 			
 			#FPS		
 			self.clock.tick(60)

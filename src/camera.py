@@ -1,4 +1,4 @@
-# Taken from stackoverflow.com/questions/14354171/add-scrolling-to-a-platformer-in-pygame
+# Modified from stackoverflow.com/questions/14354171/add-scrolling-to-a-platformer-in-pygame
 import pygame
 from utils import *
 

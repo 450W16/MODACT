@@ -18,10 +18,9 @@ class Level():
 		#TODO draw background
 		screen.fill((0,0,0))
 
-		#self.platform_list.draw(screen)
 		for plat in self.platform_list:
 			screen.blit(plat.image, camera.applyCam(plat))
-		#self.enemy_list.draw(screen)
+
 		for enemy in self.enemy_list:
 			screen.blit(enemy.image, camera.applyCam(enemy))
 
