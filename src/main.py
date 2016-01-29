@@ -1,5 +1,6 @@
 #!/bin/python
 import pygame
+import sys
 from utils import *
 from levels.tutorial_level import Tutorial_level
 from characters.tracy import Tracy
@@ -12,7 +13,7 @@ class Control(object):
 
 	def __init__(self, screen):
 		# instanciate players and their size
-		self.player = Tracy(50, SCREEN_HEIGHT-TRACY_HEIGHT)
+		self.player = Tracy(100, SCREEN_HEIGHT-TRACY_HEIGHT)
 		self.AI = Biggie(0, SCREEN_HEIGHT-BIGGIE_HEIGHT)
 
 		# screen
@@ -39,6 +40,30 @@ class Control(object):
 
 		# instantiate camera
 		self.camera = Camera()
+
+	def save(self):
+		try:
+			f = open('save/save.txt', 'w')
+			f.write("TEST TEST@ HELLO")
+			f.close()
+		except:
+			print "WRITE ERROR"
+			sys.exit(1)
+			
+
+	def load(self):
+		# load file format?
+		try:
+			f = open('save/save.txt', 'r')
+			text = f.read()
+			text = text.split(' ')
+			text[-1] = text[-1].rstrip('\n')
+			f.close()
+			print text
+			
+		except:
+			print "READ ERROR"
+			sys.exit(1)
 
 	def processEvents(self):
 		# loop events
@@ -72,9 +97,31 @@ class Control(object):
 
 		#update player
 		self.active_sprites.update()
+		if self.player.dead:
+			self.load()
 			
 		# update level
 		self.lvl_current.update()
+
+		# check if we've moved onto the next area
+		if self.player.rect.right > LEVEL_WIDTH: #and self.lvl_num < len(self.lvl_list)-1:
+			# save checkpoint
+			self.save()
+			self.player.rect.x = 50
+			self.AI.rect.x = 0
+			self.lvl_num += 1
+			self.lvl_current = self.lvl_list[self.lvl_num]
+			self.player.level = self.lvl_current
+			self.AI.level = self.lvl_current
+
+		# go to previous area
+		elif self.player.rect.left < 0 and self.lvl_num > 0:
+			self.player.rect.x = LEVEL_WIDTH-100
+			self.player.rect.x = LEVEL_WIDTH
+			self.lvl_num -= 1
+			self.lvl_current = self.lvl_list[lvl_num]
+			self.player.level = self.lvl_current
+			self.AI.level = self.lvl_current
 
 	def draw(self):
 		# draw

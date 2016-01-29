@@ -19,6 +19,9 @@ class Player(pygame.sprite.Sprite):
 		switch = Switch()
 		self.abilities = {switch.getKey(): switch}
 
+		# player dead
+		self.dead = False
+
 	def update(self):
 		# update movements, gravity, animation, etc.
 		self.gravity()
@@ -43,6 +46,11 @@ class Player(pygame.sprite.Sprite):
 			elif self.delta_y < 0:
 				self.rect.top = platform.rect.bottom
 			self.delta_y = 0
+		# detect enemy collision
+		enemy_collide = pygame.sprite.spritecollide(self, 
+				self.level.enemy_list, False)
+		if len(enemy_collide) > 0:
+			self.dead = True
 		
 	def gravity(self):
 		if self.delta_y == 0:
