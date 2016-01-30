@@ -1,13 +1,14 @@
 #!/bin/python
 import pygame
 import sys
+import ast
+import os
 from utils import *
 from levels.tutorial_level import Tutorial_level
 from characters.tracy import Tracy
 from characters.biggie import Biggie
 from levels.platforms import Platform
 from camera import Camera
-
 
 class Control(object):
 
@@ -42,29 +43,34 @@ class Control(object):
 		self.camera = Camera()
 
 	def save(self):
-		try:
-			f = open('save/save.txt', 'w')
-			f.write("TEST TEST@ HELLO")
-			f.close()
-		except:
-			print "WRITE ERROR"
-			sys.exit(1)
-			
+		with open('save/save.txt', 'w') as f:
+			saveStr = str(lvl_no) + ' ' + str(self.player.abilities) + ' ' + str(self.player.abilities)
+			f.write(saveStr)
 
 	def load(self):
-		# load file format?
-		try:
-			f = open('save/save.txt', 'r')
-			text = f.read()
-			text = text.split(' ')
-			text[-1] = text[-1].rstrip('\n')
-			f.close()
-			print text
-			
-		except:
-			print "READ ERROR"
-			sys.exit(1)
+		if os.path.exists('save/save.txt'):
+			with open('save/save.txt', 'r') as f:
 
+				text = f.read()
+
+				if text != '':
+					text = text.split(' ')
+					text[-1] = text[-1].rstrip('\n')
+		
+					# read in level
+					self.lvl_no = text[0]
+					self.current_lvl = self.lvl_list[self.lvl_num]
+					self.player.level = self.lvl_current
+					self.AI.level = self.lvl_current
+					if len(text) > 1:
+						# read in abilities
+						self.player.abilities = ast.literal_eval(text[1])
+						self.AI.abilities = ast.literal_eval(text[2])
+
+		# reset player position
+		self.player.rect.x = 50
+		self.AI.rect.x = 0	
+			
 	def processEvents(self):
 		# loop events
 		for event in pygame.event.get()	:
@@ -99,12 +105,13 @@ class Control(object):
 		self.active_sprites.update()
 		if self.player.dead:
 			self.load()
+			self.player.dead = False
 			
 		# update level
 		self.lvl_current.update()
 
 		# check if we've moved onto the next area
-		if self.player.rect.right > LEVEL_WIDTH: #and self.lvl_num < len(self.lvl_list)-1:
+		if self.player.rect.right > LEVEL_WIDTH and self.lvl_num < len(self.lvl_list)-1:
 			# save checkpoint
 			self.save()
 			self.player.rect.x = 50
