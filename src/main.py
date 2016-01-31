@@ -14,8 +14,8 @@ class Control(object):
 
 	def __init__(self, screen):
 		# instanciate players and their size
-		self.player = Tracy(100, SCREEN_HEIGHT-TRACY_HEIGHT)
-		self.AI = Biggie(0, SCREEN_HEIGHT-BIGGIE_HEIGHT)
+		self.player = Tracy(100, SCREEN_HEIGHT/2)
+		self.AI = Biggie(0, SCREEN_HEIGHT/2)
 
 		# screen
 		self.screen = screen

@@ -6,20 +6,56 @@ from utils import *
 
 class Tutorial_level(Level):
 	
+	# map tile textures
+	BROWN = (153, 76, 0)
+	GREEN = (0, 255, 0)
+	GREY = (84, 84, 84)
+	
 	def __init__(self, player, AI):
 		Level.__init__(self,player, AI)
 		
-		# an array of platforms
-		level = [[210, 70, 500, 500],
-			 [210, 70, 200, 400]]
-		enemies = [[40, 40, 0, 0, 'Basic_enemy', 0],
-			   [40, 40, 0, 0, 'Basic_enemy', 1]]
+		mapdict = {
+			"B": self.BROWN,
+			"G": self.GREEN,
+			"#": self.GREY
+		}
+		
+		map = [
+			"                                                                       ",
+			"                                                                       ",
+			"                                                                       ",
+			"                                                                       ",
+			"                                                                       ",
+			"                                                                       ",
+			"                                                                       ",
+			"                             GGGGGGGGGGG     GG                        ",
+			"                             GGGGGGGGGGG     GGG                       ",
+			"                             BBBBBBBBBBB     GGGG                      ",
+			"                                  G          GGGGG                     ",
+			"                                  G          GGGGGG                    ",
+			"                                  G          GGGGGGG                   ",
+			"                                  G          GGGGGGGG                  ",
+			"                 ###              G          GGGGGGGGG                 ",
+			"      ###        ###              G          GGGGGGGGGG                ",
+			"GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+			"GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+			"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+		]
+		
+		#enemies = [[40, 40, 0, 0, 'Basic_enemy', 0],
+		#		[40, 40, 0, 0, 'Basic_enemy', 1]]
 
-		for platform in level:
-			plat = Platform(platform[0], platform[1])
-			plat.rect.x = platform[2]
-			plat.rect.y = platform[3]
-			self.platform_list.add(plat)
+		x = y = 0
+		for row in map:
+			for block in row:
+				if block != " ":
+					platform = Platform(x, y)
+					platform.image.fill(mapdict[block])
+					self.platform_list.add(platform)
+				x += PLATFORM_WIDTH
+			x = 0
+			y += PLATFORM_HEIGHT
+				
 		
 		for enemy in enemies:
 			if enemy[4] == 'Basic_enemy':

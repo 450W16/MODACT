@@ -18,7 +18,7 @@ class Tracy(Player):
 
 		#check if we're on the ground
 		self.rect.y += 2
-		platform_collisions = pygame.sprite.spritecollide(self, 				self.level.platform_list, False)
+		platform_collisions = pygame.sprite.spritecollide(self, self.level.platform_list, False)
 		self.rect.y -= 2
 		#if yes, set trajectory upwards
 		if len(platform_collisions) > 0 or self.rect.bottom >= SCREEN_HEIGHT:
