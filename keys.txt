@@ -1,8 +1,6 @@
 List keys used here.
 
-K_r = revert
 K_l = ladder
-K_b = bridge
 K_f = switch
 K_LEFT = move left
 K_RIGHT = move right
