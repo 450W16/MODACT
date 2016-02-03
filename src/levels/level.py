@@ -11,24 +11,33 @@ class Level():
 	GREY = (84, 84, 84)
 	
 	def __init__(self, player, AI):
-		
+		dir = path.dirname(__file__)
 		self.platform_list = pygame.sprite.Group()
 		self.enemy_list = pygame.sprite.Group()
 		self.player = player
 		self.AI = AI
+		
+		terrain1 = pygame.image.load(dir+"\\..\\..\\assets\\art\\terrain1.png")
+		terrain2 = pygame.image.load(dir+"\\..\\..\\assets\\art\\terrain2.png")
+		terrain3 = pygame.image.load(dir+"\\..\\..\\assets\\art\\terrain3.png")
+		rock = pygame.image.load(dir+"\\..\\..\\assets\\art\\rockpixel_1.png")
 		self.mapdict = {
-			"B": self.BROWN,
-			"G": self.GREEN,
-			"#": self.GREY
+			"B": terrain3,
+			"G": terrain1,
+			"g": terrain2,
+			"#": rock
 		}
+		
+		self.background_image = pygame.image.load(dir+"\\..\\..\\assets\\art\\background.png").convert()
+		self.background_position = [0, 0]
 		
 	def update(self):
 		self.platform_list.update()
 		self.enemy_list.update()
 
 	def draw(self, screen, camera):
-		#TODO draw background
-		screen.fill((0,0,0))
+		#TODO scrolling background
+		screen.blit(self.background_image, self.background_position)
 
 		for plat in self.platform_list:
 			screen.blit(plat.image, camera.applyCam(plat))
@@ -44,7 +53,7 @@ class Level():
 				for block in line.rstrip():
 					if block != " ":
 						platform = Platform(x, y)
-						platform.image.fill(self.mapdict[block])
+						platform.image = self.mapdict[block]
 						self.platform_list.add(platform)
 					x += BLOCK_WIDTH
 				x = 0

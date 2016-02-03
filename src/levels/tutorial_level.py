@@ -14,7 +14,7 @@ class Tutorial_level(Level):
 		#enemies = [[40, 40, 0, 0, 'Basic_enemy', 0],
 		#		[40, 40, 0, 0, 'Basic_enemy', 1]]
 
-		self.parse_map('tutorial_map.txt');
+		self.parse_map('tutorial_map.txt')
 		
 		"""
 		for enemy in enemies:
