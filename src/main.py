@@ -14,8 +14,10 @@ class Control(object):
 
 	def __init__(self, screen):
 		# instanciate players and their size
-		self.player = Tracy(100, SCREEN_HEIGHT/2)
-		self.AI = Biggie(0, SCREEN_HEIGHT/2)
+		# self.player = Tracy(100, SCREEN_HEIGHT/2)
+		# self.AI = Biggie(0, SCREEN_HEIGHT/2)
+		self.player = Tracy(1200, SCREEN_HEIGHT/4)
+		self.AI = Biggie(1250, SCREEN_HEIGHT/4)
 
 		# screen
 		self.screen = screen
@@ -95,6 +97,16 @@ class Control(object):
 					self.player.stop()
 				if event.key == pygame.K_RIGHT and self.player.delta_x > 0:
 					self.player.stop()
+				if event.key == pygame.K_UP and self.player.delta_y < 0:
+					if isinstance(self.player, Tracy):
+						self.player.stop_y(self.AI.rect)
+					else:
+						self.player.stop()
+				if event.key == pygame.K_DOWN and self.player.delta_y > 0:
+					if isinstance(self.player, Tracy):
+						self.player.stop_y(self.AI.rect)
+					else:
+						self.player.stop()
 			
 
 	def update(self):
@@ -135,8 +147,8 @@ class Control(object):
 		self.lvl_current.draw(self.screen, self.camera)
 
 		# draw players
-		for char in self.active_sprites:
-			self.screen.blit(char.image, self.camera.applyCam(char))
+		self.screen.blit(self.AI.image, self.camera.applyCam(self.AI))
+		self.screen.blit(self.player.image, self.camera.applyCam(self.player))
 
 	def main_loop(self):
 		while not self.done:
