@@ -1,1 +1,1 @@
-__all__ = ["ability", "bridge", "ladder", "switch"]
+__all__ = ["ability", "bridge", "ladder", "switch", "revert", "climb"]
