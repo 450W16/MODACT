@@ -8,7 +8,11 @@ class Camera(object):
 		self.state = pygame.Rect(0,0, LEVEL_WIDTH, LEVEL_HEIGHT)
 
 	def applyCam(self, target):
-		return target.rect.move(self.state.topleft)
+		try:
+			t = target.rect.move(self.state.topleft)
+		except:
+			t = target.get_rect().move(self.state.topleft)
+		return t
 	
 	def update(self, target):
 		self.state = self.cam_func(target.rect)

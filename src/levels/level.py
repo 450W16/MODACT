@@ -29,7 +29,7 @@ class Level():
 		}
 		
 		self.background_image = pygame.image.load(dir+"\\..\\..\\assets\\art\\background.png").convert()
-		self.background_position = [0, 0]
+		#self.background_position = pygame.Rect(0,0,0,0)
 		
 	def update(self):
 		self.platform_list.update()
@@ -37,7 +37,7 @@ class Level():
 
 	def draw(self, screen, camera):
 		#TODO scrolling background
-		screen.blit(self.background_image, self.background_position)
+		screen.blit(self.background_image, camera.applyCam(self.background_image))
 
 		for plat in self.platform_list:
 			screen.blit(plat.image, camera.applyCam(plat))

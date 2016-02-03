@@ -144,7 +144,7 @@ class Control(object):
 			# input, update, draw
 			self.processEvents()
 			self.update()
-			self.draw()
+			self.draw() 
 			
 			#FPS		
 			self.clock.tick(60)
