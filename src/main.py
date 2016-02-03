@@ -3,6 +3,8 @@ import pygame
 import sys
 import ast
 import os
+import inspect
+from os import path
 from utils import *
 from levels.tutorial_level import Tutorial_level
 from characters.tracy import Tracy
@@ -31,7 +33,7 @@ class Control(object):
 		self.ACTIVE = self.player
 
 		# create level and list of levels
-		self.lvl_list = [Tutorial_level(self.player, self.AI)]
+		self.lvl_list = [Tutorial_level(self.player, self.AI)]	
 		self.lvl_num = 0
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
@@ -43,6 +45,12 @@ class Control(object):
 
 		# instantiate camera
 		self.camera = Camera()
+
+		#talking?
+		self.convo = False;
+		self.convoNum = 1;
+		self.conversation = True;
+		self.AIconversation = True;
 
 	def save(self):
 		with open('save/save.txt', 'w') as f:
@@ -86,6 +94,8 @@ class Control(object):
 					self.player.move_right()
 				if event.key == pygame.K_SPACE:
 					self.player.jump()
+				if event.key == pygame.K_RETURN:
+					self.convo = True
 				else:
 					# check for ability key
 					k = self.player.checkAbility(event.key)
@@ -150,6 +160,32 @@ class Control(object):
 		self.screen.blit(self.AI.image, self.camera.applyCam(self.AI))
 		self.screen.blit(self.player.image, self.camera.applyCam(self.player))
 
+	def initiateConvo(self):
+		if self.convo:
+			dialogue = []
+			if self.convoNum == 1:
+				dir = path.dirname(__file__)
+				with open(path.join(dir, 'tutorial_conversation.txt'), "r") as f:
+					dialogue = [x.strip('\n') for x in f.readlines()]
+			print(len(dialogue))
+		print('waiting for key press')
+
+		font = pygame.font.Font(None, 36)
+		
+		if self.convo:
+		# initialize font; must be called after 'pygame.init()' to avoid 'Font not Initialized' error
+
+			if self.conversation != False:
+				# render text
+				label = font.render("Player", 1, (255, 255, 255), )
+				self.screen.blit(label, (self.player.rect.centerx, 300))	
+
+			if self.AIconversation != False:
+				#render text
+				label = font.render("AI", 1, (255, 255, 255), )
+				self.screen.blit(label, (self.AI.rect.centerx, 100))
+
+
 	def main_loop(self):
 		while not self.done:
 			
@@ -157,6 +193,8 @@ class Control(object):
 			self.processEvents()
 			self.update()
 			self.draw()
+			if self.convo == True:
+				self.initiateConvo()
 			
 			#FPS		
 			self.clock.tick(60)
@@ -164,11 +202,12 @@ class Control(object):
 			#refresh screen
 			pygame.display.flip()
 
+
 def main():
 
 	# initialize pygame
 	pygame.init()
-
+	
 	# initialize screen
 	size = [SCREEN_WIDTH, SCREEN_HEIGHT]
 	screen = pygame.display.set_mode(size)
