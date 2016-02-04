@@ -10,7 +10,7 @@ If you press 'f', you will be able to switch between controlling Tracy and mysel
 I still have no idea who you're talking to.
 
 Uh, Biggie? How are we supposed to get up there?
-If you press 'l', I transform into a ladder. 
+If you press 'l', I transform into a ladder.
 
 If you press 'b', I transform into a bridge.
 
