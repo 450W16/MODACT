@@ -16,4 +16,7 @@ class Switch(Ability):
 		# moving and switching
 		c.player.delta_x, c.AI.delta_x = c.AI.delta_x, c.player.delta_x
 		c.player, c.AI = c.AI, c.player
+		#set both player and AI convo to false to prevent a conversation from starting
+		c.player.convo = False;
+		c.AI.convo = False;
 		c.ACTIVE = c.player

@@ -11,9 +11,9 @@
                                   G          GGGGG                     
                                   G          GGGGGG                    
                                   G          GGGGGGG                   
-                                  G          GGGGGGGG                  
-                 ###              G          GGGGGGGGG                 
-      ###        ###              G          GGGGGGGGGG                
+                   E              G          GGGGGGGG                  
+        E        ###              G          GGGGGGGGG                 
+      ###        ###     E        G          GGGGGGGGGG                
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB

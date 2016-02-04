@@ -34,6 +34,8 @@ class Player(pygame.sprite.Sprite):
 		self.locked = False
 		# Default heading
 		self.heading = Directions.Right
+		# Conversation?
+		self.convo = True
 
 	def update(self):
 		if not self.locked:
@@ -73,6 +75,15 @@ class Player(pygame.sprite.Sprite):
 						self.level.enemy_list, False)
 				if len(enemy_collide) > 0:
 					self.dead = True
+
+			if self.col:
+				#detect trigger collision (conversation), set to True to remove event block
+				trigger_collide = pygame.sprite.spritecollide(self,
+						self.level.trigger_list, True)
+				if len(trigger_collide) > 0:
+					#start the conversation
+					self.convo = True
+
 		
 	def gravity(self):
 		if self.delta_y == 0:
