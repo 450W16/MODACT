@@ -5,15 +5,15 @@
                                                                        
                                                                        
                                                                        
-                             GGGGGGGGGGG     GG                        
-                             GGGGGGGGGGG     GGG                       
-                             BBBBBBBBBBB     GGGG                      
-                                  G          GGGGG                     
-                                  G          GGGGGG                    
-                                  G          GGGGGGG                   
-                                  G          GGGGGGGG                  
-                 ###              G          GGGGGGGGG                 
-      ###        ###              G          GGGGGGGGGG                
-GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+                             ggggggggggg     gg                        
+                             DDDDDDDDDDD     DDD                       
+                             DDDDDDDDDDD     DDDD                      
+                                  D          DDDDD                     
+                                  D          DDDDDD                    
+                                  D          DDDDDDD                   
+                                  D          DDDDDDDD                  
+                 678              D          DDDDDDDDD                 
+      678        618              D          DDDDDDDDDD                
 ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
