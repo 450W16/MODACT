@@ -1,12 +1,14 @@
 import pygame
 from os import path
 from platforms import Platform
+from triggers import Trigger 
 from utils import *
 
 class Level():
 	
 	def __init__(self, player, AI):
 		self.platform_list = pygame.sprite.Group()
+		self.trigger_list = pygame.sprite.Group()
 		self.enemy_list = pygame.sprite.Group()
 		self.player = player
 		self.AI = AI
@@ -39,6 +41,7 @@ class Level():
 		
 	def update(self):
 		self.platform_list.update()
+		self.trigger_list.update()
 		self.enemy_list.update()
 
 	def draw(self, screen, camera):
@@ -47,6 +50,9 @@ class Level():
 
 		for plat in self.platform_list:
 			screen.blit(plat.image, camera.applyCam(plat))
+
+		for trig in self.trigger_list:
+			screen.blit(trig.image, camera.applyCam(trig))
 
 		for enemy in self.enemy_list:
 			screen.blit(enemy.image, camera.applyCam(enemy))
