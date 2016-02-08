@@ -36,10 +36,19 @@ class Player(pygame.sprite.Sprite):
 		self.heading = Directions.Right
 		# Conversation?
 		self.convo = True
+		
+		# Sprite animation counter
+		self.curr_sprite_index = 0
 
 	def update(self):
 		if not self.locked:
 			# update movements, gravity, animation, etc.
+			
+			if self.is_moving():
+				if self.get_sprites():
+					self.image = self.get_sprites()[self.curr_sprite_index]
+					self.curr_sprite_index = (self.curr_sprite_index + 1) % len(self.get_sprites())
+			
 			if self.grav:
 				self.gravity()
 
@@ -122,3 +131,9 @@ class Player(pygame.sprite.Sprite):
 
 	def getRect(self):
 		return self.rect
+		
+	def get_sprites(self):
+		raise NotImplementedError("Please implement this method")
+		
+	def is_moving(self):
+		return self.delta_x != 0 or self.delta_y != 0

@@ -1,17 +1,24 @@
 import pygame
+from os import path
 from player import Player
-from utils import *
 from abilities.climb import *
+from directions import Directions
+from spritesheet import SpriteSheet
+from utils import *
 
 # Default abilities: Climbup, Climbdown
 class Tracy(Player):
 	
 	def __init__(self, x, y):
 		Player.__init__(self, x, y)
-
-		# initialize avitar (will replace with sprites later)
-		self.image = pygame.Surface([TRACY_WIDTH, TRACY_HEIGHT])
-		self.image.fill((255, 0, 255))
+		
+		# initialize list for walking sprites
+		ss = SpriteSheet(path.join(get_art_dir(), 'Tracy', 'Tracy_spritesheet.png'), 8)
+		self.sprites_walk_left = ss.get_sprites()
+		self.sprites_walk_right = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_left]
+		self.curr_sprite_index = 0
+		
+		self.image = self.sprites_walk_right[0]
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
@@ -19,6 +26,12 @@ class Tracy(Player):
 		self.abilities[climbUp.getKey()] = climbUp
 		climbDown = ClimbDown()
 		self.abilities[climbDown.getKey()] = climbDown
+		
+	def move_left(self):
+		super(Tracy, self).move_left()
+
+	def move_right(self):
+		super(Tracy, self).move_right()
 		
 	def jump(self):
 
@@ -36,3 +49,12 @@ class Tracy(Player):
 			self.grav = True
 			self.horiM = True
 			self.col = True
+			
+	def get_sprites(self):
+		ret = None
+		if self.heading == Directions.Left:
+			ret = self.sprites_walk_left
+		elif self.heading == Directions.Right:
+			ret = self.sprites_walk_right
+				
+		return ret
