@@ -56,5 +56,11 @@ class Tracy(Player):
 			ret = self.sprites_walk_left
 		elif self.heading == Directions.Right:
 			ret = self.sprites_walk_right
+			
+		# Check for movement
+		if not self.is_moving():
+			ret = [ret[0]]
+		elif self.delta_y != 0:
+			ret = [ret[2]]
 				
 		return ret

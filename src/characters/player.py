@@ -44,10 +44,9 @@ class Player(pygame.sprite.Sprite):
 		if not self.locked:
 			# update movements, gravity, animation, etc.
 			
-			if self.is_moving():
-				if self.get_sprites():
-					self.image = self.get_sprites()[self.curr_sprite_index]
-					self.curr_sprite_index = (self.curr_sprite_index + 1) % len(self.get_sprites())
+			if self.get_sprites():
+				self.curr_sprite_index = (self.curr_sprite_index + 1) % len(self.get_sprites())
+				self.image = self.get_sprites()[self.curr_sprite_index]
 			
 			if self.grav:
 				self.gravity()
