@@ -106,8 +106,10 @@ class Control(object):
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_LEFT and self.player.delta_x < 0:
 					self.player.stop()
+					self.AI.stop()
 				if event.key == pygame.K_RIGHT and self.player.delta_x > 0:
 					self.player.stop()
+					self.AI.stop()
 				if event.key == pygame.K_UP and self.player.delta_y < 0:
 					if isinstance(self.player, Tracy):
 						self.player.stop_y(self.AI.rect)
@@ -129,6 +131,12 @@ class Control(object):
 		if self.player.dead:
 			self.load()
 			self.player.dead = False
+
+		# follow
+		if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST and not self.AI.locked:
+			self.AI.delta_x = self.player.delta_x
+		elif self.player.delta_x < 0 and self.AI.rect.x > self.player.rect.x + FOLLOW_DIST and not self.AI.locked:
+			self.AI.delta_x = self.player.delta_x
 			
 		# update level
 		self.lvl_current.update()

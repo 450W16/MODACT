@@ -8,6 +8,7 @@ TRACY_WIDTH, TRACY_HEIGHT = 40, 30
 ACTIVE = None
 LEVEL_WIDTH,LEVEL_HEIGHT = 2100, 3000
 BLOCK_WIDTH = BLOCK_HEIGHT = 32
+FOLLOW_DIST = 50
 
 def get_root_dir():
 	return path.join(get_src_dir(), '..')
