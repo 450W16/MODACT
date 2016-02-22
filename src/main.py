@@ -134,9 +134,9 @@ class Control(object):
 
 		# follow
 		if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST and not self.AI.locked:
-			self.AI.delta_x = self.player.delta_x
+			self.AI.move_right()
 		elif self.player.delta_x < 0 and self.AI.rect.x > self.player.rect.x + FOLLOW_DIST and not self.AI.locked:
-			self.AI.delta_x = self.player.delta_x
+			self.AI.move_left()
 			
 		# update level
 		self.lvl_current.update()
