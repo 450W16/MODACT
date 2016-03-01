@@ -62,7 +62,7 @@ class Level():
 			x = y = 0
 			for line in f:
 				for block in line.rstrip():
-					if block != " ":
+					if block != " " and block != "^" and block != ">":
 						platform = Platform(x, y)
 						platform.image = self.mapdict[block]
 						self.platform_list.add(platform)

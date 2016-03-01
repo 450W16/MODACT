@@ -6,6 +6,7 @@ import os
 import inspect
 from utils import *
 from levels.tutorial_level import Tutorial_level
+from levels.level1 import Level1_level
 from characters.tracy import Tracy
 from characters.biggie import Biggie
 from levels.platforms import Platform
@@ -14,10 +15,8 @@ from camera import Camera
 class Control(object):
 
 	def __init__(self, screen):
-		# instanciate players and their size
-		# self.player = Tracy(100, SCREEN_HEIGHT/2)
-		# self.AI = Biggie(0, SCREEN_HEIGHT/2)
-		self.player = Tracy(0, SCREEN_HEIGHT - 100)
+		# instanciate players and their position
+		self.player = Tracy(0, SCREEN_HEIGHT - 224)
 		self.AI = Biggie(100, SCREEN_HEIGHT - 150)
 
 		# screen
@@ -32,8 +31,11 @@ class Control(object):
 		self.ACTIVE = self.player
 
 		# create level and list of levels
-		self.lvl_list = [Tutorial_level(self.player, self.AI)]	
-		self.lvl_num = 0
+		self.lvl_list = [
+							Tutorial_level(self.player, self.AI),
+							Level1_level(self.player, self.AI)
+						]	
+		self.lvl_num = 1
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
 		self.AI.level = self.lvl_current
