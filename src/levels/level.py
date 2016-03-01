@@ -66,6 +66,9 @@ class Level():
 						platform = Platform(x, y)
 						platform.image = self.mapdict[block]
 						self.platform_list.add(platform)
+						if block == "E":
+							trigger = Trigger(x, y)
+							self.trigger_list.add(trigger)
 					x += BLOCK_WIDTH
 				x = 0
 				y += BLOCK_HEIGHT
