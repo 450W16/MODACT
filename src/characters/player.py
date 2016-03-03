@@ -39,20 +39,28 @@ class Player(pygame.sprite.Sprite):
 		
 		# Sprite animation counter
 		self.curr_sprite_index = 0
+		self.update_counter = 0
+		self.update_speed = 2
 
 	def update(self):
 		if not self.locked:
 			# update movements, gravity, animation, etc.
 			
 			if self.get_sprites():
-				self.curr_sprite_index = (self.curr_sprite_index + 1) % len(self.get_sprites())
-				self.image = self.get_sprites()[self.curr_sprite_index]
+				self.update_counter = (self.update_counter + 1) % self.update_speed
+				if self.update_counter == 0:
+					self.curr_sprite_index = (self.curr_sprite_index + 1) % len(self.get_sprites())
+					self.image = self.get_sprites()[self.curr_sprite_index]
 			
 			if self.grav:
 				self.gravity()
 
 			if self.horiM:
 				self.rect.x += self.delta_x
+				if self.delta_x > 0:
+					self.heading = Directions.Right
+				elif self.delta_x < 0:
+					self.heading = Directions.Left
 				if self.col:
 					# collision detection in x
 					collide_list = pygame.sprite.spritecollide(self, 
@@ -106,11 +114,11 @@ class Player(pygame.sprite.Sprite):
 	
 	def move_left(self):
 		self.delta_x = -5
-		self.heading = Directions.Left
+		#self.heading = Directions.Left
 
 	def move_right(self):
 		self.delta_x = 5
-		self.heading = Directions.Right
+		#self.heading = Directions.Right
 
 	def jump(self):
 		pass
