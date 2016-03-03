@@ -39,10 +39,10 @@ class Level():
 			"8": rock_rightend
 		}
 		
-	def update(self):
+	def update(self, c):
 		self.platform_list.update()
 		self.trigger_list.update()
-		self.enemy_list.update()
+		self.enemy_list.update(c)
 
 	def draw(self, screen, camera):
 		#TODO slower scrolling background
@@ -57,15 +57,18 @@ class Level():
 		for enemy in self.enemy_list:
 			screen.blit(enemy.image, camera.applyCam(enemy))
 			
-	def parse_map(self, filename):
+	def parse_map(self, filename, enemies, callback):
 		with open(path.join(get_levels_dir(), filename), "r") as f:
 			x = y = 0
 			for line in f:
 				for block in line.rstrip():
 					if block != " ":
-						platform = Platform(x, y)
-						platform.image = self.mapdict[block]
-						self.platform_list.add(platform)
+						if block in enemies:
+							callback(self, enemies[block](40, 40, x, y))
+						else :
+							platform = Platform(x, y)
+							platform.image = self.mapdict[block]
+							self.platform_list.add(platform)
 					x += BLOCK_WIDTH
 				x = 0
 				y += BLOCK_HEIGHT

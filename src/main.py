@@ -131,7 +131,7 @@ class Control(object):
 			self.player.dead = False
 			
 		# update level
-		self.lvl_current.update()
+		self.lvl_current.update(self)
 
 		# check if we've moved onto the next area
 		if self.player.rect.right > LEVEL_WIDTH and self.lvl_num < len(self.lvl_list)-1:
