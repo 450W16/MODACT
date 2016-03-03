@@ -55,7 +55,7 @@ class Control(object):
 
 	def save(self):
 		with open('save/save.txt', 'w') as f:
-			saveStr = str(lvl_no) + ' ' + str(self.player.abilities) + ' ' + str(self.player.abilities)
+			saveStr = str(self.lvl_num) + ' ' + str(self.player.abilities) + ' ' + str(self.player.abilities)
 			f.write(saveStr)
 
 	def load(self):
@@ -159,7 +159,7 @@ class Control(object):
 			self.player.rect.x = LEVEL_WIDTH-100
 			self.player.rect.x = LEVEL_WIDTH
 			self.lvl_num -= 1
-			self.lvl_current = self.lvl_list[lvl_num]
+			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
 			self.AI.level = self.lvl_current
 

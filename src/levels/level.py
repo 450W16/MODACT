@@ -13,6 +13,8 @@ class Level():
 		self.player = player
 		self.AI = AI
 		self.background_image = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+		self.music = None
+		self.music_is_playing = False
 		
 		grass = pygame.image.load(path.join(get_art_dir(), "terrain1.png"))
 		dirt = pygame.image.load(path.join(get_art_dir(), "terrain2.png"))
@@ -43,7 +45,9 @@ class Level():
 		self.platform_list.update()
 		self.trigger_list.update()
 		self.enemy_list.update()
-
+		if not self.music_is_playing:
+			self.playMusic()
+		
 	def draw(self, screen, camera):
 		#TODO slower scrolling background
 		screen.blit(self.background_image, camera.applyCam(self.background_image))
@@ -72,3 +76,9 @@ class Level():
 				
 	def set_background_image(self, filename):
 		self.background_image = pygame.image.load(path.join(get_art_dir(), filename)).convert()
+
+	def playMusic(self):
+		if self.music != None:
+			pygame.mixer.music.load(self.music)
+			pygame.mixer.music.play(-1)
+			self.music_is_playing = True

@@ -16,4 +16,4 @@ class Level1_level(Level):
 
 		self.set_background_image('tutorial_background.png')
 		self.parse_map('level1_map.txt')
-		
+		self.music = 'levels/forest.mp3'
