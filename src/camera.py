@@ -24,7 +24,7 @@ class Camera(object):
 
 		l = min(0,l)
 		l = max(-(self.state.width-SCREEN_WIDTH), l)
-		t = max((self.state.height-SCREEN_HEIGHT), t)
+		t = max(-(self.state.height-SCREEN_HEIGHT), t)
 		t = min(0,t)
 		
 		return pygame.Rect(l, t, w, h)

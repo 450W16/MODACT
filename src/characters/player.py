@@ -62,7 +62,7 @@ class Player(pygame.sprite.Sprite):
 				elif self.delta_x < 0:
 					self.heading = Directions.Left
 				if self.col:
-					# collision detection in x
+					# collision detection in X 					
 					collide_list = pygame.sprite.spritecollide(self, 
 							self.level.platform_list, False)
 					for platform in collide_list:
