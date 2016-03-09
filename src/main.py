@@ -162,6 +162,9 @@ class Control(object):
 			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
 			self.AI.level = self.lvl_current
+		elif self.player.rect.left < 0 and self.lvl_num == 0:
+			self.player.rect.x = 1
+			self.AI.rect.x = 1
 
 	def draw(self):
 		# draw
