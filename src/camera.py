@@ -11,7 +11,10 @@ class Camera(object):
 		try:
 			t = target.rect.move(self.state.topleft)
 		except:
-			t = target.get_rect().move(self.state.topleft)
+			try:
+				t = target.get_rect().move(self.state.topleft)
+			except:
+				t = target.move(self.state.topleft)
 		return t
 	
 	def update(self, target):

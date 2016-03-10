@@ -51,6 +51,9 @@ class Level():
 	def draw(self, screen, camera):
 		#TODO slower scrolling background
 		screen.blit(self.background_image, camera.applyCam(self.background_image))
+		if self.background_image.get_rect().right < LEVEL_WIDTH:
+			rect = pygame.Rect(self.background_image.get_rect().right, self.background_image.get_rect().top, self.background_image.get_rect().width, self.background_image.get_rect().height)
+			screen.blit(self.background_image, camera.applyCam(rect))
 
 		for plat in self.platform_list:
 			screen.blit(plat.image, camera.applyCam(plat))

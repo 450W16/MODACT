@@ -54,9 +54,10 @@ class Control(object):
 		self.dialogue = 0
 
 	def save(self):
-		with open('save/save.txt', 'w') as f:
-			saveStr = str(self.lvl_num) + ' ' + str(self.player.abilities) + ' ' + str(self.player.abilities)
-			f.write(saveStr)
+		pass
+		#with open('save/save.txt', 'w') as f:
+		#	saveStr = str(self.lvl_num) + ' ' + str(self.player.abilities) + ' ' + str(self.AI.abilities)
+		#	f.write(saveStr)
 
 	def load(self):
 		if os.path.exists('save/save.txt'):
@@ -167,6 +168,7 @@ class Control(object):
 			self.AI.rect.x = 1
 
 	def draw(self):
+		self.screen.fill((0,0,0))
 		# draw
 		self.lvl_current.draw(self.screen, self.camera)
 
