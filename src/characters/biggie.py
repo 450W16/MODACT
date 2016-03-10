@@ -23,6 +23,9 @@ class Biggie(Player):
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
+		self.rect.width = BIGGIE_WIDTH
+		self.rect.height = BIGGIE_HEIGHT
+		self.image = pygame.transform.scale(self.image, self.rect.size)
 		ladder = Ladder()
 		self.abilities[ladder.getKey()] = ladder
 		revert = Revert()

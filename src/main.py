@@ -17,7 +17,7 @@ class Control(object):
 	def __init__(self, screen):
 		# instanciate players and their position
 		self.player = Tracy(0, SCREEN_HEIGHT - 224)
-		self.AI = Biggie(100, SCREEN_HEIGHT - 150)
+		self.AI = Biggie(100, SCREEN_HEIGHT - 224)
 
 		# screen
 		self.screen = screen
@@ -138,7 +138,7 @@ class Control(object):
 		# follow
 		if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST and not self.AI.locked:
 			self.AI.move_right()
-		elif self.player.delta_x < 0 and self.AI.rect.x > self.player.rect.x + FOLLOW_DIST and not self.AI.locked:
+		elif self.player.delta_x < 0 and self.AI.rect.x > self.player.rect.right + FOLLOW_DIST and not self.AI.locked:
 			self.AI.move_left()
 			
 		# update level
@@ -173,9 +173,11 @@ class Control(object):
 		self.lvl_current.draw(self.screen, self.camera)
 
 		# draw players
+		self.player.image = pygame.transform.scale(self.player.image, self.player.rect.size)
+		self.AI.image = pygame.transform.scale(self.AI.image, self.AI.rect.size)
 		self.screen.blit(self.AI.image, self.camera.applyCam(self.AI))
 		self.screen.blit(self.player.image, self.camera.applyCam(self.player))
-
+		#print(str(self.AI.rect.height))
 	def initiateConvo(self):
 		#initialize the conversation
 		#put each line into the list of 'dialogue'
