@@ -12,11 +12,10 @@ class Tracy(Player):
 	def __init__(self, x, y):
 		Player.__init__(self, x, y)
 		
-		# initialize list for walking sprites
+		# initialize lists for walking sprites
 		ss = SpriteSheet(path.join(get_art_dir(), 'Tracy', 'Tracy_spritesheet.png'), 8)
-		self.sprites_walk_left = ss.get_sprites(size=(32,64))
+		self.sprites_walk_left = ss.get_sprites(size=(32, 64))
 		self.sprites_walk_right = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_left]
-		self.curr_sprite_index = 0
 		
 		self.image = self.sprites_walk_right[0]
 		self.rect = self.image.get_rect()

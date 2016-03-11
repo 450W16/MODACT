@@ -2,6 +2,7 @@
 import pygame
 from abilities.switch import *
 from utils import *
+from spritesheet import SpriteSheet
 from directions import Directions
 
 class Player(pygame.sprite.Sprite):
@@ -37,20 +38,17 @@ class Player(pygame.sprite.Sprite):
 		# Conversation?
 		self.convo = True
 		
+		# TODO: maybe move this counter to the future Moveable class.
 		# Sprite animation counter
 		self.curr_sprite_index = 0
 		self.update_counter = 0
-		self.update_speed = 2
+		self.frames_per_sprite = 2
 
 	def update(self):
 		if not self.locked:
 			# update movements, gravity, animation, etc.
 			
-			if self.get_sprites():
-				self.update_counter = (self.update_counter + 1) % self.update_speed
-				if self.update_counter == 0:
-					self.curr_sprite_index = (self.curr_sprite_index + 1) % len(self.get_sprites())
-					self.image = self.get_sprites()[self.curr_sprite_index]
+			self.update_sprites()
 			
 			if self.grav:
 				self.gravity()
@@ -144,3 +142,10 @@ class Player(pygame.sprite.Sprite):
 		
 	def is_moving(self):
 		return self.delta_x != 0 or self.delta_y != 0
+
+	def update_sprites(self):
+		if self.get_sprites():
+			self.update_counter = (self.update_counter + 1) % self.frames_per_sprite
+			if self.update_counter == 0:
+				self.curr_sprite_index = (self.curr_sprite_index + 1) % len(self.get_sprites())
+				self.image = self.get_sprites()[self.curr_sprite_index]

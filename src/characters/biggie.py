@@ -14,9 +14,8 @@ class Biggie(Player):
 
 		# initialize list for walking sprites
 		ss = SpriteSheet(path.join(get_art_dir(), 'Biggie', 'Biggie_spritesheet.png'), 10)
-		self.sprites_walk_right = ss.get_sprites(size=(96,96))
+		self.sprites_walk_right = ss.get_sprites(size=(96, 96))
 		self.sprites_walk_left = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_right]
-		self.curr_sprite_index = 0
 		
 		self.heading = Directions.Left
 		self.image = self.sprites_walk_left[0]

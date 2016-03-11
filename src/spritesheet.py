@@ -1,12 +1,16 @@
-"""
-Sprite sheet handler
-"""
 import pygame
 from utils import *
 
 class SpriteSheet(object):
+	"""Sprite sheet handler."""
 	
 	def __init__(self, filename, num_sprites):
+		"""Inits SpriteSheet using the given filename and number of sprites.
+		
+		Args:
+			filename: the filename of the sprite sheet.
+			num_sprites: the number of individual sprites in the sprite sheet.
+		"""
 		self.sprite_sheet = pygame.image.load(filename).convert_alpha()
 		self.num_sprites = num_sprites
 		
