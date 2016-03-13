@@ -14,15 +14,17 @@ class Biggie(Player):
 
 		# initialize list for walking sprites
 		ss = SpriteSheet(path.join(get_art_dir(), 'Biggie', 'Biggie_spritesheet.png'), 10)
-		self.sprites_walk_right = ss.get_sprites()
+		self.sprites_walk_right = ss.get_sprites(size=(96, 96))
 		self.sprites_walk_left = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_right]
-		self.curr_sprite_index = 0
 		
 		self.heading = Directions.Left
 		self.image = self.sprites_walk_left[0]
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
+		self.rect.width = BIGGIE_WIDTH
+		self.rect.height = BIGGIE_HEIGHT
+		self.image = pygame.transform.scale(self.image, self.rect.size)
 		ladder = Ladder()
 		self.abilities[ladder.getKey()] = ladder
 		revert = Revert()

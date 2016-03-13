@@ -6,6 +6,7 @@ import os
 import inspect
 from utils import *
 from levels.tutorial_level import Tutorial_level
+from levels.level1 import Level1_level
 from characters.tracy import Tracy
 from characters.biggie import Biggie
 from levels.platforms import Platform
@@ -14,11 +15,9 @@ from camera import Camera
 class Control(object):
 
 	def __init__(self, screen):
-		# instanciate players and their size
-		# self.player = Tracy(100, SCREEN_HEIGHT/2)
-		# self.AI = Biggie(0, SCREEN_HEIGHT/2)
-		self.player = Tracy(0, SCREEN_HEIGHT - 100)
-		self.AI = Biggie(100, SCREEN_HEIGHT - 150)
+		# instanciate players and their position
+		self.player = Tracy(0, SCREEN_HEIGHT - 224)
+		self.AI = Biggie(100, SCREEN_HEIGHT - 224)
 
 		# screen
 		self.screen = screen
@@ -32,7 +31,10 @@ class Control(object):
 		self.ACTIVE = self.player
 
 		# create level and list of levels
-		self.lvl_list = [Tutorial_level(self.player, self.AI)]	
+		self.lvl_list = [
+							Tutorial_level(self.player, self.AI),
+							Level1_level(self.player, self.AI)
+						]	
 		self.lvl_num = 0
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
@@ -52,9 +54,10 @@ class Control(object):
 		self.dialogue = 0
 
 	def save(self):
-		with open('save/save.txt', 'w') as f:
-			saveStr = str(lvl_no) + ' ' + str(self.player.abilities) + ' ' + str(self.player.abilities)
-			f.write(saveStr)
+		pass
+		#with open('save/save.txt', 'w') as f:
+		#	saveStr = str(self.lvl_num) + ' ' + str(self.player.abilities) + ' ' + str(self.AI.abilities)
+		#	f.write(saveStr)
 
 	def load(self):
 		if os.path.exists('save/save.txt'):
@@ -135,7 +138,7 @@ class Control(object):
 		# follow
 		if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST and not self.AI.locked:
 			self.AI.move_right()
-		elif self.player.delta_x < 0 and self.AI.rect.x > self.player.rect.x + FOLLOW_DIST and not self.AI.locked:
+		elif self.player.delta_x < 0 and self.AI.rect.x > self.player.rect.right + FOLLOW_DIST and not self.AI.locked:
 			self.AI.move_left()
 			
 		# update level
@@ -157,18 +160,24 @@ class Control(object):
 			self.player.rect.x = LEVEL_WIDTH-100
 			self.player.rect.x = LEVEL_WIDTH
 			self.lvl_num -= 1
-			self.lvl_current = self.lvl_list[lvl_num]
+			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
 			self.AI.level = self.lvl_current
+		elif self.player.rect.left < 0 and self.lvl_num == 0:
+			self.player.rect.x = 1
+			self.AI.rect.x = 1
 
 	def draw(self):
+		self.screen.fill((0,0,0))
 		# draw
 		self.lvl_current.draw(self.screen, self.camera)
 
 		# draw players
+		self.player.image = pygame.transform.scale(self.player.image, self.player.rect.size)
+		self.AI.image = pygame.transform.scale(self.AI.image, self.AI.rect.size)
 		self.screen.blit(self.AI.image, self.camera.applyCam(self.AI))
 		self.screen.blit(self.player.image, self.camera.applyCam(self.player))
-
+		#print(str(self.AI.rect.height))
 	def initiateConvo(self):
 		#initialize the conversation
 		#put each line into the list of 'dialogue'
