@@ -53,6 +53,8 @@ class Control(object):
 		#dialogue line #
 		self.dialogue = 0
 
+
+
 	def save(self):
 		pass
 		#with open('save/save.txt', 'w') as f:
@@ -167,6 +169,8 @@ class Control(object):
 			self.player.rect.x = 1
 			self.AI.rect.x = 1
 
+		
+
 	def draw(self):
 		self.screen.fill((0,0,0))
 		# draw
@@ -178,6 +182,7 @@ class Control(object):
 		self.screen.blit(self.AI.image, self.camera.applyCam(self.AI))
 		self.screen.blit(self.player.image, self.camera.applyCam(self.player))
 		#print(str(self.AI.rect.height))
+
 	def initiateConvo(self):
 		#initialize the conversation
 		#put each line into the list of 'dialogue'
