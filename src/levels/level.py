@@ -19,6 +19,7 @@ class Level():
 		self.background_image = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
 		self.music = None
 		self.music_is_playing = False
+<<<<<<< HEAD
 
 		#platform movement speed and boundaries
 		self.platform_change_x = 2
@@ -26,6 +27,9 @@ class Level():
 		self.platform_totalChange = 0
 		self.platform_boundary = 40
 
+=======
+		
+>>>>>>> origin/dev
 		grass = pygame.image.load(path.join(get_art_dir(), "terrain1.png"))
 		dirt = pygame.image.load(path.join(get_art_dir(), "terrain2.png"))
 		dirt_bottom = pygame.image.load(path.join(get_art_dir(), "terrain3.png"))
@@ -102,6 +106,7 @@ class Level():
 			x = y = 0
 			for line in f:
 				for block in line.rstrip():
+<<<<<<< HEAD
 					if block != " ":
 						#need a trigger block image
 						if block == "E":
@@ -121,6 +126,9 @@ class Level():
 							self.platform_list.add(platform)
 					#is this part necessary?
 					if block != " " and block != "^" and block != ">" and block != "E":
+=======
+					if block != " " and block != "^" and block != ">":
+>>>>>>> origin/dev
 						platform = Platform(x, y)
 						platform.image = self.mapdict[block]
 						self.platform_list.add(platform)

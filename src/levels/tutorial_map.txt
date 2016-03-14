@@ -4,7 +4,11 @@ d                                                                     d
 d                                                                     d  
 d                                                                     d  
 d                                                                     d  
+<<<<<<< HEAD
 d                                     E                               d 
+=======
+d                                                                     d 
+>>>>>>> origin/dev
 d                            ggggggggggg     gg                       d 
 d                            DDDDDDDDDDD     DDD                      d 
 d                            DDDDDDDDDDD     DDDD                     d 
