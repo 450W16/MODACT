@@ -168,11 +168,7 @@ class Control(object):
 		elif self.player.rect.left < 0 and self.lvl_num == 0:
 			self.player.rect.x = 1
 			self.AI.rect.x = 1
-<<<<<<< HEAD
 
-		
-=======
->>>>>>> origin/dev
 
 	def draw(self):
 		self.screen.fill((0,0,0))
@@ -185,10 +181,7 @@ class Control(object):
 		self.screen.blit(self.AI.image, self.camera.applyCam(self.AI))
 		self.screen.blit(self.player.image, self.camera.applyCam(self.player))
 		#print(str(self.AI.rect.height))
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/dev
 	def initiateConvo(self):
 		#initialize the conversation
 		#put each line into the list of 'dialogue'

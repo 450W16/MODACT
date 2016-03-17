@@ -50,11 +50,7 @@ class Player(pygame.sprite.Sprite):
 
 			if not self.convo:
 			
-<<<<<<< HEAD
 				self.update_sprites()
-=======
-			self.update_sprites()
->>>>>>> origin/dev
 			
 				if self.grav:
 					self.gravity()
@@ -90,13 +86,11 @@ class Player(pygame.sprite.Sprite):
 							self.delta_y = 0
 				
 				if self.col:
-<<<<<<< HEAD
 					# detect enemy collision
 					enemy_collide = pygame.sprite.spritecollide(self, 
 							self.level.enemy_list, False)
 					if len(enemy_collide) > 0:
 						self.dead = True
-=======
 					# collision detection in X 					
 					collide_list = pygame.sprite.spritecollide(self, 
 							self.level.platform_list, False)
@@ -108,7 +102,6 @@ class Player(pygame.sprite.Sprite):
 
 			if self.vertM:
 				self.rect.y += self.delta_y
->>>>>>> origin/dev
 
 				if self.col:
 					#detect trigger collision (conversation), set to True to remove event block
