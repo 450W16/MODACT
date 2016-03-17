@@ -9,12 +9,7 @@ class Monkey(Enemy):
 		self.speed = 2
 
 	def update(self, c):
-		if self.dir == 'R':
-			self.rect.x += self.speed
-			if self.rect.right > self.platform.rect.right:
-				self.dir = 'L'
+		if self.checkAggro(c, False):
+			# Throw
 		else:
-			self.rect.x -= self.speed
-			if self.rect.left < self.platform.rect.left:
-				self.dir = 'R'
-		# Implement throw after aggro
+			super(Monkey, self).update(c)
