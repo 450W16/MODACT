@@ -106,7 +106,6 @@ class Level():
 						#need a trigger block image
 						if block in enemies:
 							callback(self, enemies[block](40, 40, x, y))
-							print(str(x) + " " + str(y))
 						elif block == "E":
 							trigger = Trigger(x, y)
 							self.trigger_list.add(trigger)
