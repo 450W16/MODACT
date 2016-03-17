@@ -158,7 +158,9 @@ class Control(object):
 		# go to previous area
 		elif self.player.rect.left < 0 and self.lvl_num > 0:
 			self.player.rect.x = LEVEL_WIDTH-100
-			self.player.rect.x = LEVEL_WIDTH
+			self.AI.rect.x = LEVEL_WIDTH-100
+			self.player.rect.y -= 100
+			self.AI.rect.y -= 100
 			self.lvl_num -= 1
 			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current

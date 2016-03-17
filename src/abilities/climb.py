@@ -9,20 +9,21 @@ class ClimbUp(Ability):
 	def cast(self, c):
 		biggieRect = c.AI.getRect()
 		tracyRect = c.player.getRect()
-
-		if abs(biggieRect.left - tracyRect.left) < 10 and abs(biggieRect.right - tracyRect.right) < 10 and c.AI.locked == True:
-			if tracyRect.bottom <= biggieRect.top:
-				c.player.delta_y = 0
-				c.player.grav = True
-				c.player.horiM = True
-				c.player.col = True
-			else:
-				c.player.delta_y = -2
-				c.player.rect.left = biggieRect.left
-				c.player.rect.right = biggieRect.right
-				c.player.grav = False
-				c.player.horiM = False
-				c.player.col = False
+	
+		if biggieRect.colliderect(tracyRect) and c.AI.locked == True:
+			
+			#if tracyRect.bottom <= biggieRect.top:
+			#	print("ayy lmao")
+			#	c.player.delta_y = 0
+			#	c.player.grav = True 
+			#	c.player.horiM = True
+			#	c.player.col = True
+			#else:
+			c.player.delta_y = -2
+			c.player.rect.left = biggieRect.left + 10
+			c.player.grav = False
+			c.player.horiM = False
+			c.player.col = False
 
 class ClimbDown(Ability):
 	def __init__(self):
@@ -32,16 +33,18 @@ class ClimbDown(Ability):
 		biggieRect = c.AI.getRect()
 		tracyRect = c.player.getRect()
 
-		if abs(biggieRect.left - tracyRect.left) < 10 and abs(biggieRect.right - tracyRect.right) < 10 and c.AI.locked == True:
+		print(str(tracyRect.center[0]) + " " + str(biggieRect.center[0]))
+		print(str(tracyRect.bottom) + " " + str(biggieRect.top))
+		if (biggieRect.colliderect(tracyRect) or biggieRect.collidepoint(tracyRect.center[0],tracyRect.bottom)) and c.AI.locked == True:
 			if tracyRect.bottom >= biggieRect.bottom:
+				print("hi")
 				c.player.delta_y = 0
 				c.player.grav = True
 				c.player.horiM = True
 				c.player.col = True
 			else:
 				c.player.delta_y = 2
-				c.player.rect.left = biggieRect.left
-				c.player.rect.right = biggieRect.right
+				c.player.rect.left = biggieRect.left + 10
 				c.player.grav = False
 				c.player.horiM = False
-				c.player.col = False
+				c.player.col = True
