@@ -24,7 +24,7 @@ class Tutorial_level(Level):
 			'S': initSpider
 		}
 
-		self.set_background_image('background.png')
+		self.set_background_image('tutorial_background.png')
 		self.parse_map('tutorial_map.txt', enemies, initEnemy)
 		
 	

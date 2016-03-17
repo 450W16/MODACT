@@ -11,7 +11,10 @@ class Camera(object):
 		try:
 			t = target.rect.move(self.state.topleft)
 		except:
-			t = target.get_rect().move(self.state.topleft)
+			try:
+				t = target.get_rect().move(self.state.topleft)
+			except:
+				t = target.move(self.state.topleft)
 		return t
 	
 	def update(self, target):
@@ -24,7 +27,7 @@ class Camera(object):
 
 		l = min(0,l)
 		l = max(-(self.state.width-SCREEN_WIDTH), l)
-		t = max((self.state.height-SCREEN_HEIGHT), t)
+		t = max(-(self.state.height-SCREEN_HEIGHT), t)
 		t = min(0,t)
 		
 		return pygame.Rect(l, t, w, h)
