@@ -15,6 +15,7 @@ class Enemy(pygame.sprite.Sprite):
 		self.rect.x = x
 		self.rect.y = y
 		self.aggroRange = 300
+		print(str(self.rect.x) + " " + str(self.rect.y))
 	
 	def checkAggro(self, c, default):
 		# Check aggro
@@ -35,6 +36,7 @@ class Enemy(pygame.sprite.Sprite):
 
 	# Basic left right mob update
 	def update(self, c):
+		print(str(self.rect.x) + " " + str(self.rect.y))
 		self.gravity()
 
 		# Check aggro

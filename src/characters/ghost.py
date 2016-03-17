@@ -18,9 +18,6 @@ class Ghost(Enemy):
 		self.curr_sprite_index = 0
 		
 		self.image = self.sprites_walk_right[0]
-		self.rect = self.image.get_rect()
-		self.rect.x = width
-		self.rect.y = height
 
 	def get_sprites(self):
 		ret = None
