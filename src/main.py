@@ -199,25 +199,26 @@ class Control(object):
 
 		#show the dialogue in a loop until the dialogue is empty
 		if dialogue[self.dialogue] != '':
+			pygame.draw.rect(self.screen, (0,0,0), (0,0,1000,100))
 			label = font.render('Press enter to continue', 1, (255, 255, 255), )
-			self.screen.blit(label, (0,0))
-			font = pygame.font.Font(None, 24)
+			self.screen.blit(label, (SCREEN_WIDTH/2- 200,0))
+			font = pygame.font.Font(None, 26)
 			if self.dialogue % 2 != 0:
 				# render text for Tracy
 				tracyText = font.render(dialogue[self.dialogue], 1, (255, 0, 255), )
 				#if the player is currently Tracy, put the dialogue there, otherwise on the other sprite
 				if isinstance(self.player,Tracy):
-					self.screen.blit(tracyText, (self.player.rect.left, self.player.rect.top - 100))	
+					self.screen.blit(tracyText, (0, 50))	
 				else:
-					self.screen.blit(tracyText, (self.AI.rect.left, self.AI.rect.top - 100))
+					self.screen.blit(tracyText, (0, 50))
 			else:
-				#render text
+				#render text for Biggie
 				biggieText = font.render(dialogue[self.dialogue], 1, (0, 0, 255), )
 				#if the player is currently Biggie, put the dialogue there, otherwise on the other sprite
 				if isinstance(self.player,Biggie):
-					self.screen.blit(biggieText, (self.player.rect.left, self.player.rect.top - 100))	
+					self.screen.blit(biggieText, (0, 50))	
 				else:
-					self.screen.blit(biggieText, (self.AI.rect.left, self.AI.rect.top - 100))
+					self.screen.blit(biggieText, (0, 50))
 		else:
 			#unfreeze player and AI, end the conversation with player.convo = False, add one to the dialogue
 			# to move to the next conversation line
