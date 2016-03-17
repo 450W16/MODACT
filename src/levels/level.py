@@ -51,7 +51,7 @@ class Level():
 			"8": rock_rightend
 		}
 		
-	def update(self):
+	def update(self, c):
 
 		#if the moving platforms hit their boundaries, reverse the direction of travel
 		if abs(self.platform_totalChange +  self.platform_change_x) > self.platform_boundary:
@@ -104,7 +104,10 @@ class Level():
 				for block in line.rstrip():
 					if block != " ":
 						#need a trigger block image
-						if block == "E":
+						if block in enemies:
+							callback(self, enemies[block](40, 40, x, y))
+							print(str(x) + " " + str(y))
+						elif block == "E":
 							trigger = Trigger(x, y)
 							self.trigger_list.add(trigger)
 						#need a vertically moving platform image
@@ -119,18 +122,7 @@ class Level():
 							platform = Platform(x, y)
 							platform.image = self.mapdict[block]
 							self.platform_list.add(platform)
-					#is this part necessary?
-					if block != " " and block != "^" and block != ">" and block != "E":
 
-						platform = Platform(x, y)
-						platform.image = self.mapdict[block]
-						self.platform_list.add(platform)
-						if block in enemies:
-							callback(self, enemies[block](40, 40, x, y))
-						else :
-							platform = Platform(x, y)
-							platform.image = self.mapdict[block]
-							self.platform_list.add(platform)
 					x += BLOCK_WIDTH
 				x = 0
 				y += BLOCK_HEIGHT

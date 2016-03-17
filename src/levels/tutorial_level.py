@@ -6,7 +6,7 @@ from characters.spider import Spider
 from utils import *
 
 def initGhost(width, height, x, y):
-		return Ghost(width, height, x, y)
+	return Ghost(width, height, x, y)
 
 def initSpider(width, height, x, y):
 	return Spider(width, height, x, y)
@@ -23,6 +23,7 @@ class Tutorial_level(Level):
 			'G': initGhost,
 			'S': initSpider
 		}
+		# enemies = {}
 
 		self.set_background_image('tutorial_background.png')
 		self.parse_map('tutorial_map.txt', enemies, initEnemy)
