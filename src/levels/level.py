@@ -116,18 +116,9 @@ class Level():
 						elif block == ">":
 							moving_platformsLR = MplatformsLR(x, y)
 							self.platform_listLR.add(moving_platformsLR)
-						else:
-							platform = Platform(x, y)
-							platform.image = self.mapdict[block]
-							self.platform_list.add(platform)
-					#is this part necessary?
-					if block != " " and block != "^" and block != ">" and block != "E":
-						platform = Platform(x, y)
-						platform.image = self.mapdict[block]
-						self.platform_list.add(platform)
-						if block in enemies:
+						elif block in enemies:
 							callback(self, enemies[block](40, 40, x, y))
-						else :
+						else:
 							platform = Platform(x, y)
 							platform.image = self.mapdict[block]
 							self.platform_list.add(platform)

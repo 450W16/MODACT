@@ -1,6 +1,7 @@
 import pygame
 from spritesheet import SpriteSheet
 from enemy import Enemy
+from directions import Directions
 from utils import *
 
 class Monkey(Enemy):
@@ -8,6 +9,8 @@ class Monkey(Enemy):
 	
 	def __init__(self, width, height, x, y):
 		Enemy.__init__(self, width, height, x, y)
+		self.dir = 'R'
+		self.speed = 2
 		
 		# initialize sprite lists
 		ss = SpriteSheet(path.join(get_art_dir(), 'Monkey', 'Monkey_spritesheet.png'), 7)
@@ -19,9 +22,6 @@ class Monkey(Enemy):
 		self.rect = self.image.get_rect()
 		self.rect.x = width
 		self.rect.y = height
-		self.dir = 'R'
-		self.speed = 2
-
 
 	def get_sprites(self):
 		ret = None

@@ -1,4 +1,5 @@
 import pygame
+from directions import Directions
 from utils import *
 
 class Enemy(pygame.sprite.Sprite):
@@ -15,6 +16,14 @@ class Enemy(pygame.sprite.Sprite):
 		self.rect.x = x
 		self.rect.y = y
 		self.aggroRange = 300
+		
+		# Default heading
+		self.heading = Directions.Right
+		
+		# Sprite animation counter
+		self.curr_sprite_index = 0
+		self.update_counter = 0
+		self.frames_per_sprite = 4
 	
 	def checkAggro(self, c, default):
 		# Check aggro
@@ -35,6 +44,7 @@ class Enemy(pygame.sprite.Sprite):
 
 	# Basic left right mob update
 	def update(self, c):
+		self.update_sprites()
 		self.gravity()
 
 		# Check aggro
@@ -118,6 +128,8 @@ class Enemy(pygame.sprite.Sprite):
 				self.dir = "R"
 		self.delta_x = 0
 
+	def get_sprites(self):
+		raise NotImplementedError("Please implement this method")
 
 	def gravity(self):
 		if self.delta_y == 0:
@@ -129,3 +141,10 @@ class Enemy(pygame.sprite.Sprite):
 		if self.rect.y >= SCREEN_HEIGHT - self.rect.height and self.delta_y >= 0:
 			self.delta_y = 0
 			self.rect.y = SCREEN_HEIGHT - self.rect.height
+
+	def update_sprites(self):
+		if self.get_sprites():
+			self.update_counter = (self.update_counter + 1) % self.frames_per_sprite
+			if self.update_counter == 0:
+				self.curr_sprite_index = (self.curr_sprite_index + 1) % len(self.get_sprites())
+				self.image = self.get_sprites()[self.curr_sprite_index]
