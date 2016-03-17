@@ -91,7 +91,6 @@ class Player(pygame.sprite.Sprite):
 							self.level.enemy_list, False)
 					if len(enemy_collide) > 0:
 						self.dead = True
-
 					# collision detection in X 					
 					collide_list = pygame.sprite.spritecollide(self, 
 							self.level.platform_list, False)

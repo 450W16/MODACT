@@ -122,7 +122,6 @@ class Level():
 							platform = Platform(x, y)
 							platform.image = self.mapdict[block]
 							self.platform_list.add(platform)
-
 					x += BLOCK_WIDTH
 				x = 0
 				y += BLOCK_HEIGHT
