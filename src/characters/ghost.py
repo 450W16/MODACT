@@ -6,8 +6,10 @@ from utils import *
 class Ghost(Enemy):
 	"""Ghost Enemy."""
 	
-	def __init__(self, width, height):
-		Enemy.__init__(self, width, height)
+	def __init__(self, width, height, x, y):
+		Enemy.__init__(self, width, height, x, y)
+		self.dir = 'R'
+		self.speed = 1
 		
 		# initialize sprite lists
 		ss = SpriteSheet(path.join(get_art_dir(), 'Ghost', 'Ghost_spritesheet.png'), 12)
@@ -28,3 +30,6 @@ class Ghost(Enemy):
 			ret = self.sprites_walk_right
 				
 		return ret
+
+	def update(self, c):
+		super(Ghost, self).update(c)

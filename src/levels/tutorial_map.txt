@@ -5,9 +5,13 @@ d                                                                     d
 d                                                                     d  
 d                                                                     d  
 <<<<<<< HEAD
+<<<<<<< HEAD
 d                                     E                               d 
 =======
 d                                                                     d 
+>>>>>>> origin/dev
+=======
+d                                 G                                   d 
 >>>>>>> origin/dev
 d                            ggggggggggg     gg                       d 
 d                            DDDDDDDDDDD     DDD                      d 
@@ -17,7 +21,11 @@ d                                 D          DDDDD                    d
                                   D          DDDDDDD                   
                    E              D          DDDDDDDD                  
                  678              D          DDDDDDDDD                 
+<<<<<<< HEAD
       678        618       E      D          DDDDDDDDDD                
+=======
+      678        618      G       D          DDDDDDDDDD                
+>>>>>>> origin/dev
 ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
 DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD

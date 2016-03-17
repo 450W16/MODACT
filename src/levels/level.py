@@ -55,6 +55,7 @@ class Level():
 			"8": rock_rightend
 		}
 		
+<<<<<<< HEAD
 	def update(self):
 
 		#if the moving platforms hit their boundaries, reverse the direction of travel
@@ -71,11 +72,14 @@ class Level():
 		#keep track of how far the platforms have travelled
 		self.platform_totalChange += self.platform_change_x
 
+=======
+	def update(self, c):
+>>>>>>> origin/dev
 		self.platform_list.update()
 		self.platform_listUD.update()
 		self.platform_listLR.update()
 		self.trigger_list.update()
-		self.enemy_list.update()
+		self.enemy_list.update(c)
 		if not self.music_is_playing:
 			self.playMusic()
 		
@@ -101,7 +105,7 @@ class Level():
 		for enemy in self.enemy_list:
 			screen.blit(enemy.image, camera.applyCam(enemy))
 			
-	def parse_map(self, filename):
+	def parse_map(self, filename, enemies, callback):
 		with open(path.join(get_levels_dir(), filename), "r") as f:
 			x = y = 0
 			for line in f:
@@ -128,10 +132,19 @@ class Level():
 					if block != " " and block != "^" and block != ">" and block != "E":
 =======
 					if block != " " and block != "^" and block != ">":
+<<<<<<< HEAD
 >>>>>>> origin/dev
 						platform = Platform(x, y)
 						platform.image = self.mapdict[block]
 						self.platform_list.add(platform)
+=======
+						if block in enemies:
+							callback(self, enemies[block](40, 40, x, y))
+						else :
+							platform = Platform(x, y)
+							platform.image = self.mapdict[block]
+							self.platform_list.add(platform)
+>>>>>>> origin/dev
 					x += BLOCK_WIDTH
 				x = 0
 				y += BLOCK_HEIGHT
