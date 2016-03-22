@@ -141,11 +141,11 @@ class Player(pygame.sprite.Sprite):
 	
 	def move_left(self):
 		self.delta_x = -5
-		#self.heading = Directions.Left
+		self.heading = Directions.Left
 
 	def move_right(self):
 		self.delta_x = 5
-		#self.heading = Directions.Right
+		self.heading = Directions.Right
 
 	def jump(self):
 		pass

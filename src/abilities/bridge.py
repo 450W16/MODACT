@@ -2,6 +2,7 @@ import pygame
 from ability import Ability
 from characters.directions import Directions
 from characters.transformed import Transformed
+from characters.directions import Directions
 
 # TODO: Implement gap detection
 # Transform into a bridge.
@@ -12,70 +13,67 @@ class Bridge(Ability):
 
 	def cast(self, c):
 		playerRect = c.player.getRect()
-		platformList = c.lvl_current.platform_list
-		p_candidates = []
+		pl = c.lvl_current.platform_list
+
 		# Get all platforms below character
-		for platform in platformList:
-			# y axis is top to bottom
-			if platform.rect.center[0] > playerRect.left and platform.rect.center[0] < playerRect.right and platform.rect.y > playerRect.top:
-				p_candidates.append(platform)
-		# No targets
-		if len(p_candidates) == 0:
-			print "PROBLEM?"
-			return
-		else:
-			# Find the closest one (also the highest)
-			pf = p_candidates[0]
-			for platform in p_candidates[1:]:
-				if platform.rect.y < pf.rect.y:
-					pf = platform
-
-		p_candidates = []
-		# Find platforms on the same y as pf
+		p_cand = None
+		# if right, check right of rectangle against platforms
 		if c.player.heading == Directions.Right:
-			# Candidates to the right of base
-			for platform in platformList:
-				if platform.rect.center[1] > pf.rect.top and platform.rect.center[1] < pf.rect.bottom:
-					if platform.rect.x > pf.rect.x:
-						p_candidates.append(platform)
+			for platform in pl:
+				if playerRect.bottom == platform.rect.top and platform.rect.left < playerRect.right and platform.rect.right >= playerRect.left:
+					p_cand = platform
 
+		else:
+			for platform in pl:
+				if playerRect.bottom == platform.rect.top and platform.rect.right > playerRect.left and platform.rect.left <= playerRect.right:
+					p_cand = platform
 
+		# error
+		if p_cand == None:
+			print "ERROR: FALLING"
+			return
+		
+		p_candidates = []
+		print(c.player.heading)
+		if c.player.heading == Directions.Right:
+			for platform in pl:
+				if platform.rect.top == p_cand.rect.top and platform.rect.x > p_cand.rect.x:
+					p_candidates.append(platform)
+			
 			if len(p_candidates) == 0:
-				print "PROBLEM!"
+				print "Error: Problem!"
 				return
 			else:
-				# Find closest wrt x value
+				#find closest wrt x value
 				target = p_candidates[0]
 				for platform in p_candidates[1:]:
-					if platform.rect.x < target.rect.x:
+					if platform.rect.x < target.rect.x and platform != p_cand:
 						target = platform
-
-			# Modify rect/img, lock character, and then switch
-			deltaX = abs(pf.rect.right - target.rect.left)
-			c.player.image = pygame.transform.scale(c.player.image, (deltaX, playerRect.height))
-			c.player.rect = pygame.Rect(pf.rect.right, pf.rect.top, deltaX, playerRect.height)
-
-		# Reverse some values for creating bridge in other direction
-		elif c.player.heading == Directions.Left:
-			# Candidates to the left of base
-			for platform in platformList:
-				if platform.rect.center[1] > pf.rect.top and platform.rect.center[1] < pf.rect.bottom:
-					if platform.rect.x < pf.rect.x:
-						p_candidates.append(platform)
-
-			if len(p_candidates) == 0:
-				print "PROBLEM!"
-				return
-			else:
-				# Find closest wrt x value
-				target = p_candidates[0]
-				for platform in p_candidates[1:]:
-					if platform.rect.x > target.rect.x:
-						target = platform
-
-			deltaX = abs(pf.rect.left - target.rect.right)
+			print("hello")	
+			print(target.rect.x)
+			print(target.rect.y)
+			deltaX = abs(p_cand.rect.right - target.rect.left)
 			c.player.image = pygame.transform.scale(c.player.image, (deltaX, playerRect.height))
 			c.player.rect = pygame.Rect(target.rect.right, target.rect.top, deltaX, playerRect.height)
+
+		elif c.player.heading == Directions.Left:
+			for platform in pl:
+				if platform.rect.top == p_cand.rect.top and platform.rect.x < p_cand.rect.x:
+					p_candidates.append(platform)
+			if len(p_candidates) == 0:
+				print "Error: problem"
+				return
+			else:
+				#find closest wrt x value
+				target = p_candidates[0]
+				for platform in p_candidates[1:]:
+					if platform.rect.x > target.rect.x and platform != p_cand:
+						target = platform
+			
+			deltaX = abs(p_cand.rect.left - target.rect.right)
+			c.player.image = pygame.transform.scale(c.player.image, (deltaX, playerRect.height))
+			c.player.rect = pygame.Rect(target.rect.right, target.rect.top, deltaX, playerRect.height)
+
 
 		c.player.locked = True
 		c.player.status = Transformed.Bridge
