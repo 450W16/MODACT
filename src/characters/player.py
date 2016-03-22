@@ -42,7 +42,7 @@ class Player(pygame.sprite.Sprite):
 		# Sprite animation counter
 		self.curr_sprite_index = 0
 		self.update_counter = 0
-		self.frames_per_sprite = 2
+		self.frames_per_sprite = 3
 
 	def update(self):
 		if not self.locked:

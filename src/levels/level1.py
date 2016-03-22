@@ -1,7 +1,7 @@
 import pygame
 from level import Level
 from platforms import Platform
-from characters.basic_enemy import Basic_enemy
+from characters import *
 from utils import *
 
 def initGhost(width, height, x, y):
