@@ -117,6 +117,12 @@ class Level():
 						elif block == ">":
 							moving_platformsLR = MplatformsLR(x, y)
 							self.platform_listLR.add(moving_platformsLR)
+						elif block == "P":
+							self.Px = x
+							self.Py = y 
+						elif block == "A":
+							self.Ax = x
+							self.Ay = y 
 						else:
 							platform = Platform(x, y)
 							platform.image = self.mapdict[block]

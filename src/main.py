@@ -6,6 +6,7 @@ import os
 import inspect
 from utils import *
 from levels.tutorial_level import Tutorial_level
+from levels.level1 import Level1_level
 from characters.tracy import Tracy
 from characters.biggie import Biggie
 from levels.platforms import Platform
@@ -32,7 +33,7 @@ class Control(object):
 		self.ACTIVE = self.player
 
 		# create level and list of levels
-		self.lvl_list = [Tutorial_level(self.player, self.AI)]	
+		self.lvl_list = [Tutorial_level(self.player, self.AI), Level1_level(self.player, self.AI)]	
 		self.lvl_num = 0
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
@@ -52,9 +53,10 @@ class Control(object):
 		self.dialogue = 0
 
 	def save(self):
-		with open('save/save.txt', 'w') as f:
-			saveStr = str(lvl_no) + ' ' + str(self.player.abilities) + ' ' + str(self.player.abilities)
-			f.write(saveStr)
+		pass
+		# with open('save/save.txt', 'w') as f:
+		# 	saveStr = str(self.lvl_num) + ' ' + str(self.player.abilities) + ' ' + str(self.AI.abilities)
+		# 	f.write(saveStr)
 
 	def load(self):
 		if os.path.exists('save/save.txt'):
@@ -67,7 +69,7 @@ class Control(object):
 					text[-1] = text[-1].rstrip('\n')
 		
 					# read in level
-					self.lvl_no = text[0]
+					self.lvl_num = text[0]
 					self.current_lvl = self.lvl_list[self.lvl_num]
 					self.player.level = self.lvl_current
 					self.AI.level = self.lvl_current
@@ -137,12 +139,16 @@ class Control(object):
 		if self.player.rect.right > LEVEL_WIDTH and self.lvl_num < len(self.lvl_list)-1:
 			# save checkpoint
 			self.save()
-			self.player.rect.x = 50
-			self.AI.rect.x = 0
+			# self.player.rect.x = 50
+			# self.AI.rect.x = 0
 			self.lvl_num += 1
 			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
 			self.AI.level = self.lvl_current
+			self.player.rect.x = self.lvl_current.Px
+			self.player.rect.y = self.lvl_current.Py
+			self.AI.rect.x = self.lvl_current.Ax
+			self.AI.rect.y = self.lvl_current.Ay
 
 		# go to previous area
 		elif self.player.rect.left < 0 and self.lvl_num > 0:
@@ -151,9 +157,13 @@ class Control(object):
 			self.player.rect.y -= 100
 			self.AI.rect.y -= 100
 			self.lvl_num -= 1
-			self.lvl_current = self.lvl_list[lvl_num]
+			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
 			self.AI.level = self.lvl_current
+			# self.player.rect.x = self.lvl_current.Px
+			# self.player.rect.y = self.lvl_current.Py
+			# self.AI.rect.x = self.lvl_current.Ax
+			# self.AI.rect.y = self.lvl_current.Ay
 
 		elif self.player.rect.left < 0 and self.lvl_num == 0:
 			self.player.rect.x = 1

@@ -4,7 +4,6 @@ from characters.directions import Directions
 from characters.transformed import Transformed
 from characters.directions import Directions
 
-# TODO: Implement gap detection
 # Transform into a bridge.
 class Bridge(Ability):
 

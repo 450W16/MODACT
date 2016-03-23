@@ -35,5 +35,6 @@ class Monkey(Enemy):
 	def update(self, c):
 		if self.checkAggro(c, False):
 			# Throw
+			pass
 		else:
 			super(Monkey, self).update(c)
