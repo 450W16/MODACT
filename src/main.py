@@ -160,10 +160,6 @@ class Control(object):
 			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
 			self.AI.level = self.lvl_current
-			# self.player.rect.x = self.lvl_current.Px
-			# self.player.rect.y = self.lvl_current.Py
-			# self.AI.rect.x = self.lvl_current.Ax
-			# self.AI.rect.y = self.lvl_current.Ay
 
 		elif self.player.rect.left < 0 and self.lvl_num == 0:
 			self.player.rect.x = 1
