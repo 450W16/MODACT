@@ -2,16 +2,15 @@ import pygame
 from os import path
 from platforms import Platform
 from triggers import Trigger 
-from moving_platformsLR import MplatformsLR
-from moving_platformsUD import MplatformsUD
+from moving_platformsLR import MplatformLR
+from moving_platformsUD import MplatformUD
+from vine import Vine
 from utils import *
 
 class Level():
 	
 	def __init__(self, player, AI):
 		self.platform_list = pygame.sprite.Group()
-		self.platform_listLR = pygame.sprite.Group()
-		self.platform_listUD = pygame.sprite.Group()
 		self.trigger_list = pygame.sprite.Group()
 		self.enemy_list = pygame.sprite.Group()
 		self.player = player
@@ -19,12 +18,6 @@ class Level():
 		self.background_image = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
 		self.music = None
 		self.music_is_playing = False
-
-		#platform movement speed and boundaries
-		self.platform_change_x = 2
-		self.platform_change_y = 2
-		self.platform_totalChange = 0
-		self.platform_boundary = 40
 
 		grass = pygame.image.load(path.join(get_art_dir(), "terrain1.png"))
 		dirt = pygame.image.load(path.join(get_art_dir(), "terrain2.png"))
@@ -51,26 +44,8 @@ class Level():
 			"8": rock_rightend
 		}
 
-	def update(self):
-
-		#if the moving platforms hit their boundaries, reverse the direction of travel
-		if abs(self.platform_totalChange +  self.platform_change_x) > self.platform_boundary:
-			self.platform_change_x *= -1
-			self.platform_change_y *= -1
-
-		#update platform locations
-		for platform in self.platform_listLR:
-			platform.rect.x += self.platform_change_x
-		for platform in self.platform_listUD:
-			platform.rect.y += self.platform_change_y
-
-		#keep track of how far the platforms have travelled
-		self.platform_totalChange += self.platform_change_x
-
 	def update(self, c):
 		self.platform_list.update()
-		self.platform_listUD.update()
-		self.platform_listLR.update()
 		self.trigger_list.update()
 		self.enemy_list.update(c)
 		if not self.music_is_playing:
@@ -86,11 +61,11 @@ class Level():
 		for plat in self.platform_list:
 			screen.blit(plat.image, camera.applyCam(plat))
 
-		for platUD in self.platform_listUD:
-			screen.blit(platUD.image, camera.applyCam(platUD))
+		#for platUD in self.platform_listUD:
+		#	screen.blit(platUD.image, camera.applyCam(platUD))
 
-		for platLR in self.platform_listLR:
-			screen.blit(platLR.image, camera.applyCam(platLR))
+		#for platLR in self.platform_listLR:
+		#	screen.blit(platLR.image, camera.applyCam(platLR))
 
 		for trig in self.trigger_list:
 			screen.blit(trig.image, camera.applyCam(trig))
@@ -110,12 +85,15 @@ class Level():
 							self.trigger_list.add(trigger)
 						#need a vertically moving platform image
 						elif block == "^":
-							moving_platformsUD = MplatformsUD(x, y)
-							self.platform_listUD.add(moving_platformsUD)
+							moving_platformsUD = MplatformUD(self.player, x, y)
+							self.platform_list.add(moving_platformsUD)
+						elif block == "v":
+							vine = Vine(self.player, x, y)
+							self.platform_list.add(vine)
 						#need a horizontally moving platform image
 						elif block == ">":
-							moving_platformsLR = MplatformsLR(x, y)
-							self.platform_listLR.add(moving_platformsLR)
+							moving_platformsLR = MplatformLR(self.player, x, y)
+							self.platform_list.add(moving_platformsLR)
 						elif block in enemies:
 							callback(self, enemies[block](40, 40, x, y))
 						else:

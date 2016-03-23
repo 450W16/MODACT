@@ -1,14 +1,20 @@
 import pygame
+from moving_platforms import MovingPlatform
 from utils import *
 
-class MplatformsLR(pygame.sprite.Sprite):
+class MplatformLR(MovingPlatform):
 
-	def __init__(self, x, y, width=BLOCK_WIDTH, height=BLOCK_HEIGHT):
+	def update(self):
+		
+		# Move left/right
+		self.rect.x += self.change_x
 
-		pygame.sprite.Sprite.__init__(self)
-
-		self.image = pygame.Surface((width, height))
-		self.image.fill((0, 255, 0))
-		self.rect = self.image.get_rect()
-		self.rect.x = x
-		self.rect.y = y
+		# Check and see if we hit the player
+		hit = pygame.sprite.collide_rect(self, self.player)
+		if hit:
+			# Reset player position based on left/right of platform
+			if self.change_x < 0:
+				self.player.rect.right = self.rect.left
+			else:
+				self.player.rect.left = self.rect.right
+ 
