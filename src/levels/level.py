@@ -11,8 +11,6 @@ class Level():
 	
 	def __init__(self, player, AI):
 		self.platform_list = pygame.sprite.Group()
-		self.platform_listLR = pygame.sprite.Group()
-		self.platform_listUD = pygame.sprite.Group()
 		self.trigger_list = pygame.sprite.Group()
 		self.enemy_list = pygame.sprite.Group()
 		self.player = player
@@ -47,21 +45,6 @@ class Level():
 		}
 		
 	def update(self, c):
-
-		#if the moving platforms hit their boundaries, reverse the direction of travel
-		if abs(self.platform_totalChange +  self.platform_change_x) > self.platform_boundary:
-			self.platform_change_x *= -1
-			self.platform_change_y *= -1
-
-		#update platform locations
-		for platform in self.platform_listLR:
-			platform.rect.x += self.platform_change_x
-		for platform in self.platform_listUD:
-			platform.rect.y += self.platform_change_y
-
-		#keep track of how far the platforms have travelled
-		self.platform_totalChange += self.platform_change_x
-
 		self.platform_list.update()
 		self.trigger_list.update()
 		self.enemy_list.update(c)
@@ -112,7 +95,7 @@ class Level():
 						#need a horizontally moving platform image
 						elif block == ">":
 							moving_platformsLR = MplatformLR(self.player, x, y)
-							self.platform_listLR.add(moving_platformsLR)
+							self.platform_list.add(moving_platformsLR)
 						elif block == "P":
 							self.Px = x
 							self.Py = y 
