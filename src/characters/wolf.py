@@ -4,17 +4,17 @@ from enemy import Enemy
 from directions import Directions
 from utils import *
 
-class Ghost(Enemy):
-	"""Ghost Enemy."""
+class Wolf(Enemy):
+	"""Wolf Enemy."""
 	
 	def __init__(self, width, height, x, y):
 		Enemy.__init__(self, width, height, x, y)
 		self.dir = 'R'
-		self.speed = 1
+		self.speed = 2
 		
 		# initialize sprite lists
-		ss = SpriteSheet(path.join(get_art_dir(), 'Ghost', 'Ghost_spritesheet.png'), 12)
-		self.sprites_walk_left = ss.get_sprites(size=(30, 44))
+		ss = SpriteSheet(path.join(get_art_dir(), 'Wolf', 'Wolf_spritesheet.png'), 6)
+		self.sprites_walk_left = ss.get_sprites(size=(80, 41))
 		self.sprites_walk_right = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_left]
 		self.curr_sprite_index = 0
 		
@@ -31,6 +31,16 @@ class Ghost(Enemy):
 			ret = self.sprites_walk_right
 				
 		return ret
-
+		
 	def update(self, c):
-		super(Ghost, self).update(c)
+		super(Wolf, self).update(c)
+		"""
+		if self.dir == 'R':
+			self.rect.x += self.speed
+			if self.rect.right > self.platform.rect.right:
+				self.dir = 'L'
+		else:
+			self.rect.x -= self.speed
+			if self.rect.left < self.platform.rect.left:
+				self.dir = 'R'
+		"""

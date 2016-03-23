@@ -42,24 +42,55 @@ class Player(pygame.sprite.Sprite):
 		# Sprite animation counter
 		self.curr_sprite_index = 0
 		self.update_counter = 0
-		self.frames_per_sprite = 2
+		self.frames_per_sprite = 3
 
 	def update(self):
 		if not self.locked:
 			# update movements, gravity, animation, etc.
-			
-			self.update_sprites()
-			
-			if self.grav:
-				self.gravity()
 
-			if self.horiM:
-				self.rect.x += self.delta_x
-				if self.delta_x > 0:
-					self.heading = Directions.Right
-				elif self.delta_x < 0:
-					self.heading = Directions.Left
+			if not self.convo:
+				self.update_sprites()
+
+			
+				if self.grav:
+					self.gravity()
+
+				if self.horiM:
+					self.rect.x += self.delta_x
+					if self.delta_x > 0:
+						self.heading = Directions.Right
+					elif self.delta_x < 0:
+						self.heading = Directions.Left
+					if self.col:
+						# collision detection in X 					
+						collide_list = pygame.sprite.spritecollide(self, 
+								self.level.platform_list, False)
+						for platform in collide_list:
+							if self.delta_x > 0:
+								self.rect.right = platform.rect.left
+							elif self.delta_x < 0:
+								self.rect.left = platform.rect.right
+
+				if self.vertM:
+					self.rect.y += self.delta_y
+
+					if self.col:
+						# collision detection in y
+						collide_list = pygame.sprite.spritecollide(self, 
+								self.level.platform_list, False)
+						for platform in collide_list:
+							if self.delta_y > 0:
+								self.rect.bottom = platform.rect.top
+							elif self.delta_y < 0:
+								self.rect.top = platform.rect.bottom
+							self.delta_y = 0
+				
 				if self.col:
+					# detect enemy collision
+					enemy_collide = pygame.sprite.spritecollide(self, 
+							self.level.enemy_list, False)
+					if len(enemy_collide) > 0:
+						self.dead = True
 					# collision detection in X 					
 					collide_list = pygame.sprite.spritecollide(self, 
 							self.level.platform_list, False)
@@ -71,32 +102,29 @@ class Player(pygame.sprite.Sprite):
 
 			if self.vertM:
 				self.rect.y += self.delta_y
-
 				if self.col:
-					# collision detection in y
-					collide_list = pygame.sprite.spritecollide(self, 
-							self.level.platform_list, False)
-					for platform in collide_list:
-						if self.delta_y > 0:
-							self.rect.bottom = platform.rect.top
-						elif self.delta_y < 0:
-							self.rect.top = platform.rect.bottom
-						self.delta_y = 0
-			
-			if self.col:
-				# detect enemy collision
-				enemy_collide = pygame.sprite.spritecollide(self, 
-						self.level.enemy_list, False)
-				if len(enemy_collide) > 0:
-					self.dead = True
+					#detect trigger collision (conversation), set to True to remove event block
+					trigger_collide = pygame.sprite.spritecollide(self,
+							self.level.trigger_list, True)
+					if len(trigger_collide) > 0:
+						#start the conversation
+						self.convo = True
+
+		if self.convo:
+			#if in a conversation, allow y movement to fix the stuck in the air bug
+			#temporary solution
+			self.rect.y += self.delta_y
 
 			if self.col:
-				#detect trigger collision (conversation), set to True to remove event block
-				trigger_collide = pygame.sprite.spritecollide(self,
-						self.level.trigger_list, True)
-				if len(trigger_collide) > 0:
-					#start the conversation
-					self.convo = True
+				# collision detection in y
+				collide_list = pygame.sprite.spritecollide(self, 
+						self.level.platform_list, False)
+				for platform in collide_list:
+					if self.delta_y > 0:
+						self.rect.bottom = platform.rect.top
+					elif self.delta_y < 0:
+						self.rect.top = platform.rect.bottom
+					self.delta_y = 0
 
 		
 	def gravity(self):
