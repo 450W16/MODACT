@@ -37,7 +37,7 @@ class Control(object):
 							Tutorial_level(self.player, self.AI),
 							Level1_level(self.player, self.AI)
 						]	
-		self.lvl_num = 1
+		self.lvl_num = 0
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
 		self.AI.level = self.lvl_current
@@ -135,6 +135,11 @@ class Control(object):
 			self.load()
 			self.player.dead = False
 			
+		# if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST and not self.AI.locked:
+		# 	self.AI.move_right()
+		# elif self.player.delta_x < 0 and self.AI.rect.x > self.player.rect.right + FOLLOW_DIST and not self.AI.locked:
+		# 	self.AI.move_left()
+
 		# update level
 		self.lvl_current.update(self)
 
@@ -169,10 +174,13 @@ class Control(object):
 			self.AI.rect.x = 1
 
 	def draw(self):
+		self.screen.fill((0,0,0))
 		# draw
 		self.lvl_current.draw(self.screen, self.camera)
 
 		# draw players
+		self.player.image = pygame.transform.scale(self.player.image, self.player.rect.size)
+		self.AI.image = pygame.transform.scale(self.AI.image, self.AI.rect.size)
 		self.screen.blit(self.AI.image, self.camera.applyCam(self.AI))
 		self.screen.blit(self.player.image, self.camera.applyCam(self.player))
 
