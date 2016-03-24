@@ -18,6 +18,9 @@ class Level():
 		self.background_image = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
 		self.music = None
 		self.music_is_playing = False
+		self.level_width = 0
+		self.level_height = 0
+		self.ground_level = 0
 
 		grass = pygame.image.load(path.join(get_art_dir(), "terrain1.png"))
 		dirt = pygame.image.load(path.join(get_art_dir(), "terrain2.png"))
@@ -102,13 +105,19 @@ class Level():
 						elif block == "A":
 							self.Ax = x
 							self.Ay = y 
+						elif block == "y":
+							self.ground_level = y
 						else:
 							platform = Platform(x, y)
 							platform.image = self.mapdict[block]
 							self.platform_list.add(platform)
 					x += BLOCK_WIDTH
+				if x > self.level_width:
+					self.level_width = x
 				x = 0
 				y += BLOCK_HEIGHT
+
+			self.level_height = y
 				
 	def set_background_image(self, filename):
 		self.background_image = pygame.image.load(path.join(get_art_dir(), filename)).convert()

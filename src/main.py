@@ -49,6 +49,8 @@ class Control(object):
 		# instantiate camera
 		self.camera = Camera()
 
+		self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
+
 		#conversation variables
 		#will change this variable once we refactor, essentially tells main to parse the text file
 		self.convoNum = 1 
@@ -73,7 +75,8 @@ class Control(object):
 		
 					# read in level
 					self.lvl_num = text[0]
-					self.current_lvl = self.lvl_list[self.lvl_num]
+					self.lvl_current = self.lvl_list[self.lvl_num]
+					self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
 					self.player.level = self.lvl_current
 					self.AI.level = self.lvl_current
 					if len(text) > 1:
@@ -135,6 +138,7 @@ class Control(object):
 			self.load()
 			self.player.dead = False
 			
+		# Follow code
 		# if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST and not self.AI.locked:
 		# 	self.AI.move_right()
 		# elif self.player.delta_x < 0 and self.AI.rect.x > self.player.rect.right + FOLLOW_DIST and not self.AI.locked:
@@ -144,11 +148,9 @@ class Control(object):
 		self.lvl_current.update(self)
 
 		# check if we've moved onto the next area
-		if self.player.rect.right > LEVEL_WIDTH and self.lvl_num < len(self.lvl_list)-1:
+		if self.player.rect.right > self.lvl_current.level_width and self.lvl_num < len(self.lvl_list)-1:
 			# save checkpoint
 			self.save()
-			# self.player.rect.x = 50
-			# self.AI.rect.x = 0
 			self.lvl_num += 1
 			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
@@ -158,16 +160,21 @@ class Control(object):
 			self.AI.rect.x = self.lvl_current.Ax
 			self.AI.rect.y = self.lvl_current.Ay
 
+			self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
+
 		# go to previous area
 		elif self.player.rect.left < 0 and self.lvl_num > 0:
-			self.player.rect.x = LEVEL_WIDTH-100
-			self.AI.rect.x = LEVEL_WIDTH-100
-			self.player.rect.y -= 100
-			self.AI.rect.y -= 100
 			self.lvl_num -= 1
 			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
 			self.AI.level = self.lvl_current
+
+			self.player.rect.y = self.lvl_current.ground_level
+			self.AI.rect.y = self.lvl_current.ground_level
+			self.player.rect.x = self.lvl_current.level_width-200
+			self.AI.rect.x = self.lvl_current.level_width-200
+
+			self.camera.updateCam(self.lvl_current.level_width-SCREEN_WIDTH, self.lvl_current.ground_level, self.lvl_current.level_width, self.lvl_current.level_height)
 
 		elif self.player.rect.left < 0 and self.lvl_num == 0:
 			self.player.rect.x = 1
