@@ -18,7 +18,3 @@ class Menu_level(Level):
 		
 		self.parse_map('menu.txt', enemies, initEnemy)
 		self.set_background_image('menu.png')
-		#self.width = SCREEN_WIDTH
-		#self.height = SCREEN_HEIGHT
-
-

@@ -19,9 +19,9 @@ class Monkey(Enemy):
 		self.curr_sprite_index = 0
 		
 		self.image = self.sprites_walk_right[0]
-		self.rect = self.image.get_rect()
-		self.rect.x = width
-		self.rect.y = height
+		self.dir = 'R'
+		self.speed = 2
+
 
 	def get_sprites(self):
 		ret = None
@@ -33,12 +33,8 @@ class Monkey(Enemy):
 		return ret
 
 	def update(self, c):
-		if self.dir == 'R':
-			self.rect.x += self.speed
-			if self.rect.right > self.platform.rect.right:
-				self.dir = 'L'
+		if self.checkAggro(c, False):
+			# Throw
+			pass
 		else:
-			self.rect.x -= self.speed
-			if self.rect.left < self.platform.rect.left:
-				self.dir = 'R'
-		# Implement throw after aggro
+			super(Monkey, self).update(c)
