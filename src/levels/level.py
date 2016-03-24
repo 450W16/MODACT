@@ -26,6 +26,9 @@ class Level():
 		self.platform_totalChange = 0
 		self.platform_boundary = 40
 
+		self.width = LEVEL_WIDTH
+		self.height = LEVEL_HEIGHT
+
 		grass = pygame.image.load(path.join(get_art_dir(), "terrain1.png"))
 		dirt = pygame.image.load(path.join(get_art_dir(), "terrain2.png"))
 		dirt_bottom = pygame.image.load(path.join(get_art_dir(), "terrain3.png"))
@@ -77,9 +80,11 @@ class Level():
 			self.playMusic()
 		
 	def draw(self, screen, camera):
+		SCREEN_WIDTH = self.width
+		SCREEN_HEIGHT = self.height
 		#TODO slower scrolling background
 		screen.blit(self.background_image, camera.applyCam(self.background_image))
-		if self.background_image.get_rect().right < LEVEL_WIDTH:
+		if self.background_image.get_rect().right < self.width:
 			rect = pygame.Rect(self.background_image.get_rect().right, self.background_image.get_rect().top, self.background_image.get_rect().width, self.background_image.get_rect().height)
 			screen.blit(self.background_image, camera.applyCam(rect))
 
@@ -123,8 +128,12 @@ class Level():
 							platform.image = self.mapdict[block]
 							self.platform_list.add(platform)
 					x += BLOCK_WIDTH
+				self.width = x
 				x = 0
 				y += BLOCK_HEIGHT
+
+			self.height = y
+			
 				
 	def set_background_image(self, filename):
 		self.background_image = pygame.image.load(path.join(get_art_dir(), filename)).convert()

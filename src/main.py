@@ -7,6 +7,7 @@ import inspect
 from utils import *
 from levels.tutorial_level import Tutorial_level
 from levels.level1 import Level1_level
+from levels.menu_level import Menu_level
 from characters.tracy import Tracy
 from characters.biggie import Biggie
 from levels.platforms import Platform
@@ -16,8 +17,8 @@ class Control(object):
 
 	def __init__(self, screen):
 		# instanciate players and their position
-		self.player = Tracy(0, SCREEN_HEIGHT - 224)
-		self.AI = Biggie(100, SCREEN_HEIGHT - 224)
+		self.player = Tracy(0, 20)
+		self.AI = Biggie(100, 20)
 
 		# screen
 		self.screen = screen
@@ -32,6 +33,7 @@ class Control(object):
 
 		# create level and list of levels
 		self.lvl_list = [
+							Menu_level(self.player, self.AI),
 							Tutorial_level(self.player, self.AI),
 							Level1_level(self.player, self.AI)
 						]	
@@ -137,6 +139,7 @@ class Control(object):
 			self.load()
 			self.player.dead = False
 
+
 		# follow
 		if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST and not self.AI.locked:
 			self.AI.move_right()
@@ -147,7 +150,7 @@ class Control(object):
 		self.lvl_current.update(self)
 
 		# check if we've moved onto the next area
-		if self.player.rect.right > LEVEL_WIDTH and self.lvl_num < len(self.lvl_list)-1:
+		if self.player.rect.right > self.lvl_current.width and self.lvl_num < len(self.lvl_list)-1:
 			# save checkpoint
 			self.save()
 			self.player.rect.x = 50
@@ -159,8 +162,8 @@ class Control(object):
 
 		# go to previous area
 		elif self.player.rect.left < 0 and self.lvl_num > 0:
-			self.player.rect.x = LEVEL_WIDTH-100
-			self.AI.rect.x = LEVEL_WIDTH-100
+			self.player.rect.x = self.lvl_current.width-100
+			self.AI.rect.x = self.lvl_current.width-100
 			self.player.rect.y -= 100
 			self.AI.rect.y -= 100
 			self.lvl_num -= 1
