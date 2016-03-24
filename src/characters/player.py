@@ -49,8 +49,8 @@ class Player(pygame.sprite.Sprite):
 			# update movements, gravity, animation, etc.
 
 			if not self.convo:
+			
 				self.update_sprites()
-
 			
 				if self.grav:
 					self.gravity()
@@ -102,6 +102,7 @@ class Player(pygame.sprite.Sprite):
 
 			if self.vertM:
 				self.rect.y += self.delta_y
+
 				if self.col:
 					#detect trigger collision (conversation), set to True to remove event block
 					trigger_collide = pygame.sprite.spritecollide(self,
@@ -132,19 +133,14 @@ class Player(pygame.sprite.Sprite):
 			self.delta_y = 1
 		else:
 			self.delta_y += 1 
-
-		# check if we're on the ground
-		if self.rect.y >= SCREEN_HEIGHT - self.rect.height and self.delta_y >= 0:
-			self.delta_y = 0
-			self.rect.y = SCREEN_HEIGHT - self.rect.height
 	
 	def move_left(self):
 		self.delta_x = -5
-		#self.heading = Directions.Left
+		self.heading = Directions.Left
 
 	def move_right(self):
 		self.delta_x = 5
-		#self.heading = Directions.Right
+		self.heading = Directions.Right
 
 	def jump(self):
 		pass

@@ -16,9 +16,13 @@ from camera import Camera
 class Control(object):
 
 	def __init__(self, screen):
-		# instanciate players and their position
-		self.player = Tracy(0, 20)
-		self.AI = Biggie(100, 20)
+
+		# instanciate players and their size
+		# self.player = Tracy(100, SCREEN_HEIGHT/2)
+		# self.AI = Biggie(0, SCREEN_HEIGHT/2)
+		self.player = Tracy(0, SCREEN_HEIGHT - 100)
+		self.AI = Biggie(100, SCREEN_HEIGHT - 150)
+
 
 		# screen
 		self.screen = screen
@@ -49,19 +53,19 @@ class Control(object):
 		# instantiate camera
 		self.camera = Camera()
 
+		self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
+
 		#conversation variables
 		#will change this variable once we refactor, essentially tells main to parse the text file
 		self.convoNum = 1 
 		#dialogue line #
 		self.dialogue = 0
 
-
-
 	def save(self):
 		pass
-		#with open('save/save.txt', 'w') as f:
-		#	saveStr = str(self.lvl_num) + ' ' + str(self.player.abilities) + ' ' + str(self.AI.abilities)
-		#	f.write(saveStr)
+		# with open('save/save.txt', 'w') as f:
+		# 	saveStr = str(self.lvl_num) + ' ' + str(self.player.abilities) + ' ' + str(self.AI.abilities)
+		# 	f.write(saveStr)
 
 	def load(self):
 		if os.path.exists('save/save.txt'):
@@ -74,8 +78,9 @@ class Control(object):
 					text[-1] = text[-1].rstrip('\n')
 		
 					# read in level
-					self.lvl_no = text[0]
-					self.current_lvl = self.lvl_list[self.lvl_num]
+					self.lvl_num = text[0]
+					self.lvl_current = self.lvl_list[self.lvl_num]
+					self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
 					self.player.level = self.lvl_current
 					self.AI.level = self.lvl_current
 					if len(text) > 1:
@@ -113,10 +118,8 @@ class Control(object):
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_LEFT and self.player.delta_x < 0:
 					self.player.stop()
-					self.AI.stop()
 				if event.key == pygame.K_RIGHT and self.player.delta_x > 0:
 					self.player.stop()
-					self.AI.stop()
 				if event.key == pygame.K_UP and self.player.delta_y < 0:
 					if isinstance(self.player, Tracy):
 						self.player.stop_y(self.AI.rect)
@@ -140,36 +143,64 @@ class Control(object):
 			self.player.dead = False
 
 
+
 		# follow
 		if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST and not self.AI.locked:
 			self.AI.move_right()
 		elif self.player.delta_x < 0 and self.AI.rect.x > self.player.rect.right + FOLLOW_DIST and not self.AI.locked:
 			self.AI.move_left()
+		else:
+			self.AI.stop()
+
+
 			
+		# Follow code
+		# if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST and not self.AI.locked:
+		# 	self.AI.move_right()
+		# elif self.player.delta_x < 0 and self.AI.rect.x > self.player.rect.right + FOLLOW_DIST and not self.AI.locked:
+		# 	self.AI.move_left()
+
 		# update level
 		self.lvl_current.update(self)
 
 		# check if we've moved onto the next area
-		if self.player.rect.right > self.lvl_current.width and self.lvl_num < len(self.lvl_list)-1:
+
+		if self.player.rect.right > self.lvl_current.level_width and self.lvl_num < len(self.lvl_list)-1:
+
 			# save checkpoint
 			self.save()
-			self.player.rect.x = 50
-			self.AI.rect.x = 0
 			self.lvl_num += 1
 			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
 			self.AI.level = self.lvl_current
+			self.player.rect.x = self.lvl_current.Px
+			self.player.rect.y = self.lvl_current.Py
+			self.AI.rect.x = self.lvl_current.Ax
+			self.AI.rect.y = self.lvl_current.Ay
+
+			self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
 
 		# go to previous area
 		elif self.player.rect.left < 0 and self.lvl_num > 0:
+<<<<<<< HEAD
 			self.player.rect.x = self.lvl_current.width-100
 			self.AI.rect.x = self.lvl_current.width-100
 			self.player.rect.y -= 100
 			self.AI.rect.y -= 100
+=======
+>>>>>>> 44aac6b896eede8a33e964fb272c466cb3e82c57
 			self.lvl_num -= 1
 			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
 			self.AI.level = self.lvl_current
+
+			self.player.rect.y = self.lvl_current.ground_level
+			self.AI.rect.y = self.lvl_current.ground_level
+			self.player.rect.x = self.lvl_current.level_width-200
+			self.AI.rect.x = self.lvl_current.level_width-200
+
+			self.camera.updateCam(self.lvl_current.level_width-SCREEN_WIDTH, self.lvl_current.ground_level, self.lvl_current.level_width, self.lvl_current.level_height)
+
 		elif self.player.rect.left < 0 and self.lvl_num == 0:
 			self.player.rect.x = 1
 			self.AI.rect.x = 1
@@ -184,7 +215,7 @@ class Control(object):
 		self.AI.image = pygame.transform.scale(self.AI.image, self.AI.rect.size)
 		self.screen.blit(self.AI.image, self.camera.applyCam(self.AI))
 		self.screen.blit(self.player.image, self.camera.applyCam(self.player))
-		#print(str(self.AI.rect.height))
+
 
 	def initiateConvo(self):
 		#initialize the conversation

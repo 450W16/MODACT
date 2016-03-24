@@ -2,10 +2,18 @@ import pygame
 from level import Level
 from platforms import Platform
 from characters.ghost import Ghost
+from characters.spider import Spider
+from characters.monkey import Monkey
 from utils import *
 
 def initGhost(width, height, x, y):
-		return Ghost(width, height, x, y)
+	return Ghost(width, height, x, y)
+
+def initSpider(width, height, x, y):
+	return Spider(width, height, x, y)
+
+def initMonkey(width, height, x, y):
+	return Monkey(width, height, x, y)
 
 def initEnemy(level, baddie):
 	level.enemy_list.add(baddie)
@@ -17,8 +25,11 @@ class Tutorial_level(Level):
 		Level.__init__(self,player, AI)
 
 		enemies = {
-			'G': initGhost
+			'G': initGhost,
+			'S': initSpider,
+			'M': initMonkey
 		}
+		# enemies = {}
 
 		
 		self.parse_map('tutorial_map.txt', enemies, initEnemy)

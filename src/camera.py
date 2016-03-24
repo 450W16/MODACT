@@ -20,6 +20,9 @@ class Camera(object):
 	def update(self, target):
 		self.state = self.cam_func(target.rect)
 
+	def updateCam(self, x, y, width, height):
+		self.state = pygame.Rect(x, y, width, height)
+
 	def cam_func(self, target):
 		l, t, _, _ = target
 		_, _, w, h = self.state

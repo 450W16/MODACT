@@ -34,13 +34,4 @@ class Wolf(Enemy):
 		
 	def update(self, c):
 		super(Wolf, self).update(c)
-		"""
-		if self.dir == 'R':
-			self.rect.x += self.speed
-			if self.rect.right > self.platform.rect.right:
-				self.dir = 'L'
-		else:
-			self.rect.x -= self.speed
-			if self.rect.left < self.platform.rect.left:
-				self.dir = 'R'
-		"""
+
