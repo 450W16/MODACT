@@ -88,7 +88,7 @@ class Bridge(Ability):
 				
 				deltaX = abs(p_cand.rect.left - target.rect.right)
 				c.player.image = pygame.transform.scale(c.player.image, (deltaX, playerRect.height))
-				c.player.rect = pygame.Rect(p_cand.rect.right, target.rect.top, deltaX, playerRect.height)
+				c.player.rect = pygame.Rect(target.rect.right, target.rect.top, deltaX, playerRect.height)
 
 
 			c.player.locked = True
