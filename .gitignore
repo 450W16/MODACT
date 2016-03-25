@@ -1,4 +1,4 @@
 # ignore .py~ and .pyc files
 *.py~
 *.pyc
-save.txt~
+*.txt~

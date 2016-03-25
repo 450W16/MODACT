@@ -22,8 +22,6 @@ class Level():
 		self.level_height = 0
 		self.ground_level = 0
 
-		self.width = LEVEL_WIDTH
-		self.height = LEVEL_HEIGHT
 
 		grass = pygame.image.load(path.join(get_art_dir(), "terrain1.png"))
 		dirt = pygame.image.load(path.join(get_art_dir(), "terrain2.png"))
@@ -61,7 +59,7 @@ class Level():
 		
 		#TODO slower scrolling background
 		screen.blit(self.background_image, camera.applyCam(self.background_image))
-		if self.background_image.get_rect().right < self.width:
+		if self.background_image.get_rect().right < self.level_width:
 			rect = pygame.Rect(self.background_image.get_rect().right, self.background_image.get_rect().top, self.background_image.get_rect().width, self.background_image.get_rect().height)
 			screen.blit(self.background_image, camera.applyCam(rect))
 
@@ -126,7 +124,9 @@ class Level():
 
 				
 	def set_background_image(self, filename):
+		self.background_image = pygame.Surface((self.level_width, self.level_height))
 		self.background_image = pygame.image.load(path.join(get_art_dir(), filename)).convert()
+		
 
 	def playMusic(self):
 		if self.music != None:
