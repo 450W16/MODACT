@@ -29,7 +29,7 @@ class MovingPlatform(pygame.sprite.Sprite):
 		pass
 		
 	def set_hor_move_amount(self, numblocks):
-		"""Up/down movement platforms start from left position"""
+		"""left/right movement platforms start from left position"""
 		self.boundary_right = self.rect.right + (self.rect.width * numblocks)
 		
 	def set_vert_move_amount(self, numblocks):
