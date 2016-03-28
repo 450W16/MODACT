@@ -155,12 +155,6 @@ class Control(object):
 		else:
 			self.AI.stop()
 
-			
-		# Follow code
-		# if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST and not self.AI.locked:
-		# 	self.AI.move_right()
-		# elif self.player.delta_x < 0 and self.AI.rect.x > self.player.rect.right + FOLLOW_DIST and not self.AI.locked:
-		# 	self.AI.move_left()
 
 		# update level
 		self.lvl_current.update(self)
@@ -184,11 +178,6 @@ class Control(object):
 
 		# go to previous area
 		elif self.player.rect.left < 0 and self.lvl_num > 0:
-
-			#self.player.rect.x = self.lvl_current.width-100
-			#self.AI.rect.x = self.lvl_current.width-100
-			#self.player.rect.y -= 100
-			#self.AI.rect.y -= 100
 
 			self.lvl_num -= 1
 			self.lvl_current = self.lvl_list[self.lvl_num]

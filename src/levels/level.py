@@ -13,6 +13,8 @@ class Level():
 		self.platform_list = pygame.sprite.Group()
 		self.trigger_list = pygame.sprite.Group()
 		self.enemy_list = pygame.sprite.Group()
+		self.title_list = []
+		self.title_rect = pygame.Rect(20, 180, SCREEN_WIDTH//4, SCREEN_HEIGHT//4)
 		self.player = player
 		self.AI = AI
 		self.background_image = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -21,6 +23,7 @@ class Level():
 		self.level_width = 0
 		self.level_height = 0
 		self.ground_level = 0
+
 
 		grass = pygame.image.load(path.join(get_art_dir(), "terrain1.png"))
 		dirt = pygame.image.load(path.join(get_art_dir(), "terrain2.png"))
@@ -75,6 +78,9 @@ class Level():
 
 		for enemy in self.enemy_list:
 			screen.blit(enemy.image, camera.applyCam(enemy))
+
+		for title in self.title_list:
+			screen.blit(title, camera.applyCam(self.title_rect))
 			
 	def parse_map(self, filename, enemies, callback):
 		with open(path.join(get_levels_dir(), filename), "r") as f:
@@ -122,7 +128,9 @@ class Level():
 
 				
 	def set_background_image(self, filename):
+		self.background_image = pygame.Surface((self.level_width, self.level_height))
 		self.background_image = pygame.image.load(path.join(get_art_dir(), filename)).convert()
+		
 
 	def playMusic(self):
 		if self.music != None:
