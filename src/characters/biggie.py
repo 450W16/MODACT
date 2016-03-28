@@ -3,6 +3,7 @@ from player import Player
 from abilities.bridge import *
 from abilities.ladder import Ladder
 from abilities.revert import Revert
+from abilities.wall import *
 from spritesheet import SpriteSheet
 from utils import *
 
