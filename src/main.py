@@ -20,7 +20,7 @@ class Control(object):
 		# instanciate players and their size
 		# self.player = Tracy(100, SCREEN_HEIGHT/2)
 		# self.AI = Biggie(0, SCREEN_HEIGHT/2)
-		self.player = Tracy(0, SCREEN_HEIGHT - 100)
+		self.player = Tracy(0, SCREEN_HEIGHT - 120)
 		self.AI = Biggie(100, SCREEN_HEIGHT - 150)
 
 
