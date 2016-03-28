@@ -104,16 +104,18 @@ class Control(object):
 				if event.key == pygame.K_RIGHT:
 					self.player.move_right()
 				if event.key == pygame.K_SPACE:
-					self.player.jump()
+					if not self.player.convo:
+						self.player.jump()
 				if event.key == pygame.K_RETURN:
 					#if conversation has begun, only return key can progress
 					if self.player.convo == True:
 						self.dialogue += 1
 				else:
-					# check for ability key
-					k = self.player.checkAbility(event.key)
-					if k is not None:
-						k.cast(self)
+					if not self.player.convo:
+						# check for ability key
+						k = self.player.checkAbility(event.key)
+						if k is not None:
+							k.cast(self)
 			# key released
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_LEFT and self.player.delta_x < 0:
