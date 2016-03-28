@@ -25,6 +25,12 @@ class Revert(Ability):
 				c.AI.rect = pygame.Rect(c.AI.rect.right, c.AI.rect.top - BIGGIE_HEIGHT, BIGGIE_WIDTH, BIGGIE_HEIGHT)
 			else:
 				print "PROBLEM#"
+		elif c.AI.status == Transformed.Wall:
+			c.lvl_current.special_platforms.remove(c.AI)
+			c.AI.image = pygame.transform.scale(c.AI.image, (BIGGIE_WIDTH, BIGGIE_HEIGHT))
+			c.AI.rect = pygame.Rect(c.AI.rect.left, c.AI.rect.top + BIGGIE_HEIGHT, BIGGIE_WIDTH, BIGGIE_HEIGHT)
 
+		c.AI.rect.right = c.player.rect.left
+		c.AI.rect.bottom = c.player.rect.bottom
 		c.AI.locked = False
 		c.AI.status = Transformed.Default

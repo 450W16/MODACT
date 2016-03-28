@@ -1,2 +1,2 @@
 class Transformed:
-	Default, Ladder, Bridge = range(3)
+	Default, Ladder, Bridge, Wall = range(4)

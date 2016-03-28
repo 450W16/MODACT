@@ -88,7 +88,6 @@ class Enemy(pygame.sprite.Sprite):
 
 		# Error: falling
 		if p_cand == None:
-			print "ERROR: FALLING"
 			return
 
 		p_found = False
