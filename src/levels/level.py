@@ -13,6 +13,8 @@ class Level():
 		self.platform_list = pygame.sprite.Group()
 		self.trigger_list = pygame.sprite.Group()
 		self.enemy_list = pygame.sprite.Group()
+		self.title_list = []
+		self.title_rect = pygame.Rect(20, 180, SCREEN_WIDTH//4, SCREEN_HEIGHT//4)
 		self.player = player
 		self.AI = AI
 		self.background_image = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -77,6 +79,9 @@ class Level():
 
 		for enemy in self.enemy_list:
 			screen.blit(enemy.image, camera.applyCam(enemy))
+
+		for title in self.title_list:
+			screen.blit(title, camera.applyCam(self.title_rect))
 			
 	def parse_map(self, filename, enemies, callback):
 		with open(path.join(get_levels_dir(), filename), "r") as f:

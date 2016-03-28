@@ -18,6 +18,9 @@ class Menu_level(Level):
 		
 		self.parse_map('menu.txt', enemies, initEnemy)
 		self.set_background_image('menu.png')
-		self.background_image = pygame.transform.scale(self.background_image, (self.level_width, self.level_height - BLOCK_HEIGHT*5))
+		self.background_image = pygame.transform.scale(self.background_image, (self.level_width, self.level_height - BLOCK_HEIGHT*5))	
+		myFont = pygame.font.SysFont("monospace", 100)
+		title = myFont.render("Imaginary", 1, (255,255,255))
+		self.title_list.append(title)
 		
 
