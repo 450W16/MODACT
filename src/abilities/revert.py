@@ -26,7 +26,7 @@ class Revert(Ability):
 			else:
 				print "PROBLEM#"
 		elif c.AI.status == Transformed.Wall:
-			c.lvl_current.platform_list.remove(c.AI)
+			c.lvl_current.special_platforms.remove(c.AI)
 			c.AI.image = pygame.transform.scale(c.AI.image, (BIGGIE_WIDTH, BIGGIE_HEIGHT))
 			c.AI.rect = pygame.Rect(c.AI.rect.left, c.AI.rect.top + BIGGIE_HEIGHT, BIGGIE_WIDTH, BIGGIE_HEIGHT)
 

@@ -18,6 +18,8 @@ class Monkey(Enemy):
 		self.sprites_walk_left = ss.get_sprites(size=(45, 45))
 		self.sprites_walk_right = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_left]
 		self.curr_sprite_index = 0
+
+		self.aggroRange = 200
 		
 		self.image = self.sprites_walk_right[0]
 		self.dir = 'R'

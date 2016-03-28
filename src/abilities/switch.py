@@ -9,7 +9,7 @@ class Switch(Ability):
 
 	def cast(self, c):
 		# Revert if switching to biggie
-		if pygame.K_r in c.AI.abilities and c.AI.locked == True:
+		if pygame.K_r in c.AI.abilities:
 			c.AI.abilities[pygame.K_r].cast(c)
 
 		# set change to 0 otherwise you get weird behaviour when

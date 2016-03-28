@@ -9,12 +9,17 @@ class Wall(Ability):
 
 	def cast(self, c):
 		playerRect = c.player.rect
+		aiRect = c.AI.rect
 
-		wallHeight = playerRect.height + 100
+		left = max(0, aiRect.left - 200)
+		right = min(c.lvl_current.level_width, aiRect.right + 200)
 
+		wallHeight = 50
 		c.player.image = pygame.transform.scale(c.player.image, (playerRect.width, wallHeight))
-		c.player.rect = pygame.Rect(playerRect.left, playerRect.top-100, playerRect.width, wallHeight)
+		c.player.rect = pygame.Rect(left, aiRect.top - 75, right-left, wallHeight)
+		
+
 		c.player.locked = True
 		c.player.status = Transformed.Wall
-		c.lvl_current.platform_list.add(c.player)
+		c.lvl_current.special_platforms.add(c.player)
 		c.player.abilities[pygame.K_f].cast(c)

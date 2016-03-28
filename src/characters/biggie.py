@@ -32,6 +32,8 @@ class Biggie(Player):
 		self.abilities[revert.getKey()] = revert
 		bridge = Bridge()
 		self.abilities[bridge.getKey()] = bridge
+		wall = Wall()
+		self.abilities[wall.getKey()] = wall
 		self.status = Transformed.Default
 		
 	def jump(self):

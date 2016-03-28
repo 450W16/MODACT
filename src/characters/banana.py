@@ -9,3 +9,8 @@ class Banana(Projectile):
 
 	def update(self, c):
 		self.rect.y += self.speed
+		collide_list = pygame.sprite.spritecollide(self, c.lvl_current.special_platforms, False)
+		if len(collide_list) >= 1:
+			self.kill()
+
+
