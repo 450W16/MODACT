@@ -63,7 +63,7 @@ class Control(object):
 		self.dialogue = 0
 
 	def save(self):
-		# pass
+		
 		with open('save/save.txt', 'w') as f:
 			pickle.dump([self.lvl_num, self.player.abilities, self.AI.abilities], f, protocol=pickle.HIGHEST_PROTOCOL)
 
