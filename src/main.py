@@ -8,6 +8,7 @@ import pickle
 from utils import *
 from levels.tutorial_level import Tutorial_level
 from levels.level1 import Level1_level
+from levels.level2 import Level2_level
 from levels.menu_level import Menu_level
 from characters.tracy import Tracy
 from characters.biggie import Biggie
@@ -41,6 +42,7 @@ class Control(object):
 							Menu_level(self.player, self.AI),
 							Tutorial_level(self.player, self.AI),
 							Level1_level(self.player, self.AI)
+							Level2_level(self.player, self.AI)
 						]	
 		self.lvl_num = 0
 		self.lvl_current = self.lvl_list[self.lvl_num]
@@ -254,7 +256,8 @@ class Control(object):
 			self.draw()
 			#initialize conversation
 			if self.player.convo == True:
-				self.initiateConvo()
+				self.player.convo = False
+				#self.initiateConvo()
 			
 			#FPS		
 			self.clock.tick(60)
