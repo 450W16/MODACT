@@ -58,10 +58,11 @@ class Level():
 		if not self.music_is_playing:
 			self.playMusic()
 		if c.player.rect.top > self.level_height:
-			c.player.rect.x = self.Px
-			c.player.rect.y = self.Py
-			c.AI.rect.x = self.Ax
-			c.AI.rect.y = self.Ay
+			c.player.dead = True
+			#c.player.rect.x = self.Px
+			#c.player.rect.y = self.Py
+			#c.AI.rect.x = self.Ax
+			#c.AI.rect.y = self.Ay
 		
 	def draw(self, screen, camera):
 		#TODO slower scrolling background

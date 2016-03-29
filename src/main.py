@@ -4,6 +4,7 @@ import sys
 import ast
 import os
 import inspect
+import pickle
 from utils import *
 from levels.tutorial_level import Tutorial_level
 from levels.level1 import Level1_level
@@ -62,35 +63,26 @@ class Control(object):
 		self.dialogue = 0
 
 	def save(self):
-		pass
-		# with open('save/save.txt', 'w') as f:
-		# 	saveStr = str(self.lvl_num) + ' ' + str(self.player.abilities) + ' ' + str(self.AI.abilities)
-		# 	f.write(saveStr)
+		# pass
+		with open('save/save.txt', 'w') as f:
+			pickle.dump([self.lvl_num, self.player.abilities, self.AI.abilities], f, protocol=pickle.HIGHEST_PROTOCOL)
 
 	def load(self):
 		if os.path.exists('save/save.txt'):
 			with open('save/save.txt', 'r') as f:
-
-				text = f.read()
-
-				if text != '':
-					text = text.split(' ')
-					text[-1] = text[-1].rstrip('\n')
-		
-					# read in level
-					self.lvl_num = text[0]
-					self.lvl_current = self.lvl_list[self.lvl_num]
-					self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
-					self.player.level = self.lvl_current
-					self.AI.level = self.lvl_current
-					if len(text) > 1:
-						# read in abilities
-						self.player.abilities = ast.literal_eval(text[1])
-						self.AI.abilities = ast.literal_eval(text[2])
-
-		# reset player position
-		self.player.rect.x = 50
-		self.AI.rect.x = 0	
+				
+				self.lvl_num, self.player.abilities, self.AI.abilities = pickle.load(f)
+				# read in level
+				self.lvl_current = self.lvl_list[self.lvl_num]
+				#self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
+				self.player.level = self.lvl_current
+				self.AI.level = self.lvl_current
+				
+				# reset player position
+				self.player.rect.x = self.lvl_current.Px
+				self.player.rect.y = self.lvl_current.Py
+				self.AI.rect.x = self.lvl_current.Ax
+				self.AI.rect.y = self.lvl_current.Ay	
 			
 	def processEvents(self):
 		# loop events
@@ -163,9 +155,8 @@ class Control(object):
 
 		if self.player.rect.right > self.lvl_current.level_width and self.lvl_num < len(self.lvl_list)-1:
 
-			# save checkpoint
-			self.save()
 			self.lvl_num += 1
+			self.save()
 			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
 			self.AI.level = self.lvl_current
