@@ -41,8 +41,8 @@ class Control(object):
 		self.lvl_list = [
 							Menu_level(self.player, self.AI),
 							Tutorial_level(self.player, self.AI),
-							Level1_level(self.player, self.AI)
-							Level2_level(self.player, self.AI)
+							Level1_level(self.player, self.AI)#,
+							#Level2_level(self.player, self.AI)
 						]	
 		self.lvl_num = 0
 		self.lvl_current = self.lvl_list[self.lvl_num]
@@ -198,6 +198,11 @@ class Control(object):
 		self.AI.image = pygame.transform.scale(self.AI.image, self.AI.rect.size)
 		self.screen.blit(self.AI.image, self.camera.applyCam(self.AI))
 		self.screen.blit(self.player.image, self.camera.applyCam(self.player))
+
+		#draw rect at player
+		# font = pygame.font.Font(None, 36)
+		# label = font.render('TEST TEXT', 1, (0, 255, 0), )
+		# self.screen.blit(label, (self.player.rect.left, self.player.rect.bottom))
 
 
 	def initiateConvo(self):
