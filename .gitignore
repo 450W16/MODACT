@@ -2,3 +2,5 @@
 *.py~
 *.pyc
 *.txt~
+save.txt
+*.*~
