@@ -30,7 +30,8 @@ class Ladder(Ability):
 
 		# Modify rect/img, lock character, and then switch
 		deltaY = abs(pf.rect.top - playerRect.bottom)
-		c.player.image = pygame.transform.scale(c.player.image, (playerRect.width, deltaY))
+		#c.player.image = pygame.transform.scale(c.player.image, (playerRect.width, deltaY))
+		c.player.image = c.player.sprites_ladder[0]
 		c.player.rect = pygame.Rect(playerRect.left, pf.rect.top, playerRect.width, deltaY)
 		c.player.locked = True
 		c.player.status = Transformed.Ladder

@@ -17,6 +17,10 @@ class Biggie(Player):
 		ss = SpriteSheet(path.join(get_art_dir(), 'Biggie', 'Biggie_spritesheet.png'), 10)
 		self.sprites_walk_right = ss.get_sprites(size=(96, 96))
 		self.sprites_walk_left = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_right]
+		ss = SpriteSheet(path.join(get_art_dir(), 'Biggie', 'Bridge.png'), 8)
+		self.sprites_bridge = ss.get_sprites(size=(256, 32))
+		ss = SpriteSheet(path.join(get_art_dir(), 'Biggie', 'Ladder.png'), 8)
+		self.sprites_ladder = ss.get_sprites(size=(32, 256))
 		
 		self.heading = Directions.Left
 		self.image = self.sprites_walk_left[0]
@@ -59,6 +63,8 @@ class Biggie(Player):
 			ret = [ret[9]]
 		elif self.delta_y != 0:
 			ret = [ret[0]]
+			
+
 				
 		return ret
 		
