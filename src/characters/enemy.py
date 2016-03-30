@@ -56,7 +56,7 @@ class Enemy(pygame.sprite.Sprite):
 
 		pl = c.lvl_current.platform_list
 
-		# collision detection in y 
+		# collision detection in y
 		# check first so mob is positioned properly on top of platform
 		self.rect.y += self.delta_y
 		collide_list = pygame.sprite.spritecollide(self, pl, False)
@@ -134,7 +134,7 @@ class Enemy(pygame.sprite.Sprite):
 		if self.delta_y == 0:
 			self.delta_y = 1
 		else:
-			self.delta_y += 1 
+			self.delta_y += 1
 
 		# check if we're on the ground
 		if self.rect.y >= SCREEN_HEIGHT - self.rect.height and self.delta_y >= 0:

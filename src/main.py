@@ -41,10 +41,10 @@ class Control(object):
 		self.lvl_list = [
 							Menu_level(self.player, self.AI),
 							Tutorial_level(self.player, self.AI),
-							Level1_level(self.player, self.AI)#,
-							#Level2_level(self.player, self.AI)
-						]	
-		self.lvl_num = 0
+							Level1_level(self.player, self.AI),
+							Level2_level(self.player, self.AI)
+						]
+		self.lvl_num = 3
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
 		self.AI.level = self.lvl_current
@@ -60,7 +60,7 @@ class Control(object):
 
 		#conversation variables
 		#will change this variable once we refactor, essentially tells main to parse the text file
-		self.convoNum = 1 
+		self.convoNum = 1
 		#dialogue line #
 		self.dialogue = 0
 
@@ -84,14 +84,14 @@ class Control(object):
 				self.player.rect.x = self.lvl_current.Px
 				self.player.rect.y = self.lvl_current.Py
 				self.AI.rect.x = self.lvl_current.Ax
-				self.AI.rect.y = self.lvl_current.Ay	
+				self.AI.rect.y = self.lvl_current.Ay
 			
 	def processEvents(self):
 		# loop events
 		for event in pygame.event.get()	:
 			if event.type == pygame.QUIT:
 				self.done = True
-			# key pressed 
+			# key pressed
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_LEFT:
 					self.player.move_left()
@@ -130,7 +130,7 @@ class Control(object):
 
 	def update(self):
 		# update camera
-		self.camera.update(self.player)			
+		self.camera.update(self.player)
 
 		#update player
 		self.active_sprites.update()
@@ -232,7 +232,7 @@ class Control(object):
 				tracyText = font.render(dialogue[self.dialogue], 1, (255, 0, 255), )
 				#if the player is currently Tracy, put the dialogue there, otherwise on the other sprite
 				if isinstance(self.player,Tracy):
-					self.screen.blit(tracyText, (0, 50))	
+					self.screen.blit(tracyText, (0, 50))
 				else:
 					self.screen.blit(tracyText, (0, 50))
 			else:
@@ -240,7 +240,7 @@ class Control(object):
 				biggieText = font.render(dialogue[self.dialogue], 1, (0, 0, 255), )
 				#if the player is currently Biggie, put the dialogue there, otherwise on the other sprite
 				if isinstance(self.player,Biggie):
-					self.screen.blit(biggieText, (0, 50))	
+					self.screen.blit(biggieText, (0, 50))
 				else:
 					self.screen.blit(biggieText, (0, 50))
 		else:
@@ -264,7 +264,7 @@ class Control(object):
 				self.player.convo = False
 				#self.initiateConvo()
 			
-			#FPS		
+			#FPS
 			self.clock.tick(60)
 			
 			#refresh screen

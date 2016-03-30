@@ -41,7 +41,7 @@ class Monkey(Enemy):
 		if self.delta_y == 0:
 			self.delta_y = 0.5
 		else:
-			self.delta_y += 0.5 
+			self.delta_y += 0.5
 
 	def get_sprites(self):
 		ret = None
@@ -57,7 +57,7 @@ class Monkey(Enemy):
 		if self.checkAggro(c, False):
 			self.jump(c)
 
-			# collision detection in y 
+			# collision detection in y
 			# check first so mob is positioned properly on top of platform
 			self.rect.y += self.delta_y
 			collide_list = pygame.sprite.spritecollide(self, c.lvl_current.platform_list, False)
