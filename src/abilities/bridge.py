@@ -69,7 +69,8 @@ class Bridge(Ability):
 							target = platform
 
 				deltaX = abs(p_cand.rect.right - target.rect.left)
-				c.player.image = pygame.transform.scale(c.player.image, (deltaX, playerRect.height))
+				#c.player.image = pygame.transform.scale(c.player.image, (deltaX, playerRect.height))
+				c.player.image = c.player.sprites_bridge[0]
 				c.player.rect = pygame.Rect(p_cand.rect.right, target.rect.top, deltaX, playerRect.height)
 
 			elif c.player.heading == Directions.Left:
@@ -87,7 +88,8 @@ class Bridge(Ability):
 							target = platform
 				
 				deltaX = abs(p_cand.rect.left - target.rect.right)
-				c.player.image = pygame.transform.scale(c.player.image, (deltaX, playerRect.height))
+				#c.player.image = pygame.transform.scale(c.player.image, (deltaX, playerRect.height))
+				c.player.image = c.player.sprites_bridge[0]
 				c.player.rect = pygame.Rect(target.rect.right, target.rect.top, deltaX, playerRect.height)
 
 

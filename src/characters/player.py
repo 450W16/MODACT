@@ -38,10 +38,9 @@ class Player(pygame.sprite.Sprite):
 		# Conversation?
 		self.convo = True
 		
-		# TODO: maybe move this counter to the future Moveable class.
 		# Sprite animation counter
 		self.curr_sprite_index = 0
-		self.update_counter = 0
+		self.frame_counter = 0
 		self.frames_per_sprite = 3
 
 	def update(self):
@@ -169,7 +168,7 @@ class Player(pygame.sprite.Sprite):
 
 	def update_sprites(self):
 		if self.get_sprites():
-			self.update_counter = (self.update_counter + 1) % self.frames_per_sprite
-			if self.update_counter == 0:
+			self.frame_counter = (self.frame_counter + 1) % self.frames_per_sprite
+			if self.frame_counter == 0:
 				self.curr_sprite_index = (self.curr_sprite_index + 1) % len(self.get_sprites())
 				self.image = self.get_sprites()[self.curr_sprite_index]

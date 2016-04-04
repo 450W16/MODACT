@@ -17,13 +17,9 @@ class Monkey(Enemy):
 		ss = SpriteSheet(path.join(get_art_dir(), 'Monkey', 'Monkey_spritesheet.png'), 7)
 		self.sprites_walk_left = ss.get_sprites(size=(45, 45))
 		self.sprites_walk_right = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_left]
-		self.curr_sprite_index = 0
+		self.image = self.sprites_walk_right[0]
 
 		self.aggroRange = 200
-		
-		self.image = self.sprites_walk_right[0]
-		self.dir = 'R'
-		self.speed = 2
 
 		self.cooldown = 2000
 		self.last = pygame.time.get_ticks()
@@ -41,7 +37,7 @@ class Monkey(Enemy):
 		if self.delta_y == 0:
 			self.delta_y = 0.5
 		else:
-			self.delta_y += 0.5 
+			self.delta_y += 0.5
 
 	def get_sprites(self):
 		ret = None
@@ -57,7 +53,7 @@ class Monkey(Enemy):
 		if self.checkAggro(c, False):
 			self.jump(c)
 
-			# collision detection in y 
+			# collision detection in y
 			# check first so mob is positioned properly on top of platform
 			self.rect.y += self.delta_y
 			collide_list = pygame.sprite.spritecollide(self, c.lvl_current.platform_list, False)
@@ -71,7 +67,7 @@ class Monkey(Enemy):
 			now = pygame.time.get_ticks()
 			if now - self.last >= self.cooldown:
 				self.last = now
-				b = Banana(10, 10, self.rect.x, self.rect.bottom)
+				b = Banana(10, 10, self.rect.x, self.rect.bottom, self)
 				c.lvl_current.enemy_list.add(b)
 
 		else:
