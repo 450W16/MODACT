@@ -138,7 +138,7 @@ class Control(object):
 
 
 		# follow
-		if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST and not self.AI.locked:
+		if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST-20 and not self.AI.locked:
 			self.AI.move_right()
 
 		elif self.player.delta_x < 0 and self.AI.rect.x > self.player.rect.right + FOLLOW_DIST and not self.AI.locked:

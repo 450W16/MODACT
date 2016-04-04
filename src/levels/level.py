@@ -24,6 +24,7 @@ class Level():
 		self.level_width = 0
 		self.level_height = 0
 		self.ground_level = 0
+		self.load_block = None
 
 
 		grass = pygame.image.load(path.join(get_art_dir(), "terrain1.png"))
