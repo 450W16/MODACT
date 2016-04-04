@@ -36,7 +36,7 @@ class Player(pygame.sprite.Sprite):
 		# Default heading
 		self.heading = Directions.Right
 		# Conversation?
-		self.convo = True
+		self.convo = False
 		
 		# Sprite animation counter
 		self.curr_sprite_index = 0
