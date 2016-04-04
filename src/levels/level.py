@@ -16,6 +16,7 @@ class Level():
 		self.special_platforms = pygame.sprite.Group()
 		self.title_list = []
 		self.title_rect = pygame.Rect(20, 180, SCREEN_WIDTH//4, SCREEN_HEIGHT//4)
+		self.load_rect = pygame.Rect(240, 290, 100, 50)
 		self.player = player
 		self.AI = AI
 		self.background_image = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -64,6 +65,14 @@ class Level():
 			#c.player.rect.y = self.Py
 			#c.AI.rect.x = self.Ax
 			#c.AI.rect.y = self.Ay
+		if self.load_block:
+			mouse = pygame.mouse.get_pos()
+			click = pygame.mouse.get_pressed()
+			if  c.camera.applyCam(self.load_rect).collidepoint(mouse) and click[0]:
+				print self.load_rect.x
+				print self.load_rect.y
+				print mouse
+				c.load()
 		
 	def draw(self, screen, camera):
 		#TODO slower scrolling background
@@ -89,6 +98,9 @@ class Level():
 
 		for title in self.title_list:
 			screen.blit(title, camera.applyCam(self.title_rect))
+
+		if self.load_block != None:
+			screen.blit(self.load_block, camera.applyCam(self.load_rect))
 			
 	def parse_map(self, filename, enemies, callback):
 		with open(path.join(get_levels_dir(), filename), "r") as f:

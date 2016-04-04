@@ -44,7 +44,7 @@ class Control(object):
 							Level1_level(self.player, self.AI),
 							Level2_level(self.player, self.AI)
 						]
-		self.lvl_num = 3
+		self.lvl_num = 0
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
 		self.AI.level = self.lvl_current
@@ -76,7 +76,7 @@ class Control(object):
 				self.lvl_num, self.player.abilities, self.AI.abilities = pickle.load(f)
 				# read in level
 				self.lvl_current = self.lvl_list[self.lvl_num]
-				#self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
+				self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
 				self.player.level = self.lvl_current
 				self.AI.level = self.lvl_current
 				

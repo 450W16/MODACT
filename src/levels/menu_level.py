@@ -26,6 +26,8 @@ class Menu_level(Level):
 		self.title_list.append(title)
 
 		# block for loading
-		
+		myFont2 = pygame.font.SysFont("monospace", 50)
+		title2 = myFont2.render("Load", 1, (255,255,255))
+		self.load_block = title2
 
 
