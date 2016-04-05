@@ -13,10 +13,10 @@
          dddddddddddddddddddddddddddddddddddddddddddddddddddddd    
                                                                    
      gggg                                                          
-                                                                   
-          vv                                                         
           vv                                                       
           vv                                                       
+          vv                                                       
+          vv        V                                              
      ggggggggggggggggggggggggggggggg                               
      DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD                               
      ddddddddddddddddddddddddddddddd                               
@@ -32,7 +32,7 @@
                                           ^^^^                     
   gggg>>>>>>    gggg        gggg                               ^^^^
                                                                    
- P  A                                                        ^^^^    
+ P  A                                                        ^^^^  
                                                                    
                                                >>>>    ^^^^        
 gggggg          gggggggggggggggg                                   

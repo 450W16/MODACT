@@ -22,10 +22,8 @@ class MovingPlatform(pygame.sprite.Sprite):
 		self.set_hor_move_amount(2)
 		self.boundary_bottom = self.rect.bottom
 		self.set_vert_move_amount(2)
-		
-		self.player = player
 	
-	def update(self):
+	def update(self, c):
 		pass
 		
 	def set_hor_move_amount(self, numblocks):
