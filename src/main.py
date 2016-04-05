@@ -12,6 +12,7 @@ from levels.level2 import Level2_level
 from levels.menu_level import Menu_level
 from characters.tracy import Tracy
 from characters.biggie import Biggie
+from abilities.revert import Revert
 from abilities.climb import *
 from levels.platforms import Platform
 from camera import Camera
@@ -108,6 +109,10 @@ class Control(object):
 				self.player.rect.y = self.lvl_current.Py
 				self.AI.rect.x = self.lvl_current.Ax
 				self.AI.rect.y = self.lvl_current.Ay
+
+				if isinstance(self.player, Tracy):
+					revert = Revert()
+					revert.cast(self)
 			
 	def processEvents(self):
 		# loop events
