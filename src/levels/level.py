@@ -30,7 +30,7 @@ class Level():
 
 		grass = pygame.image.load(path.join(get_art_dir(), "terrain1.png"))
 		dirt = pygame.image.load(path.join(get_art_dir(), "terrain2.png"))
-		dirt_bottom = pygame.image.load(path.join(get_art_dir(), "terrain3.png"))
+		self.dirt_bottom = pygame.image.load(path.join(get_art_dir(), "terrain3.png"))
 		rock1 = pygame.image.load(path.join(get_art_dir(), "rock1.png"))
 		rock2 = pygame.image.load(path.join(get_art_dir(), "rock2.png"))
 		rock3 = pygame.image.load(path.join(get_art_dir(), "rock3.png"))
@@ -42,7 +42,7 @@ class Level():
 		self.mapdict = {
 			"g": grass,
 			"D": dirt,
-			"d": dirt_bottom,
+			"d": self.dirt_bottom,
 			"1": rock1,
 			"2": rock2,
 			"3": rock3,
