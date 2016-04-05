@@ -1,7 +1,8 @@
 import pygame
 from os import path
 from platforms import Platform
-from triggers import Trigger 
+from triggers import Trigger
+from vine_trigger import VineTrigger
 from moving_platformsLR import MplatformLR
 from moving_platformsUD import MplatformUD
 from vine import Vine
@@ -13,7 +14,7 @@ class Level():
 		self.platform_list = pygame.sprite.Group()
 		self.trigger_list = pygame.sprite.Group()
 		self.enemy_list = pygame.sprite.Group()
-		self.special_platforms = pygame.sprite.Group()
+		self.vinetrigger_list = pygame.sprite.Group()
 		self.title_list = []
 		self.title_rect = pygame.Rect(20, 180, SCREEN_WIDTH//4, SCREEN_HEIGHT//4)
 		self.load_rect = pygame.Rect(240, 290, 100, 50)
@@ -53,9 +54,10 @@ class Level():
 		}
 		
 	def update(self, c):
-		self.platform_list.update()
-		self.trigger_list.update()
+		self.platform_list.update(c)
+		self.trigger_list.update(c)
 		self.enemy_list.update(c)
+		self.vinetrigger_list.update(c)
 		if not self.music_is_playing:
 			self.playMusic()
 		if c.player.rect.top > self.level_height:
@@ -83,12 +85,6 @@ class Level():
 		for plat in self.platform_list:
 			screen.blit(plat.image, camera.applyCam(plat))
 
-		#for platUD in self.platform_listUD:
-		#	screen.blit(platUD.image, camera.applyCam(platUD))
-
-		#for platLR in self.platform_listLR:
-		#	screen.blit(platLR.image, camera.applyCam(platLR))
-
 		for trig in self.trigger_list:
 			screen.blit(trig.image, camera.applyCam(trig))
 
@@ -100,6 +96,9 @@ class Level():
 
 		if self.load_block != None:
 			screen.blit(self.load_block, camera.applyCam(self.load_rect))
+			
+		for vinetrigger in self.vinetrigger_list:
+			screen.blit(vinetrigger.image, camera.applyCam(vinetrigger))
 			
 	def parse_map(self, filename, enemies, callback):
 		with open(path.join(get_levels_dir(), filename), "r") as f:
@@ -113,16 +112,17 @@ class Level():
 						elif block == "E":
 							trigger = Trigger(x, y)
 							self.trigger_list.add(trigger)
-						#need a vertically moving platform image
 						elif block == "^":
-							moving_platformsUD = MplatformUD(self.player, x, y)
+							moving_platformsUD = MplatformUD(x, y)
 							self.platform_list.add(moving_platformsUD)
 						elif block == "v":
-							vine = Vine(self.player, x, y)
+							vine = Vine(x, y)
 							self.platform_list.add(vine)
-						#need a horizontally moving platform image
+						elif block == "V":
+							vinetrigger = VineTrigger(x, y)
+							self.vinetrigger_list.add(vinetrigger)
 						elif block == ">":
-							moving_platformsLR = MplatformLR(self.player, x, y)
+							moving_platformsLR = MplatformLR(x, y)
 							self.platform_list.add(moving_platformsLR)
 						elif block == "P":
 							self.Px = x
