@@ -49,7 +49,7 @@ class Biggie(Player):
 		#if yes, set trajectory upwards
 		# will have to change if we change ground
 		if len(platform_collisions) > 0 or self.rect.bottom >= SCREEN_HEIGHT:
-			self.delta_y = -20
+			self.delta_y = -17
 		
 	def get_sprites(self):
 		ret = None

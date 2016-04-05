@@ -70,9 +70,6 @@ class Level():
 			mouse = pygame.mouse.get_pos()
 			click = pygame.mouse.get_pressed()
 			if  c.camera.applyCam(self.load_rect).collidepoint(mouse) and click[0]:
-				print self.load_rect.x
-				print self.load_rect.y
-				print mouse
 				c.load()
 		
 	def draw(self, screen, camera):
@@ -81,6 +78,12 @@ class Level():
 		if self.background_image.get_rect().right < self.level_width:
 			rect = pygame.Rect(self.background_image.get_rect().right, self.background_image.get_rect().top, self.background_image.get_rect().width, self.background_image.get_rect().height)
 			screen.blit(self.background_image, camera.applyCam(rect))
+		#if self.background_image.get_rect().bottom < self.level_height:
+		#	rect = pygame.Rect(self.background_image.get_rect().left, self.background_image.get_rect().bottom, self.background_image.get_rect().width, self.background_image.get_rect().height)
+		#	screen.blit(self.background_image, camera.applyCam(rect))
+		#if rect.y < self.level_height:
+		#	rect2 = pygame.Rect(rect.left, rect.bottom, rect.width, rect.height)
+		#	screen.blit(self.background_image, camera.applyCam(rect2)) 
 
 		for plat in self.platform_list:
 			screen.blit(plat.image, camera.applyCam(plat))

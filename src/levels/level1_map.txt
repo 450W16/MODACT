@@ -1,17 +1,26 @@
                             dddddddddddddddd                       
-                                                                   
+                                     
+
+
+
+
+
+                              
                                                                    
               gggg g                          g                    
                    g  gggg>>>>  >>>>  >>>>    g                    
-                   g                          g gggg               
+                   g                          gggggg               
            gggg    g                          g                    
                    g                          g                    
                    g                          g                    
                    g                          g                    
-         gggggggggggggggggggggggggggggggggggggggggggggggggggggg    
-         DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD    
-         dddddddddddddddddddddddddddddddddddddddddddddddddddddd    
-                                                                   
+         gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg    
+         DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD    
+         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd    
+                                   
+
+
+                                
      gggg                                                          
           vv                                                       
           vv                                                       
@@ -21,16 +30,16 @@
      DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD                               
      ddddddddddddddddddddddddddddddd                               
                                                                    
-                                     ^^^^                          
-                                           ^^^^                    
+                                       ^^^^                          
+                                               ^^^^                    
                                                                    
-                                               >>>>                
+                                                   >>>>                
                             gggg>>>>                               
                                                                    
-                                                       >>>>        
+                                                           >>>>        
                                                                    
-                                          ^^^^                     
-  gggg>>>>>>    gggg        gggg                               ^^^^
+                                          ^^^^                         
+  gggg>>>>>>    gggg        gggg                                   ^^^^
                                                                    
  P  A                                                        ^^^^  
                                                                    
