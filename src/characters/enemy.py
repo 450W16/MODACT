@@ -138,9 +138,9 @@ class Enemy(pygame.sprite.Sprite):
 			self.delta_y += 1
 
 		# check if we're on the ground
-		if self.rect.y >= SCREEN_HEIGHT - self.rect.height and self.delta_y >= 0:
-			self.delta_y = 0
-			self.rect.y = SCREEN_HEIGHT - self.rect.height
+		#if self.rect.y >= SCREEN_HEIGHT - self.rect.height and self.delta_y >= 0:
+		#	self.delta_y = 0
+		#	self.rect.y = SCREEN_HEIGHT - self.rect.height
 
 	def update_sprites(self):
 		if self.get_sprites():

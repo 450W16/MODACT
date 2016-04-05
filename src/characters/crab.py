@@ -9,8 +9,12 @@ class Crab(Enemy):
 	
 	def __init__(self, width, height, x, y):
 		Enemy.__init__(self, 55, 25, x, y)
-		self.dir = 'R'
+		self.dir = 'L'
 		self.speed = 1
+		self.radius = 100
+		self.dist = 0
+
+		self.spawn = [x,y] 
 		
 		# initialize sprite lists
 		ss = SpriteSheet(path.join(get_art_dir(), 'Crab', 'Crab_spritesheet.png'), 4)
@@ -28,4 +32,62 @@ class Crab(Enemy):
 		return ret
 
 	def update(self, c):
-		super(Crab, self).update(c)
+
+		self.update_sprites()
+		self.gravity()
+
+		
+		if self.dir == "R":
+			self.delta_x += self.speed
+			self.dist += self.speed
+			if self.dist >= self.radius:
+				self.dir = "L"
+				self.dist = 0
+		else: # self.dir = "L"
+			self.delta_x -= self.speed
+			self.dist += self.speed
+			
+			if self.dist >= self.radius:
+				self.dir = "R"
+				self.dist = 0
+		
+		
+		
+		pl = c.lvl_current.platform_list
+
+		# collision detection in y
+		# check first so mob is positioned properly on top of platform
+		self.rect.y += self.delta_y
+		collide_list = pygame.sprite.spritecollide(self, pl, False)
+		for platform in collide_list:
+			if self.delta_y > 0:
+				self.rect.bottom = platform.rect.top
+			elif self.delta_y < 0:
+				self.rect.top = platform.rect.bottom
+			self.delta_y = 0
+
+
+		
+		# collision detection in x
+		# If collide with wall, reverse direction
+		self.rect.x += self.delta_x
+		collide_list = pygame.sprite.spritecollide(self, pl, False)
+		for platform in collide_list:
+			if self.delta_x > 0: # dir = "R"
+				self.rect.right = platform.rect.left
+				self.dir = "L"
+			elif self.delta_x < 0: # dir = "L"
+				self.rect.left = platform.rect.right
+				self.dir = "R"
+		self.delta_x = 0
+
+		if self.rect.bottom >= 1088:
+			self.rect.x = self.spawn[0]
+			self.rect.y = self.spawn[1]
+			self.dir = "L"
+			self.dist = 0
+			self.delta_x=0
+
+		
+
+

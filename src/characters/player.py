@@ -55,6 +55,7 @@ class Player(pygame.sprite.Sprite):
 				if self.grav:
 					self.gravity()
 
+				
 				if self.vertM:
 					self.rect.y += self.delta_y
 

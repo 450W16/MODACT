@@ -31,4 +31,5 @@ class Level1_level(Level):
 		
 		self.parse_map('level1_map.txt', enemies, initEnemy)
 		self.set_background_image('tutorial_background.png')
+		self.background_image = pygame.transform.scale(self.background_image, (self.level_width, self.level_height - BLOCK_HEIGHT*3))
 		self.music = 'levels/forest.mp3'
