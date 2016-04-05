@@ -67,13 +67,19 @@ class Control(object):
 	def save(self):
 		
 		with open('save/save.txt', 'w') as f:
-			pickle.dump([self.lvl_num, self.player.abilities, self.AI.abilities], f, protocol=pickle.HIGHEST_PROTOCOL)
+			if isinstance(self.player, Tracy):
+				pickle.dump([self.lvl_num, self.player.abilities, self.AI.abilities], f, protocol=pickle.HIGHEST_PROTOCOL)
+			else:
+				pickle.dump([self.lvl_num, self.AI.abilities, self.player.abilities], f, protocol=pickle.HIGHEST_PROTOCOL)
 
 	def load(self):
 		if os.path.exists('save/save.txt'):
 			with open('save/save.txt', 'r') as f:
 				
-				self.lvl_num, self.player.abilities, self.AI.abilities = pickle.load(f)
+				if isinstance(self.player, Tracy):
+					self.lvl_num, self.player.abilities, self.AI.abilities = pickle.load(f)
+				else:
+					self.lvl_num, self.AI.abilities, self.player.abilities = pickle.load(f)
 				# read in level
 				self.lvl_current = self.lvl_list[self.lvl_num]
 				self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
