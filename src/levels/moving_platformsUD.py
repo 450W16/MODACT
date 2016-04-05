@@ -6,6 +6,8 @@ class MplatformUD(MovingPlatform):
 	
 	def __init__(self, player, x, y, width=BLOCK_WIDTH, height=BLOCK_HEIGHT):
 		super(MplatformUD, self).__init__(player, x, y)
+		rock_topend = pygame.image.load(path.join(get_art_dir(), "rock7.png"))
+		self.image = rock_topend
 	
 	def update(self):
 		

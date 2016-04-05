@@ -25,7 +25,6 @@ class Level():
 		self.level_height = 0
 		self.ground_level = 0
 
-
 		grass = pygame.image.load(path.join(get_art_dir(), "terrain1.png"))
 		dirt = pygame.image.load(path.join(get_art_dir(), "terrain2.png"))
 		dirt_bottom = pygame.image.load(path.join(get_art_dir(), "terrain3.png"))
