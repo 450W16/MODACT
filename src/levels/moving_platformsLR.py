@@ -18,3 +18,6 @@ class MplatformLR(MovingPlatform):
 			else:
 				self.player.rect.left = self.rect.right
  
+ 		# Check if the platform hits boundaries and reverses direction
+ 		if self.rect.right > self.boundary_right or self.rect.left < self.boundary_left:
+ 			self.change_x *= -1
