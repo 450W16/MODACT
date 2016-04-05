@@ -70,5 +70,7 @@ class Tracy(Player):
 			
 		if self.climbing:
 			ret = self.sprites_climb
+			if not self.is_moving():
+				self.frame_counter = 0
 				
 		return ret
