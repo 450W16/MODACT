@@ -46,13 +46,27 @@ class Player(pygame.sprite.Sprite):
 	def update(self, c):
 		if not self.locked:
 			# update movements, gravity, animation, etc.
-
 			if not self.convo:
 			
 				self.update_sprites()
 			
 				if self.grav:
 					self.gravity()
+
+				if self.vertM:
+					self.rect.y += self.delta_y
+
+					if self.col:
+						# collision detection in y
+						collide_list = pygame.sprite.spritecollide(self, 
+								self.level.platform_list, False)
+						# print len(collide_list)
+						for platform in collide_list:
+							if self.delta_y > 0:
+								self.rect.bottom = platform.rect.top
+							elif self.delta_y < 0:
+								self.rect.top = platform.rect.bottom
+							self.delta_y = 0
 
 				if self.horiM:
 					self.rect.x += self.delta_x
@@ -70,19 +84,6 @@ class Player(pygame.sprite.Sprite):
 							elif self.delta_x < 0:
 								self.rect.left = platform.rect.right
 
-				if self.vertM:
-					self.rect.y += self.delta_y
-
-					if self.col:
-						# collision detection in y
-						collide_list = pygame.sprite.spritecollide(self, 
-								self.level.platform_list, False)
-						for platform in collide_list:
-							if self.delta_y > 0:
-								self.rect.bottom = platform.rect.top
-							elif self.delta_y < 0:
-								self.rect.top = platform.rect.bottom
-							self.delta_y = 0
 				
 				if self.col:
 					# detect enemy collision
@@ -91,13 +92,13 @@ class Player(pygame.sprite.Sprite):
 					if len(enemy_collide) > 0:
 						self.dead = True
 					# collision detection in X 					
-					collide_list = pygame.sprite.spritecollide(self, 
-							self.level.platform_list, False)
-					for platform in collide_list:
-						if self.delta_x > 0:
-							self.rect.right = platform.rect.left
-						elif self.delta_x < 0:
-							self.rect.left = platform.rect.right
+					# collide_list = pygame.sprite.spritecollide(self, 
+					# 		self.level.platform_list, False)
+					# for platform in collide_list:
+					# 	if self.delta_x > 0:w
+					# 		self.rect.right = platform.rect.left
+					# 	elif self.delta_x < 0:
+					# 		self.rect.left = platform.rect.right
 
 			if self.vertM:
 				self.rect.y += self.delta_y
