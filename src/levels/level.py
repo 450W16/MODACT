@@ -147,6 +147,7 @@ class Level():
 						elif block == "P":
 							self.Px = x
 							self.Py = y 
+							print "PLAYER SPAWNS: " + str(x) + " " + str(y)
 						elif block == "A":
 							self.Ax = x
 							self.Ay = y 
@@ -157,6 +158,7 @@ class Level():
 							platform.image = self.mapdict[block]
 							self.platform_list.add(platform)
 					x += BLOCK_WIDTH
+
 
 				if x > self.level_width:
 					self.level_width = x
