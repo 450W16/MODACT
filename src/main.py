@@ -151,12 +151,15 @@ class Control(object):
 						self.player.stop_y(self.AI.rect)
 					else:
 						self.player.stop()
+					self.climbing = 0
+					self.player.climbing = False
 				if event.key == pygame.K_DOWN and self.player.delta_y > 0:
 					if isinstance(self.player, Tracy):
 						self.player.stop_y(self.AI.rect)
 					else:
 						self.player.stop()
 					self.climbing = 0
+					self.player.climbing = False
 			
 
 	def update(self):
