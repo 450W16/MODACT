@@ -1,5 +1,6 @@
 import pygame
 from ability import Ability
+from abilities.revert import Revert
 
 # Switch characters
 class Switch(Ability):
@@ -9,8 +10,9 @@ class Switch(Ability):
 
 	def cast(self, c):
 		# Revert if switching to biggie
-		if pygame.K_r in c.AI.abilities:
-			c.AI.abilities[pygame.K_r].cast(c)
+		if isinstance(c.AI, c.Biggie):
+			revert = Revert()
+			revert.cast(c)
 
 		# set change to 0 otherwise you get weird behaviour when
 		# moving and switching

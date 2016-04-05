@@ -25,7 +25,7 @@ class Control(object):
 		# self.AI = Biggie(0, SCREEN_HEIGHT/2)
 		self.player = Tracy(0, SCREEN_HEIGHT - 120)
 		self.AI = Biggie(100, SCREEN_HEIGHT - 150)
-
+		self.Biggie = Biggie
 
 		# screen
 		self.screen = screen
