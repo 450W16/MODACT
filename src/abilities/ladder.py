@@ -22,11 +22,6 @@ class Ladder(Ability):
 		if len(p_candidates) == 0:
 			return
 		else:
-			# # Find the highest one (lowest y)
-			# pf = p_candidates[0]
-			# for platform in p_candidates[1:]:
-			# 	if platform.rect.y < pf.rect.y:
-			# 		pf = platform
 			# Find the closest one (highest y)
 			close = p_candidates[0]
 			for platform in p_candidates[1:]:
