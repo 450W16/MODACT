@@ -210,11 +210,16 @@ class Control(object):
 
 		if self.player.rect.right > self.lvl_current.level_width and self.lvl_num < len(self.lvl_list)-1:
 
+			if isinstance(self.player, Tracy):
+				revert = Revert()
+				revert.cast(self)
+
 			self.lvl_num += 1
 			self.save()
 			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
 			self.AI.level = self.lvl_current
+
 			self.player.rect.x = self.lvl_current.Px
 			self.player.rect.y = self.lvl_current.Py
 			self.AI.rect.x = self.lvl_current.Ax
@@ -227,6 +232,10 @@ class Control(object):
 
 		# go to previous area
 		elif self.player.rect.left < 0 and self.lvl_num > 0:
+
+			if isinstance(self.player, Tracy):
+				revert = Revert()
+				revert.cast(self)
 
 			self.lvl_num -= 1
 			self.lvl_current = self.lvl_list[self.lvl_num]
