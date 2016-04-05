@@ -43,7 +43,7 @@ class Player(pygame.sprite.Sprite):
 		self.frame_counter = 0
 		self.frames_per_sprite = 3
 
-	def update(self):
+	def update(self, c):
 		if not self.locked:
 			# update movements, gravity, animation, etc.
 

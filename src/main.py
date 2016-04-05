@@ -44,7 +44,7 @@ class Control(object):
 							Level1_level(self.player, self.AI),
 							Level2_level(self.player, self.AI)
 						]
-		self.lvl_num = 3
+		self.lvl_num = 0
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
 		self.AI.level = self.lvl_current
@@ -133,7 +133,7 @@ class Control(object):
 		self.camera.update(self.player)
 
 		#update player
-		self.active_sprites.update()
+		self.active_sprites.update(self)
 		if self.player.dead:
 			self.load()
 			self.player.dead = False
