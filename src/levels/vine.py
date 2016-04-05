@@ -9,6 +9,7 @@ class Vine(MplatformUD):
 		self.set_vert_move_amount(3)
 		
 	def update(self):
+		# TODO: Modify update based on trigger event
 		
 		# Move up/down
 		self.rect.y += self.change_y

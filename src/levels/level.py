@@ -73,12 +73,6 @@ class Level():
 		for plat in self.platform_list:
 			screen.blit(plat.image, camera.applyCam(plat))
 
-		#for platUD in self.platform_listUD:
-		#	screen.blit(platUD.image, camera.applyCam(platUD))
-
-		#for platLR in self.platform_listLR:
-		#	screen.blit(platLR.image, camera.applyCam(platLR))
-
 		for trig in self.trigger_list:
 			screen.blit(trig.image, camera.applyCam(trig))
 
@@ -100,14 +94,12 @@ class Level():
 						elif block == "E":
 							trigger = Trigger(x, y)
 							self.trigger_list.add(trigger)
-						#need a vertically moving platform image
 						elif block == "^":
 							moving_platformsUD = MplatformUD(self.player, x, y)
 							self.platform_list.add(moving_platformsUD)
 						elif block == "v":
 							vine = Vine(self.player, x, y)
 							self.platform_list.add(vine)
-						#need a horizontally moving platform image
 						elif block == ">":
 							moving_platformsLR = MplatformLR(self.player, x, y)
 							self.platform_list.add(moving_platformsLR)
