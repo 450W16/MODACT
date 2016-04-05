@@ -147,7 +147,6 @@ class Level():
 						elif block == "P":
 							self.Px = x
 							self.Py = y 
-							print "PLAYER SPAWNS: " + str(x) + " " + str(y)
 						elif block == "A":
 							self.Ax = x
 							self.Ay = y 

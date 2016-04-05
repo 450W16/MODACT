@@ -276,13 +276,10 @@ class Control(object):
 
 			#show the dialogue in a loop until the dialogue is empty
 			if self.levelEnterConvo:
-				print("level enter")
 				num = self.enterDialogue
 			else:
-				print("trigger")
 				num = self.dialogue
 
-			print(num)
 			if dialogue[num] != '':
 				pygame.draw.rect(self.screen, (0,0,0), (0,0,1000,100))
 				label = font.render('Press enter to continue', 1, (255, 255, 255), )

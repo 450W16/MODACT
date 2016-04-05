@@ -15,8 +15,8 @@
                                                 C                                                                                                                               ss                               
                                                ddddd                                                     ggggg         ggggg  >>>>    >>>>    >>>>                              sss                              
                                                                           M      M                                     ddddd                                                    ssss                             
-                                                      a                 aaaaaaaaaaaa                                                                                            sssss                            
- P A                                      ddddd       aa                ssssssssssss                                                                ^^^^                        ssssss                          
+ P  A                                                 a                 aaaaaaaaaaaa                                                                                            sssss                            
+                                          ddddd       aa                ssssssssssss                                                                ^^^^                        ssssss                          
 aaaaaa                                                aaa               dddddddddddd       v                                                                                    sssssss                          
 aaaaaa                                                aaaa                                                                                                                      ssssssss                         
 dddddd                      M                   C     aaaaa                                                                                               >>>>                  sssssssss                        
