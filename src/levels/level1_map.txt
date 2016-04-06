@@ -18,16 +18,16 @@
          DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD    
          dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd    
           v                         
-
-                                 
-   gggg                                                            
+   gggg
+                              
+                                                               
           v                                                        
                                                                    
                                                                    
                     V                                              
-     ggggggggggggggggggggggggggggggg                               
-     DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD                               
-     ddddddddddddddddddddddddddddddd                               
+gggggggggggggggggggggggggggggggggggg                               
+DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD                               
+dddddddddddddddddddddddddddddddddddd                               
                                                                    
                                        ^^^^                          
                                                ^^^^                    

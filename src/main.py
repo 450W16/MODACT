@@ -64,6 +64,7 @@ class Control(object):
 		#dialogue line #
 		self.dialogue = 0
 
+
 	def save(self):
 		
 		with open('save/save.txt', 'w') as f:
@@ -267,8 +268,8 @@ class Control(object):
 			self.draw()
 			#initialize conversation
 			if self.player.convo == True:
-				self.player.convo = False
-				#self.initiateConvo()
+				#self.player.convo = False
+				self.initiateConvo()
 			
 			#FPS
 			self.clock.tick(60)

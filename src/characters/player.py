@@ -37,6 +37,8 @@ class Player(pygame.sprite.Sprite):
 		self.heading = Directions.Right
 		# Conversation?
 		self.convo = False
+		# Wall transformation unlocked
+		self.wallUnlocked = False
 		
 		# Sprite animation counter
 		self.curr_sprite_index = 0
@@ -100,11 +102,14 @@ class Player(pygame.sprite.Sprite):
 					# 	elif self.delta_x < 0:
 					# 		self.rect.left = platform.rect.right
 
-			if self.vertM:
 				self.rect.y += self.delta_y
 
 				if self.col:
 					#detect trigger collision (conversation), set to True to remove event block
+					wall_collide = pygame.sprite.spritecollide(self, self.level.wallTrigger_list, True)
+					if len(wall_collide) > 0:
+						#unlock the wall ability
+						self.wallUnlocked = True
 					trigger_collide = pygame.sprite.spritecollide(self,
 							self.level.trigger_list, True)
 					if len(trigger_collide) > 0:
