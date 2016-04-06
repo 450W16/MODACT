@@ -110,8 +110,8 @@ class Player(pygame.sprite.Sprite):
 					if len(wall_collide) > 0:
 						#unlock the wall ability
 						self.wallUnlocked = True
-					trigger_collide = pygame.sprite.spritecollide(self,
-							self.level.trigger_list, True)
+
+					trigger_collide = pygame.sprite.spritecollide(self, self.level.trigger_list, True)
 					if len(trigger_collide) > 0:
 						#start the conversation
 						self.convo = True

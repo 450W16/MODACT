@@ -41,6 +41,8 @@ class Biggie(Player):
 		wall = Wall()
 		self.abilities[wall.getKey()] = wall
 		self.status = Transformed.Default
+
+		self.wallUnlocked = False
 		
 	def jump(self):
 

@@ -156,6 +156,11 @@ class Control(object):
 		else:
 			self.AI.stop()
 
+		# unlock the wal ability for Biggie.
+
+		if self.player.wallUnlocked:
+			self.AI.wallUnlocked = True
+
 
 		# update level
 		self.lvl_current.update(self)
