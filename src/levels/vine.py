@@ -9,7 +9,6 @@ class Vine(MplatformUD):
 		super(MplatformUD, self).__init__(self, x, y, width, height)
 		vine_sprite = pygame.image.load(path.join(get_art_dir(), "Vine.png"))
 		self.image = vine_sprite
-		self.boundary_bottom = self.rect.bottom
 		self.set_vert_move_amount(5)
 		self.vinetrigger = None
 		
