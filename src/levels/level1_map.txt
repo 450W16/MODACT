@@ -17,15 +17,14 @@
          gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg    
          DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD    
          dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd    
-                                   
+          v                         
 
-
-                                
-     gggg                                                          
-          vv                                                       
-          vv                                                       
-          vv                                                       
-          vv        V                                              
+                                 
+   gggg                                                            
+          v                                                        
+                                                                   
+                                                                   
+                    V                                              
      ggggggggggggggggggggggggggggggg                               
      DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD                               
      ddddddddddddddddddddddddddddddd                               
