@@ -42,6 +42,9 @@ class Level():
 		rock_leftend = pygame.image.load(path.join(get_art_dir(), "rock6.png"))
 		rock_topend = pygame.image.load(path.join(get_art_dir(), "rock7.png"))
 		rock_rightend = pygame.image.load(path.join(get_art_dir(), "rock8.png"))
+		sandtop = pygame.image.load(path.join(get_art_dir(), "sand1.png"))
+		sandmiddle = pygame.image.load(path.join(get_art_dir(), "sand2.png"))
+		sandbottom = pygame.image.load(path.join(get_art_dir(), "sand3.png"))
 		self.mapdict = {
 			"g": grass,
 			"D": dirt,
@@ -53,7 +56,10 @@ class Level():
 			"5": rock5,
 			"6": rock_leftend,
 			"7": rock_topend,
-			"8": rock_rightend
+			"8": rock_rightend,
+			"a": sandtop,
+			"s": sandmiddle,
+			"b": sandbottom
 		}
 		
 	def update(self, c):
