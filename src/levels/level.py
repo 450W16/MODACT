@@ -14,6 +14,7 @@ class Level():
 		self.platform_list = pygame.sprite.Group()
 		self.trigger_list = pygame.sprite.Group()
 		self.enemy_list = pygame.sprite.Group()
+		self.special_platforms = pygame.sprite.Group()
 		self.vinetrigger_list = pygame.sprite.Group()
 		self.title_list = []
 		self.title_rect = pygame.Rect(20, 180, SCREEN_WIDTH//4, SCREEN_HEIGHT//4)

@@ -21,6 +21,8 @@ class Biggie(Player):
 		self.sprites_bridge = ss.get_sprites(size=(256, 32))
 		ss = SpriteSheet(path.join(get_art_dir(), 'Biggie', 'Ladder.png'), 8)
 		self.sprites_ladder = ss.get_sprites(size=(32, 256))
+		ss = SpriteSheet(path.join(get_art_dir(), 'Biggie', 'Umbrella.png'), 8)
+		self.sprites_wall = ss.get_sprites(size=(200, 83))
 		
 		self.heading = Directions.Left
 		self.image = self.sprites_walk_left[0]
@@ -36,8 +38,8 @@ class Biggie(Player):
 		self.abilities[revert.getKey()] = revert
 		bridge = Bridge()
 		self.abilities[bridge.getKey()] = bridge
-		# wall = Wall()
-		# self.abilities[wall.getKey()] = wall
+		wall = Wall()
+		self.abilities[wall.getKey()] = wall
 		self.status = Transformed.Default
 		
 	def jump(self):
