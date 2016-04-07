@@ -46,7 +46,7 @@ class Control(object):
 							Level2_level(self.player, self.AI)
 						]
 
-		self.lvl_num = 0
+		self.lvl_num = 1
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
 		self.AI.level = self.lvl_current
@@ -152,14 +152,12 @@ class Control(object):
 					else:
 						self.player.stop()
 					self.climbing = 0
-					self.player.climbing = False
 				if event.key == pygame.K_DOWN and self.player.delta_y > 0:
 					if isinstance(self.player, Tracy):
 						self.player.stop_y(self.AI.rect)
 					else:
 						self.player.stop()
 					self.climbing = 0
-					self.player.climbing = False
 			
 
 	def update(self):
