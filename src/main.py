@@ -12,6 +12,7 @@ from levels.level2 import Level2_level
 from levels.menu_level import Menu_level
 from characters.tracy import Tracy
 from characters.biggie import Biggie
+from abilities.climb import *
 from levels.platforms import Platform
 from camera import Camera
 
@@ -44,7 +45,8 @@ class Control(object):
 							Level1_level(self.player, self.AI),
 							Level2_level(self.player, self.AI)
 						]
-		self.lvl_num = 1
+
+		self.lvl_num = 0
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
 		self.AI.level = self.lvl_current
@@ -119,6 +121,10 @@ class Control(object):
 						# check for ability key
 						k = self.player.checkAbility(event.key)
 						if k is not None:
+							if event.key != pygame.K_UP and event.key != pygame.K_DOWN:
+								print k
+								cast_sound = pygame.mixer.Sound("revert.wav")
+								cast_sound.play()
 							k.cast(self)
 			# key released
 			if event.type == pygame.KEYUP:
@@ -146,6 +152,8 @@ class Control(object):
 		#update player
 		self.active_sprites.update(self)
 		if self.player.dead:
+			death_sound = pygame.mixer.Sound("death.wav")
+			death_sound.play()
 			self.load()
 			self.player.dead = False
 
