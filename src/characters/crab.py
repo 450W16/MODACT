@@ -16,8 +16,6 @@ class Crab(Enemy):
 		ss = SpriteSheet(path.join(get_art_dir(), 'Crab', 'Crab_spritesheet.png'), 4)
 		self.sprites_walk_right = ss.get_sprites(size=(55, 25))
 		self.sprites_walk_left = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_right]
-		self.curr_sprite_index = 0
-		
 		self.image = self.sprites_walk_right[0]
 
 	def get_sprites(self):
