@@ -1,5 +1,8 @@
 import pygame
+from spritesheet import SpriteSheet
 from enemy import Enemy
+from directions import Directions
+from utils import *
 
 class Spider(Enemy):
 
@@ -7,8 +10,22 @@ class Spider(Enemy):
 		Enemy.__init__(self, width, height, x, y)
 		self.dir = 'D'
 		self.speed = 1
+		
+		# initialize sprite lists
+		ss = SpriteSheet(path.join(get_art_dir(), 'Spider', 'Spider_spritesheet.png'), 4)
+		self.sprites_walk_left = ss.get_sprites(size=(30, 20))
+		self.sprites_walk_right = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_left]
+		self.image = self.sprites_walk_left[0]
 
 	def update(self, c):
+		# Always face the player
+		if self.rect.x < c.player.rect.x:
+			self.heading = Directions.Right
+		else:
+			self.heading = Directions.Left
+			
+		self.update_sprites()
+		
 		# Check aggro
 		if not self.checkAggro(c, False):
 			if self.dir == 'U':
@@ -53,3 +70,12 @@ class Spider(Enemy):
 		# 	elif self.delta_x < 0: # dir = "L"
 		# 		self.rect.left = platform.rect.right
 		# self.delta_x = 0
+		
+	def get_sprites(self):
+		ret = None
+		if self.heading == Directions.Left:
+			ret = self.sprites_walk_left
+		elif self.heading == Directions.Right:
+			ret = self.sprites_walk_right
+				
+		return ret
