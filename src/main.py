@@ -190,7 +190,7 @@ class Control(object):
 			self.AI.level = self.lvl_current
 
 			self.player.rect.y = self.lvl_current.ground_level
-			self.AI.rect.y = self.lvl_current.ground_level
+			self.AI.rect.y = self.lvl_current.ground_level-20
 			self.player.rect.x = self.lvl_current.level_width-200
 			self.AI.rect.x = self.lvl_current.level_width-200
 

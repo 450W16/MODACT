@@ -40,7 +40,7 @@ class Tracy(Player):
 		self.rect.y -= 2
 		#if yes, set trajectory upwards
 		if len(platform_collisions) > 0 or self.rect.bottom >= SCREEN_HEIGHT:
-			self.delta_y = -15
+			self.delta_y = -14
 
 	def stop_y(self, biggieRect):
 		self.delta_y = 0
