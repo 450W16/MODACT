@@ -4,6 +4,8 @@ from abilities.switch import *
 from utils import *
 from spritesheet import SpriteSheet
 from directions import Directions
+from levels.moving_platforms import *
+from levels.moving_platformsLR import *
 
 class Player(pygame.sprite.Sprite):
 
@@ -54,22 +56,7 @@ class Player(pygame.sprite.Sprite):
 			
 				if self.grav:
 					self.gravity()
-
-				
-				if self.vertM:
-					self.rect.y += self.delta_y
-
-					if self.col:
-						# collision detection in y
-						collide_list = pygame.sprite.spritecollide(self, 
-								self.level.platform_list, False)
-						# print len(collide_list)
-						for platform in collide_list:
-							if self.delta_y > 0:
-								self.rect.bottom = platform.rect.top
-							elif self.delta_y < 0:
-								self.rect.top = platform.rect.bottom
-							self.delta_y = 0
+								 
 
 				if self.horiM:
 					self.rect.x += self.delta_x
@@ -86,7 +73,25 @@ class Player(pygame.sprite.Sprite):
 								self.rect.right = platform.rect.left
 							elif self.delta_x < 0:
 								self.rect.left = platform.rect.right
+				
+				if self.vertM:
+					self.rect.y += self.delta_y
 
+					if self.col:
+						# collision detection in y
+						collide_list = pygame.sprite.spritecollide(self, 
+								self.level.platform_list, False)
+						# print len(collide_list)
+						for platform in collide_list:
+							if self.delta_y > 0:
+								
+								self.rect.bottom = platform.rect.top
+							elif self.delta_y < 0:
+								print "aye"
+								self.rect.top = platform.rect.bottom
+							self.delta_y = 0
+							if isinstance(platform, MplatformLR):
+								self.rect.x += platform.change_x
 				
 				if self.col:
 					# detect enemy collision

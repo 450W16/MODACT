@@ -45,7 +45,7 @@
                                         ^^^^                         
   gggg>>>>>>    ggggg       gggg                                     ^^^^
                                                                    
- P  A                                                         ^^^^  
+ A  P                                                         ^^^^  
                                                                    
                                                >>>>    ^^^^        
 gggggg          gggggggggggggggg                                   
