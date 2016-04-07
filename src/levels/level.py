@@ -2,6 +2,7 @@ import pygame
 from os import path
 from platforms import Platform
 from triggers import Trigger
+from wallTrigger import WallTrigger
 from vine_trigger import VineTrigger
 from moving_platformsLR import MplatformLR
 from moving_platformsUD import MplatformUD
@@ -14,7 +15,9 @@ class Level():
 		self.platform_list = pygame.sprite.Group()
 		self.trigger_list = pygame.sprite.Group()
 		self.enemy_list = pygame.sprite.Group()
+		self.special_platforms = pygame.sprite.Group()
 		self.vinetrigger_list = pygame.sprite.Group()
+		self.wallTrigger_list = pygame.sprite.Group()
 		self.title_list = []
 		self.title_rect = pygame.Rect(20, 180, SCREEN_WIDTH//4, SCREEN_HEIGHT//4)
 		self.load_rect = pygame.Rect(240, 290, 100, 50)
@@ -39,6 +42,9 @@ class Level():
 		rock_leftend = pygame.image.load(path.join(get_art_dir(), "rock6.png"))
 		rock_topend = pygame.image.load(path.join(get_art_dir(), "rock7.png"))
 		rock_rightend = pygame.image.load(path.join(get_art_dir(), "rock8.png"))
+		sandtop = pygame.image.load(path.join(get_art_dir(), "sand1.png"))
+		sandmiddle = pygame.image.load(path.join(get_art_dir(), "sand2.png"))
+		sandbottom = pygame.image.load(path.join(get_art_dir(), "sand3.png"))
 		self.mapdict = {
 			"g": grass,
 			"D": dirt,
@@ -50,7 +56,10 @@ class Level():
 			"5": rock5,
 			"6": rock_leftend,
 			"7": rock_topend,
-			"8": rock_rightend
+			"8": rock_rightend,
+			"a": sandtop,
+			"s": sandmiddle,
+			"b": sandbottom
 		}
 		
 	def update(self, c):
@@ -58,6 +67,7 @@ class Level():
 		self.trigger_list.update(c)
 		self.enemy_list.update(c)
 		self.vinetrigger_list.update(c)
+		self.wallTrigger_list.update(c)
 		if not self.music_is_playing:
 			self.playMusic()
 		if c.player.rect.top > self.level_height:
@@ -102,6 +112,9 @@ class Level():
 			
 		for vinetrigger in self.vinetrigger_list:
 			screen.blit(vinetrigger.image, camera.applyCam(vinetrigger))
+
+		for walltrigger in self.wallTrigger_list:
+			screen.blit(walltrigger.image, camera.applyCam(walltrigger))
 			
 	def parse_map(self, filename, enemies, callback):
 		with open(path.join(get_levels_dir(), filename), "r") as f:
@@ -115,6 +128,9 @@ class Level():
 						elif block == "E":
 							trigger = Trigger(x, y)
 							self.trigger_list.add(trigger)
+						elif block == "w":
+							walltrigger = WallTrigger(x, y)
+							self.wallTrigger_list.add(walltrigger)
 						elif block == "^":
 							moving_platformsUD = MplatformUD(x, y)
 							self.platform_list.add(moving_platformsUD)
@@ -127,6 +143,7 @@ class Level():
 						elif block == ">":
 							moving_platformsLR = MplatformLR(x, y)
 							self.platform_list.add(moving_platformsLR)
+
 						elif block == "P":
 							self.Px = x
 							self.Py = y 

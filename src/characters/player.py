@@ -37,6 +37,8 @@ class Player(pygame.sprite.Sprite):
 		self.heading = Directions.Right
 		# Conversation?
 		self.convo = False
+		# Wall transformation unlocked
+		self.wallUnlocked = False
 		
 		# Sprite animation counter
 		self.curr_sprite_index = 0
@@ -46,13 +48,27 @@ class Player(pygame.sprite.Sprite):
 	def update(self, c):
 		if not self.locked:
 			# update movements, gravity, animation, etc.
-
 			if not self.convo:
 			
 				self.update_sprites()
 			
 				if self.grav:
 					self.gravity()
+
+				if self.vertM:
+					self.rect.y += self.delta_y
+
+					if self.col:
+						# collision detection in y
+						collide_list = pygame.sprite.spritecollide(self, 
+								self.level.platform_list, False)
+						# print len(collide_list)
+						for platform in collide_list:
+							if self.delta_y > 0:
+								self.rect.bottom = platform.rect.top
+							elif self.delta_y < 0:
+								self.rect.top = platform.rect.bottom
+							self.delta_y = 0
 
 				if self.horiM:
 					self.rect.x += self.delta_x
@@ -70,19 +86,6 @@ class Player(pygame.sprite.Sprite):
 							elif self.delta_x < 0:
 								self.rect.left = platform.rect.right
 
-				if self.vertM:
-					self.rect.y += self.delta_y
-
-					if self.col:
-						# collision detection in y
-						collide_list = pygame.sprite.spritecollide(self, 
-								self.level.platform_list, False)
-						for platform in collide_list:
-							if self.delta_y > 0:
-								self.rect.bottom = platform.rect.top
-							elif self.delta_y < 0:
-								self.rect.top = platform.rect.bottom
-							self.delta_y = 0
 				
 				if self.col:
 					# detect enemy collision
@@ -91,21 +94,24 @@ class Player(pygame.sprite.Sprite):
 					if len(enemy_collide) > 0:
 						self.dead = True
 					# collision detection in X 					
-					collide_list = pygame.sprite.spritecollide(self, 
-							self.level.platform_list, False)
-					for platform in collide_list:
-						if self.delta_x > 0:
-							self.rect.right = platform.rect.left
-						elif self.delta_x < 0:
-							self.rect.left = platform.rect.right
+					# collide_list = pygame.sprite.spritecollide(self, 
+					# 		self.level.platform_list, False)
+					# for platform in collide_list:
+					# 	if self.delta_x > 0:w
+					# 		self.rect.right = platform.rect.left
+					# 	elif self.delta_x < 0:
+					# 		self.rect.left = platform.rect.right
 
-			if self.vertM:
 				self.rect.y += self.delta_y
 
 				if self.col:
 					#detect trigger collision (conversation), set to True to remove event block
-					trigger_collide = pygame.sprite.spritecollide(self,
-							self.level.trigger_list, True)
+					wall_collide = pygame.sprite.spritecollide(self, self.level.wallTrigger_list, True)
+					if len(wall_collide) > 0:
+						#unlock the wall ability
+						self.wallUnlocked = True
+
+					trigger_collide = pygame.sprite.spritecollide(self, self.level.trigger_list, True)
 					if len(trigger_collide) > 0:
 						#start the conversation
 						self.convo = True
