@@ -7,7 +7,7 @@ from utils import *
 class Spider(Enemy):
 
 	def __init__(self, width, height, x, y):
-		Enemy.__init__(self, width, height, x, y)
+		Enemy.__init__(self, 30, 20, x, y)
 		self.dir = 'D'
 		self.speed = 1
 		

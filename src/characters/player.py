@@ -55,22 +55,7 @@ class Player(pygame.sprite.Sprite):
 				if self.grav:
 					self.gravity()
 
-				if self.horiM:
-					self.rect.x += self.delta_x
-					if self.delta_x > 0:
-						self.heading = Directions.Right
-					elif self.delta_x < 0:
-						self.heading = Directions.Left
-					if self.col:
-						# collision detection in X 					
-						collide_list = pygame.sprite.spritecollide(self, 
-								self.level.platform_list, False)
-						for platform in collide_list:
-							if self.delta_x > 0:
-								self.rect.right = platform.rect.left
-							elif self.delta_x < 0:
-								self.rect.left = platform.rect.right
-
+				
 				if self.vertM:
 					self.rect.y += self.delta_y
 
@@ -86,6 +71,21 @@ class Player(pygame.sprite.Sprite):
 								self.rect.top = platform.rect.bottom
 							self.delta_y = 0
 
+				if self.horiM:
+					self.rect.x += self.delta_x
+					if self.delta_x > 0:
+						self.heading = Directions.Right
+					elif self.delta_x < 0:
+						self.heading = Directions.Left
+					if self.col:
+						# collision detection in X 					
+						collide_list = pygame.sprite.spritecollide(self, 
+								self.level.platform_list, False)
+						for platform in collide_list:
+							if self.delta_x > 0:
+								self.rect.right = platform.rect.left
+							elif self.delta_x < 0:
+								self.rect.left = platform.rect.right
 
 				
 				if self.col:

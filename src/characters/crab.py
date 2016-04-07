@@ -8,16 +8,16 @@ class Crab(Enemy):
 	"""Crab Enemy."""
 	
 	def __init__(self, width, height, x, y):
-		Enemy.__init__(self, width, height, x, y)
+		Enemy.__init__(self, 55, 25, x, y)
 		self.dir = 'R'
 		self.speed = 1
 		self.radius = 100
 		self.dist = 0
 		
 		# initialize sprite lists
-		ss = SpriteSheet(path.join(get_art_dir(), 'Crab', 'Crab_spritesheet.png'), 12)
-		self.sprites_walk_left = ss.get_sprites(size=(30, 44))
-		self.sprites_walk_right = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_left]
+		ss = SpriteSheet(path.join(get_art_dir(), 'Crab', 'Crab_spritesheet.png'), 4)
+		self.sprites_walk_right = ss.get_sprites(size=(55, 25))
+		self.sprites_walk_left = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_right]
 		self.curr_sprite_index = 0
 		
 		self.image = self.sprites_walk_right[0]
@@ -32,6 +32,7 @@ class Crab(Enemy):
 		return ret
 
 	def update(self, c):
+
 		self.update_sprites()
 		self.gravity()
 
@@ -76,4 +77,5 @@ class Crab(Enemy):
 				self.rect.left = platform.rect.right
 				self.dir = "R"
 		self.delta_x = 0
+
 

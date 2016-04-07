@@ -8,7 +8,7 @@ class Ghost(Enemy):
 	"""Ghost Enemy."""
 	
 	def __init__(self, width, height, x, y):
-		Enemy.__init__(self, width, height, x, y)
+		Enemy.__init__(self, 30, 44, x, y)
 		self.dir = 'R'
 		self.speed = 1
 		

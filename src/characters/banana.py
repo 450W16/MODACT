@@ -7,7 +7,7 @@ from utils import *
 class Banana(Projectile):
 
 	def __init__(self, width, height, x, y, owner=None):
-		Projectile.__init__(self, width, height, x, y)
+		Projectile.__init__(self, 25, 25, x, y)
 		self.owner = owner
 		self.speed = 1
 		

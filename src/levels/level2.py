@@ -4,6 +4,7 @@ from platforms import Platform
 from characters.ghost import Ghost
 from characters.spider import Spider
 from characters.monkey import Monkey
+from characters.crab import Crab
 from utils import *
 
 def initCrab(width, height, x, y):
@@ -34,5 +35,5 @@ class Level2_level(Level):
 		}
 		
 		self.parse_map('level2_map.txt', enemies, initEnemy)
-		self.set_background_image('tutorial_background.png')
+		self.set_background_image('level3_background.png')
 		self.music = 'levels/forest.mp3'
