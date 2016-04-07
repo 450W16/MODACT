@@ -45,6 +45,7 @@ class Control(object):
 							Level1_level(self.player, self.AI),
 							Level2_level(self.player, self.AI)
 						]
+
 		self.lvl_num = 0
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
@@ -64,6 +65,9 @@ class Control(object):
 		self.convoNum = 1
 		#dialogue line #
 		self.dialogue = 0
+
+		# 0 not climbing, 1 move up, 2 move down
+		self.climbing = 0
 
 
 	def save(self):
@@ -138,6 +142,7 @@ class Control(object):
 						self.player.stop_y(self.AI.rect)
 					else:
 						self.player.stop()
+					self.climbing = 0
 			
 
 	def update(self):
@@ -152,6 +157,14 @@ class Control(object):
 			self.load()
 			self.player.dead = False
 
+		if self.climbing == 1:
+			k = self.player.checkAbility(pygame.K_UP)
+			if k is not None:
+				k.cast(self)
+		elif self.climbing == 2:
+			k = self.player.checkAbility(pygame.K_DOWN)
+			if k is not None:
+				k.cast(self)
 
 		# follow
 		if self.player.delta_x > 0 and self.AI.rect.x < self.player.rect.x - FOLLOW_DIST-20 and not self.AI.locked:
@@ -187,6 +200,8 @@ class Control(object):
 			self.AI.rect.y = self.lvl_current.Ay
 
 			self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
+
+			self.player.convo = True
 
 		# go to previous area
 		elif self.player.rect.left < 0 and self.lvl_num > 0:
