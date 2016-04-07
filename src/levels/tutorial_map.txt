@@ -1,15 +1,15 @@
-d                                                                     d  
-d                                                                     d  
-d                                                                     d  
-d                                                                     d  
-d                                                                     d  
-d                                                                     d 
-d                                                                     d 
-d                                      E                              d 
-d                            ggggggggggg     gg                       d 
-d                            DDDDDDDDDDD     DDD                      d 
-d                            DDDDDDDDDDD     DDDD                     d 
-d                                 D          DDDDD                    d 
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                     
+                                                                      
+                                      E                               
+                             gggggggggg      gg                        
+                             DDDDDDDDDD      DDD                       
+                             DDDDDDDDDD      DDDD                      
+                                  D          DDDDD                     
                                   D          DDDDDD                    
                    E              D          DDDDDDD                  
                  678              D          DDDDDDDD                 
