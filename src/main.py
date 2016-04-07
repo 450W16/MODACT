@@ -104,15 +104,16 @@ class Control(object):
 				self.player.level = self.lvl_current
 				self.AI.level = self.lvl_current
 				
+				if isinstance(self.player, Tracy):
+					revert = Revert()
+					revert.cast(self)
+
 				# reset player position
 				self.player.rect.x = self.lvl_current.Px
 				self.player.rect.y = self.lvl_current.Py
 				self.AI.rect.x = self.lvl_current.Ax
 				self.AI.rect.y = self.lvl_current.Ay
 
-				if isinstance(self.player, Tracy):
-					revert = Revert()
-					revert.cast(self)
 			
 	def processEvents(self):
 		# loop events
