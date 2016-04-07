@@ -47,7 +47,7 @@ class Control(object):
 							Level2_level(self.player, self.AI)
 						]
 
-		self.lvl_num = 1
+		self.lvl_num = 0
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
 		self.AI.level = self.lvl_current
