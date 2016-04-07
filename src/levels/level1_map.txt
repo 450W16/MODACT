@@ -29,20 +29,25 @@
     DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD                               
     dddddddddddddddddddddddddddddddd                               
                                                                    
-                                       ^^^^                          
-                                               ^^^^                    
+                                         ^^^^                          
+                                                ^^^^                    
+                                                   
+
+                                                       >>>>
+
+
+                                                              >>>>
+                            gggg>>>>               
+                                                          
                                                                    
-                                                   >>>>                
-                            gggg>>>>                               
                                                                    
-                                                           >>>>        
                                                                    
-                  G                       ^^^^                         
-  gggg>>>>>>    ggggg       gggg                                   ^^^^
+                                        ^^^^                         
+  gggg>>>>>>    ggggg       gggg                                     ^^^^
                                                                    
- P  A                                                        ^^^^  
+ P  A                                                         ^^^^  
                                                                    
                                                >>>>    ^^^^        
 gggggg          gggggggggggggggg                                   
 DDDDDD          DDDDDDDDDDDDDDDD                                   
-dddddd          dddddddddddddddd                                   
+dddddd          dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd                                  
