@@ -4,6 +4,7 @@ from platforms import Platform
 from characters.ghost import Ghost
 from characters.spider import Spider
 from characters.monkey import Monkey
+from characters.crab import Crab
 from utils import *
 
 def initCrab(width, height, x, y):

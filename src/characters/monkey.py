@@ -9,7 +9,7 @@ class Monkey(Enemy):
 	"""Monkey Enemy."""
 	
 	def __init__(self, width, height, x, y):
-		Enemy.__init__(self, width, height, x, y)
+		Enemy.__init__(self, 45, 45, x, y)
 		self.dir = 'R'
 		self.speed = 2
 
