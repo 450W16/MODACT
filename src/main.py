@@ -122,7 +122,7 @@ class Control(object):
 						k = self.player.checkAbility(event.key)
 						if k is not None:
 							if event.key != pygame.K_UP and event.key != pygame.K_DOWN:
-								print k
+								
 								cast_sound = pygame.mixer.Sound("revert.wav")
 								cast_sound.play()
 							k.cast(self)
@@ -212,7 +212,7 @@ class Control(object):
 			self.AI.level = self.lvl_current
 
 			self.player.rect.y = self.lvl_current.ground_level
-			self.AI.rect.y = self.lvl_current.ground_level-20
+			self.AI.rect.y = self.lvl_current.ground_level-40
 			self.player.rect.x = self.lvl_current.level_width-200
 			self.AI.rect.x = self.lvl_current.level_width-200
 

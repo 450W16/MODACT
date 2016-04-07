@@ -52,7 +52,7 @@ class Biggie(Player):
 		self.rect.y -= 2
 		#if yes, set trajectory upwards
 		# will have to change if we change ground
-		if len(platform_collisions) > 0 or self.rect.bottom >= SCREEN_HEIGHT:
+		if len(platform_collisions) > 0 or self.rect.bottom >= self.level.level_height:
 			self.delta_y = -15
 
 		jump_sound = pygame.mixer.Sound("characters/tracy_jump.wav")

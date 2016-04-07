@@ -42,7 +42,7 @@ class Tracy(Player):
 		platform_collisions = pygame.sprite.spritecollide(self, self.level.platform_list, False)
 		self.rect.y -= 2
 		#if yes, set trajectory upwards
-		if len(platform_collisions) > 0 or self.rect.bottom >= SCREEN_HEIGHT:
+		if len(platform_collisions) > 0 or self.rect.bottom >= self.level.level_height:
 			self.delta_y = -14
 
 		jump_sound = pygame.mixer.Sound("characters/tracy_jump.wav")
