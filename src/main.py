@@ -51,9 +51,16 @@ class Control(object):
 		self.player.level = self.lvl_current
 		self.AI.level = self.lvl_current
 
+		# create dialogue and dialogue lines
+		self.dialogue_list = [
+				'tutorial_conversation_onEnter.txt',
+				'tutorial_conversation.txt'
+		]
+
+
 		# some initialization for game loop
 		self.done = False
-		self.clock=pygame.time.Clock()
+		self.clock=pygame.time.Clock()	
 
 		# instantiate camera
 		self.camera = Camera()
@@ -65,6 +72,10 @@ class Control(object):
 		self.convoNum = 1
 		#dialogue line #
 		self.dialogue = 0
+		self.enterDialogue = 0
+		self.levelEnterDialogue = False
+		#enter level to start dialogue variable
+		self.levelEnterConvo = False
 
 		# 0 not climbing, 1 move up, 2 move down
 		self.climbing = 0
@@ -115,7 +126,10 @@ class Control(object):
 				if event.key == pygame.K_RETURN:
 					#if conversation has begun, only return key can progress
 					if self.player.convo == True:
-						self.dialogue += 1
+						if self.levelEnterConvo:
+							self.enterDialogue += 1
+						else:
+							self.dialogue += 1
 				else:
 					if not self.player.convo:
 						# check for ability key
@@ -201,6 +215,7 @@ class Control(object):
 
 			self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
 
+			self.levelEnterConvo = True
 			self.player.convo = True
 
 		# go to previous area
@@ -238,52 +253,68 @@ class Control(object):
 		# label = font.render('TEST TEXT', 1, (0, 255, 0), )
 		# self.screen.blit(label, (self.player.rect.left, self.player.rect.bottom))
 
-
 	def initiateConvo(self):
-		#initialize the conversation
-		#put each line into the list of 'dialogue'
-		if self.player.convo:
-			dialogue = []
-			if self.convoNum == 1:
-				with open(path.join(get_src_dir(), 'tutorial_conversation.txt'), "r") as f:
-					dialogue = [x.strip('\n') for x in f.readlines()]
+			#initialize the conversation
+			#put each line into the list of 'dialogue'
+			if self.player.convo:
+				dialogue = []
+				if self.convoNum == 1:
+					if self.levelEnterConvo:
+						with open(path.join(get_src_dir(), self.dialogue_list[0]), "r") as f:
+							dialogue = [x.strip('\n') for x in f.readlines()]
+					else:
+						with open(path.join(get_src_dir(), self.dialogue_list[1]), "r") as f:
+							dialogue = [x.strip('\n') for x in f.readlines()]
 
-		#lock the player and AI
-		self.player.locked = True
-		self.AI.locked = True
 
-		# initialize font; must be called after 'pygame.init()' to avoid 'Font not Initialized' error
-		font = pygame.font.Font(None, 48)
+			#lock the player and AI
+			self.player.locked = True
+			self.AI.locked = True
 
-		#show the dialogue in a loop until the dialogue is empty
-		if dialogue[self.dialogue] != '':
-			pygame.draw.rect(self.screen, (0,0,0), (0,0,1000,100))
-			label = font.render('Press enter to continue', 1, (255, 255, 255), )
-			self.screen.blit(label, (SCREEN_WIDTH/2- 200,0))
-			font = pygame.font.Font(None, 26)
-			if self.dialogue % 2 != 0:
-				# render text for Tracy
-				tracyText = font.render(dialogue[self.dialogue], 1, (255, 0, 255), )
-				#if the player is currently Tracy, put the dialogue there, otherwise on the other sprite
-				if isinstance(self.player,Tracy):
-					self.screen.blit(tracyText, (0, 50))
-				else:
-					self.screen.blit(tracyText, (0, 50))
+			# initialize font; must be called after 'pygame.init()' to avoid 'Font not Initialized' error
+			font = pygame.font.Font(None, 48)
+
+			#show the dialogue in a loop until the dialogue is empty
+			if self.levelEnterConvo:
+				print("level enter")
+				num = self.enterDialogue
 			else:
-				#render text for Biggie
-				biggieText = font.render(dialogue[self.dialogue], 1, (0, 0, 255), )
-				#if the player is currently Biggie, put the dialogue there, otherwise on the other sprite
-				if isinstance(self.player,Biggie):
-					self.screen.blit(biggieText, (0, 50))
+				print("trigger")
+				num = self.dialogue
+
+			print(num)
+			if dialogue[num] != '':
+				pygame.draw.rect(self.screen, (0,0,0), (0,0,1000,100))
+				label = font.render('Press enter to continue', 1, (255, 255, 255), )
+				self.screen.blit(label, (SCREEN_WIDTH/2- 200,0))
+				font = pygame.font.Font(None, 26)
+				
+				if num % 2 != 0:
+					# render text for Tracy
+					tracyText = font.render(dialogue[num], 1, (255, 0, 255), )
+					#if the player is currently Tracy, put the dialogue there, otherwise on the other sprite
+					if isinstance(self.player,Tracy):
+						self.screen.blit(tracyText, (0, 50))
+					else:
+						self.screen.blit(tracyText, (0, 50))
 				else:
-					self.screen.blit(biggieText, (0, 50))
-		else:
-			#unfreeze player and AI, end the conversation with player.convo = False, add one to the dialogue
-			# to move to the next conversation line
-			self.player.locked = False
-			self.AI.locked = False
-			self.player.convo = False
-			self.dialogue += 1
+					#render text for Biggie
+					biggieText = font.render(dialogue[num], 1, (0, 0, 255), )
+					#if the player is currently Biggie, put the dialogue there, otherwise on the other sprite
+					if isinstance(self.player,Biggie):
+						self.screen.blit(biggieText, (0, 50))
+					else:
+						self.screen.blit(biggieText, (0, 50))
+			else:
+				#unfreeze player and AI, end the conversation with player.convo = False, add one to the dialogue
+				# to move to the next conversation line
+				self.player.locked = False
+				self.AI.locked = False
+				self.player.convo = False
+				if self.levelEnterConvo:
+					self.levelEnterConvo = False
+				else:
+					self.dialogue += 1
 
 
 	def main_loop(self):
