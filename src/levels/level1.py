@@ -27,7 +27,7 @@ class Level1_level(Level):
 			'G': initGhost,
 			'S': initSpider,
 			'M': initMonkey
-		}		
+		}
 		
 		self.parse_map('level1_map.txt', enemies, initEnemy)
 		self.set_background_image('tutorial_background.png')

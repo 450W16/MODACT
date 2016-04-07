@@ -164,11 +164,11 @@ class Level():
 				y += BLOCK_HEIGHT
 
 			self.level_height = y
-
 				
 	def set_background_image(self, filename):
 		self.background_image = pygame.Surface((self.level_width, self.level_height))
 		self.background_image = pygame.image.load(path.join(get_art_dir(), filename)).convert()
+		self.background_image = pygame.transform.scale(self.background_image, (self.level_width, self.level_height))
 		
 
 	def playMusic(self):
