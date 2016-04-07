@@ -193,6 +193,8 @@ class Control(object):
 
 			self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
 
+			self.player.convo = True
+
 		# go to previous area
 		elif self.player.rect.left < 0 and self.lvl_num > 0:
 
