@@ -34,5 +34,5 @@ class Level2_level(Level):
 		}
 		
 		self.parse_map('level2_map.txt', enemies, initEnemy)
-		self.set_background_image('tutorial_background.png')
+		self.set_background_image('level3_background.png')
 		self.music = 'levels/forest.mp3'
