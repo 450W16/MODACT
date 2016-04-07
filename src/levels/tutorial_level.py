@@ -19,7 +19,6 @@ def initEnemy(level, baddie):
 	level.enemy_list.add(baddie)
 
 class Tutorial_level(Level):
-
 	
 	def __init__(self, player, AI):
 		Level.__init__(self,player, AI)
@@ -29,11 +28,10 @@ class Tutorial_level(Level):
 			'S': initSpider,
 			'M': initMonkey
 		}
-		# enemies = {}
 
-		
 		self.parse_map('tutorial_map.txt', enemies, initEnemy)
 		self.set_background_image('tutorial_background.png')
+		self.music = 'levels/forest.mp3'
 		
 	
 		
