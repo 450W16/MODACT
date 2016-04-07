@@ -16,7 +16,6 @@ class Wolf(Enemy):
 		ss = SpriteSheet(path.join(get_art_dir(), 'Wolf', 'Wolf_spritesheet.png'), 6)
 		self.sprites_walk_left = ss.get_sprites(size=(80, 41))
 		self.sprites_walk_right = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_left]
-		self.curr_sprite_index = 0
 		
 		self.image = self.sprites_walk_right[0]
 		self.rect = self.image.get_rect()
