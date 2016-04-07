@@ -16,6 +16,8 @@ class Tracy(Player):
 		ss = SpriteSheet(path.join(get_art_dir(), 'Tracy', 'Tracy_spritesheet.png'), 8)
 		self.sprites_walk_left = ss.get_sprites(size=(32, 64))
 		self.sprites_walk_right = [pygame.transform.flip(s, True, False) for s in self.sprites_walk_left]
+		ss = SpriteSheet(path.join(get_art_dir(), 'Tracy', 'Tracy_climb_spritesheet.png'), 8)
+		self.sprites_climb = ss.get_sprites(size=(46, 64))
 		
 		self.image = self.sprites_walk_right[0]
 		self.rect = self.image.get_rect()
@@ -25,6 +27,7 @@ class Tracy(Player):
 		self.abilities[climbUp.getKey()] = climbUp
 		climbDown = ClimbDown()
 		self.abilities[climbDown.getKey()] = climbDown
+		self.climbing = False
 		
 	def move_left(self):
 		super(Tracy, self).move_left()
@@ -61,5 +64,8 @@ class Tracy(Player):
 			ret = [ret[0]]
 		elif self.delta_y != 0:
 			ret = [ret[2]]
+			
+		if self.climbing:
+			ret = self.sprites_climb
 				
 		return ret
