@@ -1,11 +1,3 @@
-Ah, Tracy! Welcome!
-Biggie? What are you doing here?
-I'm here to give the player a tutorial
-Huh? What do you mean?
-I mean, you should really use the arrow keys to move, and the space bar to jump.
-Arrow keys?
-Don't worry. It'll work out.
-
 If you press 'f', you will be able to switch between controlling Tracy and myself. And I can jump higher than Tracy.
 I still have no idea who you're talking to.
 
@@ -19,3 +11,5 @@ Biggie. There's a monster there.
 I know.
 Let's go back. I don't want to be here anymore.
 Come on Tracy. Just follow my lead. We'll just jump over it and run.
+
+
