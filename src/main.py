@@ -44,16 +44,10 @@ class Control(object):
 							Level1_level(self.player, self.AI),
 							Level2_level(self.player, self.AI)
 						]
-		self.lvl_num = 0
+		self.lvl_num = 1
 		self.lvl_current = self.lvl_list[self.lvl_num]
 		self.player.level = self.lvl_current
 		self.AI.level = self.lvl_current
-
-		#create dialogue and dialogue lines
-		self.dialogue_list = [
-				'tutorial_conversation_onEnter.txt',
-				'tutorial_conversation.txt'
-		]
 
 		# some initialization for game loop
 		self.done = False
@@ -69,8 +63,6 @@ class Control(object):
 		self.convoNum = 1
 		#dialogue line #
 		self.dialogue = 0
-
-		self.levelEnterConvo = False
 
 		# 0 not climbing, 1 move up, 2 move down
 		self.climbing = 0
@@ -89,7 +81,7 @@ class Control(object):
 			with open('save/save.txt', 'r') as f:
 				
 				if isinstance(self.player, Tracy):
-					self.lvl_num, self.player.abilities, self.AI.abilities = pickle.load(f)				
+					self.lvl_num, self.player.abilities, self.AI.abilities = pickle.load(f)
 				else:
 					self.lvl_num, self.AI.abilities, self.player.abilities = pickle.load(f)
 				# read in level
@@ -201,7 +193,6 @@ class Control(object):
 
 			self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
 
-			self.levelEnterConvo = True
 			self.player.convo = True
 
 		# go to previous area
@@ -246,13 +237,8 @@ class Control(object):
 		if self.player.convo:
 			dialogue = []
 			if self.convoNum == 1:
-				if self.levelEnterConvo:
-					with open(path.join(get_src_dir(), self.dialogue_list[0]), "r") as f:
-						dialogue = [x.strip('\n') for x in f.readlines()]
-				else:
-					with open(path.join(get_src_dir(), self.dialogue_list[1]), "r") as f:
-						dialogue = [x.strip('\n') for x in f.readlines()]
-
+				with open(path.join(get_src_dir(), 'tutorial_conversation.txt'), "r") as f:
+					dialogue = [x.strip('\n') for x in f.readlines()]
 
 		#lock the player and AI
 		self.player.locked = True
@@ -289,12 +275,7 @@ class Control(object):
 			self.player.locked = False
 			self.AI.locked = False
 			self.player.convo = False
-			if self.levelEnterConvo:
-				self.levelEnterConvo = False
-				self.dialogue = 0
-			else:
-				self.dialogue += 1
-
+			self.dialogue += 1
 
 
 	def main_loop(self):
