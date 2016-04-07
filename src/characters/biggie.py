@@ -54,7 +54,10 @@ class Biggie(Player):
 		# will have to change if we change ground
 		if len(platform_collisions) > 0 or self.rect.bottom >= SCREEN_HEIGHT:
 			self.delta_y = -15
-		
+
+		jump_sound = pygame.mixer.Sound("characters/tracy_jump.wav")
+		jump_sound.play()
+
 	def get_sprites(self):
 		ret = None
 		if self.heading == Directions.Left:
