@@ -6,6 +6,9 @@ from characters.spider import Spider
 from characters.monkey import Monkey
 from utils import *
 
+def initCrab(width, height, x, y):
+	return Crab(width, height, x, y)
+
 def initGhost(width, height, x, y):
 	return Ghost(width, height, x, y)
 
@@ -24,6 +27,7 @@ class Level2_level(Level):
 		Level.__init__(self,player, AI)
 		
 		enemies = {
+			'C': initCrab,
 			'G': initGhost,
 			'S': initSpider,
 			'M': initMonkey
