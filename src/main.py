@@ -12,6 +12,7 @@ from levels.level2 import Level2_level
 from levels.menu_level import Menu_level
 from characters.tracy import Tracy
 from characters.biggie import Biggie
+from abilities.revert import Revert
 from abilities.climb import *
 from levels.platforms import Platform
 from camera import Camera
@@ -25,7 +26,7 @@ class Control(object):
 		# self.AI = Biggie(0, SCREEN_HEIGHT/2)
 		self.player = Tracy(0, SCREEN_HEIGHT - 120)
 		self.AI = Biggie(100, SCREEN_HEIGHT - 150)
-
+		self.Biggie = Biggie
 
 		# screen
 		self.screen = screen
@@ -103,11 +104,16 @@ class Control(object):
 				self.player.level = self.lvl_current
 				self.AI.level = self.lvl_current
 				
+				if isinstance(self.player, Tracy):
+					revert = Revert()
+					revert.cast(self)
+
 				# reset player position
 				self.player.rect.x = self.lvl_current.Px
 				self.player.rect.y = self.lvl_current.Py
 				self.AI.rect.x = self.lvl_current.Ax
 				self.AI.rect.y = self.lvl_current.Ay
+
 			
 	def processEvents(self):
 		# loop events
@@ -152,14 +158,12 @@ class Control(object):
 					else:
 						self.player.stop()
 					self.climbing = 0
-					self.player.climbing = False
 				if event.key == pygame.K_DOWN and self.player.delta_y > 0:
 					if isinstance(self.player, Tracy):
 						self.player.stop_y(self.AI.rect)
 					else:
 						self.player.stop()
 					self.climbing = 0
-					self.player.climbing = False
 			
 
 	def update(self):
@@ -206,11 +210,16 @@ class Control(object):
 
 		if self.player.rect.right > self.lvl_current.level_width and self.lvl_num < len(self.lvl_list)-1:
 
+			if isinstance(self.player, Tracy):
+				revert = Revert()
+				revert.cast(self)
+
 			self.lvl_num += 1
 			self.save()
 			self.lvl_current = self.lvl_list[self.lvl_num]
 			self.player.level = self.lvl_current
 			self.AI.level = self.lvl_current
+
 			self.player.rect.x = self.lvl_current.Px
 			self.player.rect.y = self.lvl_current.Py
 			self.AI.rect.x = self.lvl_current.Ax
@@ -223,6 +232,10 @@ class Control(object):
 
 		# go to previous area
 		elif self.player.rect.left < 0 and self.lvl_num > 0:
+
+			if isinstance(self.player, Tracy):
+				revert = Revert()
+				revert.cast(self)
 
 			self.lvl_num -= 1
 			self.lvl_current = self.lvl_list[self.lvl_num]

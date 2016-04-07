@@ -21,7 +21,7 @@ class MplatformUD(MovingPlatform):
 			if self.change_y < 0:
 				c.player.rect.bottom = self.rect.top
 			else:
-				c.player.rect.top = self.rect.bottom
+				c.player.rect.bottom = self.rect.top
 				
 		# Check if the platform hits boundaries and reverses direction
 		if self.rect.bottom > self.boundary_bottom or self.rect.top < self.boundary_top:

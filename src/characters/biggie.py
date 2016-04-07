@@ -2,7 +2,6 @@ import pygame
 from player import Player
 from abilities.bridge import *
 from abilities.ladder import Ladder
-from abilities.revert import Revert
 from abilities.wall import *
 from spritesheet import SpriteSheet
 from utils import *
@@ -34,8 +33,6 @@ class Biggie(Player):
 		self.image = pygame.transform.scale(self.image, self.rect.size)
 		ladder = Ladder()
 		self.abilities[ladder.getKey()] = ladder
-		revert = Revert()
-		self.abilities[revert.getKey()] = revert
 		bridge = Bridge()
 		self.abilities[bridge.getKey()] = bridge
 		wall = Wall()
