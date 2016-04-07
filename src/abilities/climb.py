@@ -20,18 +20,21 @@ class ClimbUp(Ability):
 				c.player.grav = True 
 				c.player.horiM = True
 				c.player.col = True
+				c.player.climbing = False
 			else:
 				c.player.delta_y = -2
 				c.player.rect.left = biggieRect.left + 20
 				c.player.grav = False
 				c.player.horiM = False
 				c.player.col = False
+				c.player.climbing = True
 		else:
 			c.climbing = 0
 			c.player.delta_y = 0
 			c.player.grav = True 
 			c.player.horiM = True
 			c.player.col = True
+			c.player.climbing = False
 
 class ClimbDown(Ability):
 	def __init__(self):
@@ -49,6 +52,7 @@ class ClimbDown(Ability):
 				c.player.grav = True
 				c.player.horiM = True
 				c.player.col = True
+				c.player.climbing = False
 			else:
 				c.player.delta_y = 2
 				c.player.rect.left = biggieRect.left + 20
@@ -58,3 +62,6 @@ class ClimbDown(Ability):
 					c.player.col = True
 				else:
 					c.player.col = False
+				c.player.climbing = True
+		else:
+			c.player.climbing = False
