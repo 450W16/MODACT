@@ -10,6 +10,7 @@ from levels.tutorial_level import Tutorial_level
 from levels.level1 import Level1_level
 from levels.level2 import Level2_level
 from levels.menu_level import Menu_level
+from levels.end import End_level
 from characters.tracy import Tracy
 from characters.biggie import Biggie
 from abilities.revert import Revert
@@ -44,7 +45,8 @@ class Control(object):
 							Menu_level(self.player, self.AI),
 							Tutorial_level(self.player, self.AI),
 							Level1_level(self.player, self.AI),
-							Level2_level(self.player, self.AI)
+							Level2_level(self.player, self.AI),
+							End_level(self.player, self.AI)
 						]
 
 		self.lvl_num = 0
