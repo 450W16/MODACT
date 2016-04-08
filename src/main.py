@@ -229,8 +229,11 @@ class Control(object):
 
 			self.camera.updateCam(0, 0, self.lvl_current.level_width, self.lvl_current.level_height)
 
-			self.levelEnterConvo = True
-			self.player.convo = True
+			print(self.player.level)
+
+			if isinstance(self.player.level, Tutorial_level):
+				self.levelEnterConvo = True
+				self.player.convo = True
 
 		# go to previous area
 		elif self.player.rect.left < 0 and self.lvl_num > 0:
@@ -328,6 +331,7 @@ class Control(object):
 				self.player.convo = False
 				if self.levelEnterConvo:
 					self.levelEnterConvo = False
+					self.enterDialogue = 0
 				else:
 					self.dialogue += 1
 
