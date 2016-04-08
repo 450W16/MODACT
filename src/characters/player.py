@@ -83,11 +83,12 @@ class Player(pygame.sprite.Sprite):
 								self.level.platform_list, False)
 						# print len(collide_list)
 						for platform in collide_list:
+							
 							if self.delta_y > 0:
 								
 								self.rect.bottom = platform.rect.top
 							elif self.delta_y < 0:
-								print "aye"
+								print self.delta_y
 								self.rect.top = platform.rect.bottom
 							self.delta_y = 0
 							if isinstance(platform, MplatformLR):
@@ -108,7 +109,7 @@ class Player(pygame.sprite.Sprite):
 					# 	elif self.delta_x < 0:
 					# 		self.rect.left = platform.rect.right
 
-				self.rect.y += self.delta_y
+				
 
 				if self.col:
 					#detect trigger collision (conversation), set to True to remove event block

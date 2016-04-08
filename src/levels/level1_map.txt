@@ -1,5 +1,5 @@
                             dddddddddddddddd                       
-                                     
+                   S                             S
 
                             
 
@@ -12,8 +12,8 @@
                    g                          gggggg               
            gggg    g                          g                    
                    g                          g                    
-                   g                          g                    
                    g      G           G       g                    
+                   g                          g                    
          gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg    
          DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD    
          dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
@@ -45,9 +45,9 @@
                                         ^^^^                         
   gggg>>>>>>    ggggg       gggg                                     ^^^^
                                                                    
- A  P                                                         ^^^^  
+ A  P                                          >>>>           ^^^^  
                                                                    
-                                               >>>>    ^^^^        
+                                                       ^^^^        
 gggggg          gggggggggggggggg                                   
 DDDDDD          DDDDDDDDDDDDDDDD                                   
 dddddd          dddddddddddddddd                                

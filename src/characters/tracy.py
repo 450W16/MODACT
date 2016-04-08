@@ -43,7 +43,7 @@ class Tracy(Player):
 		self.rect.y -= 2
 		#if yes, set trajectory upwards
 		if len(platform_collisions) > 0 or self.rect.bottom >= self.level.level_height:
-			self.delta_y = -14
+			self.delta_y = -19
 
 		jump_sound = pygame.mixer.Sound("characters/tracy_jump.wav")
 		jump_sound.play()

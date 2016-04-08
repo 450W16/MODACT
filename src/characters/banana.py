@@ -9,7 +9,7 @@ class Banana(Projectile):
 	def __init__(self, width, height, x, y, owner=None):
 		Projectile.__init__(self, 25, 25, x, y)
 		self.owner = owner
-		self.speed = 1
+		self.speed = 5
 		
 		# initialize sprite lists
 		ss = SpriteSheet(path.join(get_art_dir(), 'Monkey', 'Banana_spritesheet.png'), 8)
