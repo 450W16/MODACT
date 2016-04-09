@@ -4,7 +4,12 @@
 
 ## Installation
 
-In progress
+Install pygame (pip install pygame or http://www.pygame.org/download.shtml)
+
+Download ZIP or clone repo
+
+In terminal, move into the src folder and run `python main.py`
+
 
 ## Contributors
 
